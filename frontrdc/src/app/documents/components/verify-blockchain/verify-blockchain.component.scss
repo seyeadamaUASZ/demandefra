@@ -1,0 +1,62 @@
+.file_upload:hover{
+    background-color: rgb(229, 243, 252);
+  }
+  .file_upload{
+    width: 270px;
+    height: 130px;
+    border: solid 1px;
+    margin-top: 10px;
+    
+    border-color:lightgray;
+    background-color: white;
+    color: gray;
+    word-break: break-all;
+    font-size: 11px;
+    cursor: pointer;
+    padding-top: 20px;
+    
+    .mat-icon{
+      margin:auto;
+    }
+    .file_titre{
+      word-break: break-all;
+      text-align: center;
+      justify-content: center;
+    }
+    .file_name{
+      margin-top: 15px;
+      word-break: break-all;
+      color:lightslategray;
+      text-align: center;
+    justify-content: center;
+    }
+  }
+
+  table .table{
+    td{
+     align-self: baseline;
+     align-items: baseline;
+    }
+    tr:hover{
+      background-color: rgb(193, 248, 250)!important;
+      
+    }
+  }
+  
+  .mytable{
+    border-radius: 5%;
+    border:solid 1px lightgray;
+    padding: 1%;
+    th{
+      border:solid 1px lightgray;
+      font-weight: normal;
+    }
+    tr{
+      border:solid 1px lightgray;
+      td{
+        border:solid 1px lightgray;
+
+      }
+    }
+    
+  }

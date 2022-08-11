@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h3 class="float-left">
+      <strong class="foncer"> {{'menu.paiement'| translate}}
+      </strong>
+    </h3>
+  </div>
+</div>
+<mat-card class="">
+  <mat-card-header class="card-header">
+    <mat-card-title>{{'paiement.mesTransactions' | translate}}</mat-card-title>
+    <!-- <span class="header">{{'workflow.liste' | translate}}</span> -->
+  </mat-card-header><br>
+  <mat-form-field appearance="outline">
+    <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+    <input matInput (keyup)="applyFilter($event)">
+    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+  </mat-form-field>
+  <mat-menu #detail="matMenu">
+    <form [formGroup]="form">
+      <div *ngFor="let cd of columnDefinitions">
+        &nbsp; <mat-checkbox  [formControlName]="cd.def">{{cd.label}}&nbsp;
+        </mat-checkbox>
+      </div>
+     
+    </form>
+  </mat-menu>
+  <div class="">
+    <button class="float-right" mat-button [mat-menu-trigger-for]="detail" xPosition="before">
+      <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+     filter_alt
+      </mat-icon>
+    </button>
+    <table mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="reference_paiement">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'paiement.idFacture' | translate}} </th>
+        <td mat-cell *matCellDef="let element">{{element.paiIdFacture}}</td>
+      </ng-container>
+      <ng-container matColumnDef="montant">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'paiement.montantFacture' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.paiMontant}} </td>
+      </ng-container>
+      <ng-container matColumnDef="reference_client">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'paiement.numeroPaiement' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.paiReferencePaiement}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date_paiement">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'paiement.date_paiement' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.paiDatePaiement | date: 'dd/MM/yyyy hh:mm'}}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'paiement.status' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.paiStatusTransaction}}</td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef><span style="margin-left: 6%;">
+            {{'register.action' | translate}}</span> </th>
+        <td mat-cell *matCellDef="let element" class="fab">
+          <button mat-button [mat-menu-trigger-for]="detail" yPosition="above">
+            <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+              more_vert
+            </mat-icon>
+          </button>
+          <mat-menu #detail="matMenu">
+            <button mat-menu-item (click)="openDialogView(element.paiIdFacture)">
+              <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="primary">
+                visibility
+              </mat-icon>{{'utilisateur.details'| translate}}
+            </button>
+            <!-- <button mat-menu-item (click)="openDialogEdit(element)">
+                <mat-icon matTooltip="{{'Action.edit' | translate}}" color="secondary">
+                  edit</mat-icon>{{'Action.edit' | translate}}
+              </button> -->
+            <!-- <button mat-menu-item (click)=" openDialogDeleteWorkflow(element)">
+                <mat-icon color="warn" matTooltip="{{'Action.delete' | translate}}">delete
+                </mat-icon>{{'Action.delete' | translate}}
+              </button> -->
+
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+      <tr mat-row *matRowDef="let row; columns: getDisplayedColumns()"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+
+</mat-card>

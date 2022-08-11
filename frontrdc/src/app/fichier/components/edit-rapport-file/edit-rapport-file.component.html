@@ -1,0 +1,21 @@
+<div class="login-page">
+  <div class="login-spacer"></div>
+  <div class="">
+    <!-- <div id="login-fab" class="mdl-color--accent mdl-color-text--white">
+        <i id="lock-icon" class="material-icons">file_copy</i>
+    </div> -->
+    <h3><strong class="foncer right">Import rapport</strong>
+    
+    </h3>
+    <br/><br>
+    <input type="file" formControlName="rptJrxmlFile" class="right"  accept="{{accept}}" (change)="uploadJrxmlFile($event)"  required>
+  </div>
+  <div class="buttons">
+    <div class="login"><br><br><br>
+      <button mat-stroked-button color="warn" (click)="closeDialog()" type="button">{{'btn_fermer' | translate}}</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!isUpload">{{'btn_valider' | translate}}</button>
+
+    </div>
+  </div>
+</div>
+

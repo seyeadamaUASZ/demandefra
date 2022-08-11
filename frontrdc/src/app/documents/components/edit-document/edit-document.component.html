@@ -1,0 +1,45 @@
+<div >
+  <div class="">
+      <h3 class="card-heading float-left">
+          <strong class="foncer">   {{'document.edit' | translate}}
+          </strong>
+        </h3>
+      <!-- <h2>
+          {{'fonctionnalite.edit' | translate}}
+      </h2> -->
+  </div>
+  <form class="" [formGroup]="FormulaireForm" (ngSubmit)="onSubmit()">
+      <div>
+          <div>
+      
+              <mat-form-field>
+                  <mat-icon matSuffix>files_pi</mat-icon>
+                  <input matInput placeholder="{{'document.titre' | translate}}" formControlName="dctTitre" required>
+              </mat-form-field>
+              <mat-form-field>
+                  <mat-icon matSuffix>files_pi</mat-icon>
+                  <input matInput placeholder="{{'document.auteur' | translate}}" 
+                      formControlName="dctAuteur" required>
+              </mat-form-field>
+              <div class="form-group input-group mymargin">
+                <mat-form-field appearance="fill">
+                  <mat-label>{{'document.type' | translate}}</mat-label>
+                  <mat-icon matSuffix>files_pi</mat-icon>
+                  <mat-select placeholder="{{'document.type' | translate}}" formControlName="typeDocuments" [compareWith]="compareDocument"
+                      required>
+                      <mat-option *ngFor="let typedoc of typeDocument" [value]="typedoc">{{typedoc.tydDescription}}
+                      </mat-option>
+                  </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <input type="file" formControlName="file"  accept="{{accept}}" (change)="uploadDocument($event)" required>
+      </div>
+      <div class="mat-dialog-actions">
+          <button mat-stroked-button color="warn" (click)="closeDialog()"
+          type="button">{{'Action.close' | translate}}</button>
+          <button  mat-raised-button color="primary" type="submit">{{'Action.save' | translate}}</button>
+         
+      </div>
+  </form>
+</div>

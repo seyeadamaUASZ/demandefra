@@ -1,0 +1,336 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h3 class="float-left">
+      <strong class="foncer"> {{'menu.formulaire' | translate}}
+      </strong>
+    </h3>
+
+  </div>
+</div>
+<br>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+      {{'formulaire.liste' | translate}}
+    </ng-template>
+    <mat-card>
+      <mat-card-header class="card-header">
+        <mat-card-title>{{'formulaire.liste' | translate}}</mat-card-title>
+        <!-- <span class="header">{{'formulaire.liste' | translate}}</span> -->
+      </mat-card-header>
+      <div class="">
+        <div *accesscode="'create_form'">
+          <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAddForm()"
+            matTooltip="{{'formulaire.addForm' | translate}}">
+            <mat-icon>add</mat-icon>
+          </button><br>
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+          <input matInput (keyup)="applyFilterNotGeneres($event)">
+
+        </mat-form-field>
+        <!-- Generateur Mobile -->
+        <div class="container-fluid">
+          <mat-menu #detail1="matMenu">
+            <form [formGroup]="form1">
+              <div *ngFor="let cd of columnDefinitionsNoGeneres">
+                &nbsp;<mat-checkbox [formControlName]="cd.def">{{cd.label | translate}}&nbsp;
+                </mat-checkbox>
+              </div>
+            </form>
+          </mat-menu>
+          <button class="float-right" mat-button [mat-menu-trigger-for]="detail1" xPosition="before">
+            <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+              filter_alt
+            </mat-icon>
+          </button>
+          <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceFormulaireNotGeneres" matSort>
+            <ng-container matColumnDef="frmNom">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'formulaire.frmNom' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.frmNom}} </td>
+            </ng-container>
+            <ng-container matColumnDef="frmDescription">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'formulaire.frmDescription' | translate}} </th>
+  
+              <td mat-cell *matCellDef="let element"> {{element.frmDescription}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef><span>
+                  &nbsp; &nbsp;{{'register.action' | translate}}</span> </th>
+              <td mat-cell *matCellDef="let element" class="fab">
+                <button mat-button [mat-menu-trigger-for]="detail" yPosition="above" class="float-right">
+                  <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                    more_vert
+                  </mat-icon>
+                </button>
+  
+                <mat-menu #detail="" x-position="before">
+  
+                  <button mat-menu-item *ngIf="element.frmValider=='Modeliser'" (click)="validerFormulaire(element)"
+                    matTooltip="Valider">
+                    <mat-icon color="primary">done_outline</mat-icon>{{'formulaire.btnvalider' | translate}}
+                  </button>
+                  <div *accesscode="'edit_form'">
+                    <button mat-menu-item color="primary" (click)="openDialogEditForm(element)">
+                      <mat-icon matTooltip="Modification">
+                        edit
+                      </mat-icon>{{'formulaire.btnmodifier' | translate}}
+                    </button>
+                  </div>
+                  <div *accesscode="'delete_form'">
+                    <button mat-menu-item (click)="supprimerFormulaire(element.frmId)">
+                      <mat-icon color="warn" matTooltip="{{'formulaire.btndelete' | translate}}">
+                        delete
+                      </mat-icon>{{'formulaire.btndelete' | translate}}
+                    </button>
+                  </div>
+  
+                </mat-menu>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="getDisplayedColumnsNoGeneres()"></tr>
+            <tr mat-row *matRowDef="let row; columns: getDisplayedColumnsNoGeneres();"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+        <!-- <div class="row container-fluid diminuer">
+          <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let m of formulairenotgenere">
+            <div class="card card-stats">
+              <div class="card-header card-header-warning card-header-icon">
+                <button mat-button [mat-menu-trigger-for]="detail" yPosition="above" class="float-right">
+                  <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                    more_vert
+                  </mat-icon>
+                </button>
+                <h5>{{m.frmNom}}</h5><br>
+
+                <mat-menu #detail="" x-position="before">
+
+                  <button mat-menu-item *ngIf="m.frmValider=='Modeliser'" (click)="validerFormulaire(m)"
+                    matTooltip="Valider">
+                    <mat-icon color="primary">done_outline</mat-icon>{{'formulaire.btnvalider' | translate}}
+                  </button>
+                  <div *accesscode="'edit_form'">
+                    <button mat-menu-item color="primary" (click)="openDialogEditForm(m)" >
+                      <mat-icon matTooltip="Modification" >
+                        edit
+                      </mat-icon>{{'formulaire.btnmodifier' | translate}}
+                    </button>
+                  </div>
+                  <div *accesscode="'delete_form'">
+                    <button mat-menu-item (click)="supprimerFormulaire(m.frmId)" >
+                      <mat-icon color="warn" matTooltip="{{'formulaire.btndelete' | translate}}">
+                        delete
+                      </mat-icon>{{'formulaire.btndelete' | translate}}
+                    </button>
+                  </div>
+                  
+                </mat-menu>
+
+              </div>
+              <div class="">
+                <div class="stats"><br><br>
+                  <div class="">
+                    <mat-icon  class="taille centrer" svgIcon="blocks" style="zoom: 3;" matTooltip="{{'formulaire.btndelete' | translate}}"> </mat-icon>
+
+
+                  </div>
+
+                  <br><br>
+                  
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </mat-card>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+      {{'formulaire.listeGenerate' | translate}}
+    </ng-template>
+    <mat-card>
+      <mat-card-header class="card-header">
+        <mat-card-title>{{'formulaire.listeGenerate' | translate}}</mat-card-title>
+        <!-- <span class="header">{{'formulaire.liste' | translate}}</span> -->
+      </mat-card-header>
+      <br>
+      <mat-spinner class="center" *ngIf="loading" value="indeterminate"></mat-spinner>
+      <mat-form-field appearance="outline">
+        <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+        <input matInput (keyup)="applyFilterGeneres($event)">
+
+      </mat-form-field>
+      <div class="container-fluid">
+        <mat-menu #detail2="matMenu">
+          <form [formGroup]="form">
+            <div *ngFor="let cd of columnDefinitions">
+              &nbsp;<mat-checkbox [formControlName]="cd.def">{{cd.label | translate}}&nbsp;
+              </mat-checkbox>
+            </div>
+          </form>
+        </mat-menu>
+        <button class="float-right" mat-button [mat-menu-trigger-for]="detail2" xPosition="before">
+          <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+            filter_alt
+          </mat-icon>
+        </button>
+        <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceFormulaireGeneres" matSort>
+          <ng-container matColumnDef="frmNom">
+  
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'formulaire.frmNom' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.frmNom}} </td>
+          </ng-container>
+          <ng-container matColumnDef="frmDescription">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'formulaire.frmDescription' | translate}} </th>
+  
+            <td mat-cell *matCellDef="let element"> {{element.frmDescription}} </td>
+          </ng-container>
+          <ng-container matColumnDef="frmStatus">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'formulaire.status' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{(element.frmStatus? 'formulaire.genere':'formulaire.nongenere') |
+              translate}} </td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef><span>
+                &nbsp; &nbsp;{{'register.action' | translate}}</span> </th>
+            <td mat-cell *matCellDef="let element" class="fab">
+              <button mat-button [mat-menu-trigger-for]="detail" yPosition="above" class="float-right">
+                <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                  more_vert
+                </mat-icon>
+              </button>
+              <!-- <h3 class="card-category text-white center">{{m.frmNom}} </h3> -->
+  
+              <!-- <span class="card-category text-white ">{{m.frmNom}} </span><br> -->
+  
+              <mat-menu #detail="" x-position="before">
+                <div *accesscode="'remodelize_form'">
+                  <button mat-menu-item (click)="modeliserFormulaire(element)" *ngIf="element.frmValider=='Valider'"
+                    matTooltip="Reutilisation">
+                    <mat-icon>swap_horiz</mat-icon>{{'formulaire.btnreutilisation' | translate}}
+                  </button>
+                </div>
+  
+                <div *accesscode="'duplicate_form'">
+                  <button mat-menu-item color="primary" (click)="openDialogDupliquer(element)">
+                    <mat-icon matTooltip="{{'formulaire.btnduppliquer' | translate}}">
+                      add
+                    </mat-icon>{{'formulaire.btnduppliquer' | translate}}
+                  </button>
+                </div>
+                <div *accesscode="'delete_form'">
+                  <button mat-menu-item (click)="supprimerFormulaire(element.frmId)">
+                    <mat-icon color="warn" matTooltip="{{'formulaire.btndelete' | translate}}">
+                      delete
+                    </mat-icon>{{'formulaire.btndelete' | translate}}
+                  </button>
+                </div>
+  
+                <button mat-menu-item (click)="openDialogViewForm(element)">
+                  <mat-icon color="primary" matTooltip="{{'formulaire.btnappercu' | translate}}">
+                    visibility
+                  </mat-icon>{{'formulaire.btnappercu' | translate}}
+                </button>
+  
+                <!-- <button  mat-menu-item  *ngIf="m.frmValider=='Modeliser'"
+                    (click)="validerFormulaire(m)" matTooltip="Valider">
+                    <mat-icon color="primary">done_outline</mat-icon>{{'formulaire.btnvalider' | translate}}
+                  </button>
+  
+                  <button mat-menu-item color="primary" (click)="openDialogEditForm(m)">
+                    <mat-icon matTooltip="Modification">
+                      edit
+                    </mat-icon>{{'formulaire.btnmodifier' | translate}}
+                  </button>
+                  <button mat-menu-item   (click)="supprimerFormulaire(m.frmId)">
+                    <mat-icon color="warn" matTooltip="{{'formulaire.btndelete' | translate}}">
+                      delete
+                    </mat-icon>{{'formulaire.btndelete' | translate}}
+                  </button> -->
+  
+  
+              </mat-menu>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+          <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+      <!-- <div class="row container-fluid diminuer">
+        <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let m of formulairegenere">
+          <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+              <button mat-button [mat-menu-trigger-for]="detail" yPosition="above" class="float-right">
+                <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                  more_vert
+                </mat-icon>
+              </button>
+              
+
+              <mat-menu #detail="" x-position="before">
+                <div *accesscode="'remodelize_form'">
+                  <button mat-menu-item (click)="modeliserFormulaire(m)" *ngIf="m.frmValider=='Valider'"
+                  matTooltip="Reutilisation" >
+                  <mat-icon>swap_horiz</mat-icon>{{'formulaire.btnreutilisation' | translate}}
+                </button>
+                </div>
+               
+                <div *accesscode="'duplicate_form'">
+                  <button mat-menu-item color="primary" (click)="openDialogDupliquer(m)" >
+                    <mat-icon matTooltip="{{'formulaire.btnduppliquer' | translate}}">
+                      add
+                    </mat-icon>{{'formulaire.btnduppliquer' | translate}}
+                  </button>
+                </div>
+                <div *accesscode="'delete_form'">
+                  <button mat-menu-item (click)="supprimerFormulaire(m.frmId)" >
+                  <mat-icon color="warn" matTooltip="{{'formulaire.btndelete' | translate}}">
+                    delete
+                  </mat-icon>{{'formulaire.btndelete' | translate}}
+                </button>
+                </div>
+                
+                <button mat-menu-item (click)="openDialogViewForm(m)">
+                  <mat-icon color="primary" matTooltip="{{'formulaire.btnappercu' | translate}}">
+                    visibility
+                  </mat-icon>{{'formulaire.btnappercu' | translate}}
+                </button>
+
+                
+
+
+              </mat-menu>
+              <h5>{{m.frmNom}}</h5>
+
+              <span class="" *ngIf="m.frmStatus">Généré</span>
+              <span class="" *ngIf="!m.frmStatus">Non généré</span>
+
+            </div>
+            <div class="">
+
+              <div class="stats"><br><br>
+                <div class="">
+                  <mat-icon  class="taille centrer" svgIcon="blocks" style="zoom: 3;" matTooltip="{{'formulaire.btndelete' | translate}}"> </mat-icon>
+
+
+                </div>
+                <br><br>
+
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>

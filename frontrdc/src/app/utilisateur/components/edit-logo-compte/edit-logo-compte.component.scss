@@ -1,0 +1,104 @@
+.image{
+  background: url("/assets/images/gainde/ia.jpg");
+}
+
+#test {
+  background-image: url();
+  background-size: cover;
+  /* background: url(http://www.petite-annonce-gratuite.com/layout_images/carte-france.png) no-repeat;
+  width: 100%;
+  height: 390px;*/
+}
+
+
+body{
+  background-image: url("/assets/images/gainde/ia1.jpg");
+  background-size: cover;
+
+}
+.right{
+  margin-left: 20%;
+}
+.top{
+  margin-top: 11%;
+}
+.text{
+  font-size: 11px;
+}
+
+.center{
+  margin-left: 33%;
+}
+.right{
+  margin-left: 0%;
+  border: 2px solid black;
+}
+
+.login-page{
+  height: 68vh;
+//  width: 100%;
+  margin-top: -10%;
+  overflow-wrap: scroll;
+}
+
+.login-spacer{
+  height: 7vh;
+}
+
+.login-container{
+  margin: auto;
+  width: 300px;
+  padding: 1vh;
+  background-color: #fff;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+}
+
+
+#lock-icon{
+  line-height: 56px;
+  color: #fff;
+}
+.card-heading{
+  text-align: center;
+  color: rgba(0, 0, 0, 0.31);
+}
+
+.buttons .login{
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+}
+
+.buttons .login > button{
+  width: 40%;
+}
+button{
+  margin: 5%;
+}
+.buttons .register{
+  display: flex;
+  padding-top: 4vh;
+  padding-bottom: 2vh;
+  justify-content: space-between;
+}
+.app-header{
+  color: #fff;
+      background-color: #1e88e5;
+      text-align: center;
+      margin-top: -3px;
+      padding: 2px;
+  -webkit-box-shadow: 2px 4px 58px -20px rgba(0,0,0,1);
+  -moz-box-shadow: 2px 4px 58px -20px rgba(0,0,0,1);
+  box-shadow: 2px 4px 58px -20px rgba(0,0,0,1);
+  }
+
+  .my-mat-tool-bar {
+    height: 150px;
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}

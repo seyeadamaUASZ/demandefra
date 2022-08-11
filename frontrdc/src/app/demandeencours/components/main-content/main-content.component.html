@@ -1,0 +1,103 @@
+<div class="row">
+    <div class="col-sm-6">
+        <h3 class="float-left">
+            <strong class="foncer"> {{'menu.demandeatraiterchef' | translate}}</strong>
+        </h3>
+    </div>
+</div>
+<mat-tab-group>
+    <mat-tab>
+        <mat-card class="">
+            <mat-form-field appearance="outline">
+                <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+                <input matInput (keyup)="applyFilter($event)">
+              </mat-form-field>
+            <mat-menu #detail="matMenu">
+                <form [formGroup]="form">
+                    <div *ngFor="let cd of columnDefinitions">
+                        &nbsp; <mat-checkbox [formControlName]="cd.def">{{cd.label}}&nbsp;
+                        </mat-checkbox>
+                    </div>
+                </form>
+            </mat-menu>
+
+            <div class="" *ngIf="(paiement$ | async) as result" [ngSwitch]="result.dataState">
+                <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+                    <mat-spinner></mat-spinner>                  
+                </ng-container>
+              
+                <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+                    <div class="alert-danger">
+                      {{result.errorMessage}}
+                    </div>
+                </ng-container>
+                <button class="float-right" mat-button (click)="select.open({position:0})" yPosition="above">
+                    <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                        filter_alt
+                    </mat-icon>
+                    <mat-select style="visibility: hidden;" [disableOptionCentering]="false" #select
+                        [(ngModel)]="selectedColumns" multiple>
+                        <mat-option *ngFor="let c of columnDefinitions" [value]="c">
+                            {{('demandeatraiter.'+c) | translate}}</mat-option>
+                    </mat-select>
+                </button>
+                <table mat-table class=" mat-elevation-z8" *ngSwitchCase="DataStateEnum.LOADED" [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="numero">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'demandeatraiter.numero' | translate}}
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.numdemande}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dateSoumission">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'demandeatraiter.dateSoumission' | translate}}
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.dateSoumission | date:"dd/MM/yyyy H:mm:ss"}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="prenomResponsable">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'demandeatraiter.prenomResponsable' | translate}}
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.prenomResponsable}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="nomResponsable">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'demandeatraiter.nomResponsable' | translate}}
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.nomResponsable}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="raisonSociale">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'demandeatraiter.raisonsociale' | translate}}
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.raisonsociale}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <span>{{'register.action' | translate}}</span>
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button type="button" mat-icon-button (click)="openDialogVisualiser(element)" *ngIf="element.status==2 && profilLibelle == 'chef bureau'">
+                                <mat-icon matTooltip="{{'demanderejetees.traiter'| translate}}" color="primary">
+                                    touch_app
+                                </mat-icon>
+                            </button>
+                            <button type="button" mat-icon-button *ngIf="element.status==2 && profilLibelle == 'chef division'" (click)="openDialogVisualiser(element)">
+                                <mat-icon matTooltip="{{'demandeterminee.visualiser'| translate}}" color="primary">
+                                    visibility
+                                </mat-icon>
+                            </button>
+                        </td>                        
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+                    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns()"></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+
+        </mat-card>
+    </mat-tab>
+</mat-tab-group>

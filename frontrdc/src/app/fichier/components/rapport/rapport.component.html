@@ -1,0 +1,42 @@
+<!-- <span class="route">{{'dashboard.home' | translate }} >  {{'dashboard.fichier' | translate }}</span> -->
+<mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="mymargin" color="primary">content_copy</mat-icon>
+        {{'fichier.alert' | translate}}
+      </ng-template>
+      <mat-card class="">
+        <mat-card-header class="card-header centrer">
+            <mat-card-title>{{'fichier.model' | translate}}</mat-card-title>
+            <!-- <span class="header">{{'fichier.alert' | translate}}</span> -->
+        </mat-card-header>
+        <mat-form-field class="filtre" appearance="outline">
+            <mat-label>{{'utilisateur.filtre'| translate}}</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search">
+        </mat-form-field>
+
+        <div class="">
+            <table mat-table class=" mat-elevation-z8" [dataSource]="dataSource" matSort>   
+                <ng-container matColumnDef="fhrNom">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'fichier.nom' | translate}} </th>
+                    <td mat-cell *matCellDef="let rapport"> {{rapport.rptNom}} </td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                            {{'register.action' | translate}}</span> </th>
+                    <td mat-cell *matCellDef="let rapport" class="fab">
+                        <mat-icon matTooltip="Details" color="primary" (click)="gotoExprotFile(rapport.rptId)">
+                            visibility
+                        </mat-icon>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+
+      </mat-card>
+    </mat-tab>
+</mat-tab-group>

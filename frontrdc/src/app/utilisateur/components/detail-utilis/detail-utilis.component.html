@@ -1,0 +1,40 @@
+
+  <mat-card-header>
+    <!-- <div mat-card-avatar name="{{compte.utiPrenom}} {{compte.utiNom}}" class="example-header-image"></div> -->
+    <ngx-avatar name="{{user.utiPrenom}}  {{user.utiNom}}" class="centerr"></ngx-avatar>
+    <!-- <mat-card-title>{{user.utiPrenom}} {{user.utiNom}}</mat-card-title> -->
+<!-- <mat-card-subtitle>{{user.uti_pro_id?.proLibelle}}</mat-card-subtitle> -->
+
+  </mat-card-header>
+  <div class="center">
+
+  </div>
+  <h3 class="centre">{{user.utiPrenom}} {{user.utiNom}}</h3>
+  <p class="center">{{user.uti_pro_id?.proLibelle}}</p>
+
+  <mat-card-content>
+    <div class="row">
+      <div class="col-sm-12 col-lg-12 col-md-12">
+        <mat-icon color="primary" matSuffix>perm_identity</mat-icon>&nbsp;
+        <mat-label>{{'register.username' | translate}} : {{user.utiUsername}}</mat-label><br>
+        <hr>
+        <mat-icon color="primary" matSuffix>email</mat-icon>&nbsp;
+        <mat-label>{{'register.email' | translate}} : {{user.utiEmail}}</mat-label><br>
+        <hr>
+        <mat-icon color="primary" matSuffix>phone</mat-icon>&nbsp;
+        <mat-label>{{'register.telephone' | translate}} : {{user.utiTelephone}}</mat-label><br>
+        <hr>
+        <mat-icon color="primary" matSuffix>home</mat-icon>&nbsp;
+        <mat-label>{{'register.adresse' | translate}} : {{user.utiAdresse}}</mat-label><br>
+        <hr>
+      </div>
+      <!-- <div class="col-sm-6 col-lg-6 col-md-6">
+        <mat-label>{{'register.adresse' | translate}} : {{user.utiAdresse}}</mat-label><br>
+        <hr>
+      </div> -->
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="closeDialog()">{{'btn_fermer' | translate}}</button>
+
+  </mat-card-actions>

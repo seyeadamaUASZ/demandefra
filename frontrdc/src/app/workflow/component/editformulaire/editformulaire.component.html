@@ -1,0 +1,38 @@
+<div>
+  <div class="">
+      <h3 class="card-heading float-left">
+          <strong class="foncer">{{'formulaire.ajout' | translate}} 
+          </strong> 
+          
+      </h3>
+  </div><br>
+  <form class="" [formGroup]="addWrkForm" (ngSubmit)="onSubmit()">
+      <div class="">
+          <div>
+              <mat-form-field appearance="fill"> 
+                  <mat-icon matSuffix>compare_arrows</mat-icon>
+                  <input matInput type="text"  placeholder="{{'formulaire.name' | translate}} " formControlName="nomform" required>
+                  <mat-error *ngIf="!f.name">
+                      {{'workflow.name-error' | translate}} </mat-error>
+              </mat-form-field>
+              <br>
+              <label class="container"> 
+                <input type="checkbox" formControlName="positionform" [(ngModel)]="theCheckbox"  data-md-icheck (change)="toggleVisibility($event)"/>
+                {{'workflow.formulaireprimaire' | translate}}  
+                </label>
+              <br>
+                  <input  type="file"   id="fichierform" formControlName="fichierform"  (change)="handleUpload($event)" required>
+
+          </div>
+      </div>
+      <br><br>
+      <div class="mat-dialog-actions">
+          <button mat-stroked-button color="warn" (click)="closeDialog()"
+              type="button">{{'Action.close' | translate}}</button>
+          <mat-spinner class="center" *ngIf="loading" value="indeterminate"></mat-spinner>
+          <button mat-raised-button color="primary" type="submit">{{'Action.save' | translate}}</button>
+
+
+      </div>
+  </form>
+</div>

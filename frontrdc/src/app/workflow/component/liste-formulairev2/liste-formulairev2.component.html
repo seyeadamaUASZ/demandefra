@@ -1,0 +1,185 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h3 class="float-left">
+      <strong class="foncer"> {{'menu.formulaire' | translate}}
+      </strong>
+    </h3>
+
+  </div>
+</div>
+<br>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+      {{'formulaire.statusNoGenerer' | translate}}
+    </ng-template>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+      {{'formulaire.statusNoGenerer' | translate}}
+    </ng-template>
+    <mat-card class="">
+      <mat-card-header class="card-header centrer">
+          <mat-card-title>{{'formulaire.statusNoGenerer' | translate}}</mat-card-title>
+      </mat-card-header><br>
+      <mat-form-field appearance="outline">
+          <mat-label>{{'formulaire.filtre' | translate}}</mat-label>
+          <input matInput (keyup)="applyFilterg($event)">
+      </mat-form-field>
+      <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAddform('')"
+      matTooltip="{{'document.ajout' | translate}}">
+      <mat-icon>person_add</mat-icon>
+    </button>
+      <div class="">
+        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+          <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceFrmNoGenerer" matSort>
+
+              <ng-container matColumnDef="wfcId">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'formulaire.wfcId' | translate}} </th>
+                  <td mat-cell *matCellDef="let element"> {{element.wfcId}} </td>
+              </ng-container>
+              <ng-container matColumnDef="workflowNameId.name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header="workflowNameId">{{'formulaire.workflowNameId' | translate}} </th>
+                  <td mat-cell *matCellDef="let element"> {{element.workflowname.name}} </td>
+              </ng-container>
+              <ng-container matColumnDef="wfcIdFormulaire">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'formulaire.wfcIdFormulaire' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.wfcIdFormulaire}} </td>
+            </ng-container>
+            <ng-container matColumnDef="wfcPrimaire">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'formulaire.wfcPrimaire' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.wfcPrimaire==true ? "formulaire de depart":"formulaire de tache"}} </td>
+          </ng-container>
+          
+          
+              <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                          {{'register.action' | translate}}</span> </th>
+                  <td mat-cell *matCellDef="let element" class="fab">
+                      <button mat-button [mat-menu-trigger-for]="detail">
+                          <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                              yPosition="above">
+                              more_vert
+                          </mat-icon>
+                      </button>
+
+
+                      <mat-menu #detail="matMenu">
+                       
+                        <button mat-menu-item (click)="confirmGenerer(element)">
+                          <mat-icon matTooltip="{{'formulaire.generer'| translate}}" color="primary">
+                              settings
+                          </mat-icon>{{'formulaire.generer'| translate}}
+                      </button>
+                      <button mat-menu-item (click)="modifierFormulaire(element)">
+                        <mat-icon matTooltip="{{'formulaire.modifier'| translate}}" color="primary">
+                            edit
+                        </mat-icon>{{'formulaire.modifier'| translate}}
+                    </button>
+                      <button mat-menu-item (click)="deleteform(element.jfrmId)">
+                        <mat-icon matTooltip="{{'formulaire.supprimer'| translate}}" color="primary">
+                            delete
+                        </mat-icon>{{'formulaire.supprimer'| translate}}
+                    </button>
+
+                      </mat-menu>
+
+
+                  </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+
+
+    </mat-card>
+
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+      {{'formulaire.statusGenerer' | translate}}
+    </ng-template>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+      {{'formulaire.statusGenerer' | translate}}
+    </ng-template>
+    <mat-card class="">
+      <mat-card-header class="card-header centrer">
+          <mat-card-title>{{'formulaire.statusGenerer' | translate}}</mat-card-title>
+      </mat-card-header><br>
+      <mat-form-field appearance="outline">
+          <mat-label>{{'document.filtre' | translate}}</mat-label>
+          <input matInput (keyup)="applyFilter($event)">
+      </mat-form-field>
+      <button mat-mini-fab color="primary" class="add-contact" (click)="assemblerFormulaire('')"
+      matTooltip="{{'formulaire.assembler' | translate}}">
+      <mat-icon>person_add</mat-icon>
+    </button>
+      <div class="">
+         <!-- <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceFrmGenerer" matSort>
+
+            <ng-container matColumnDef="wfcId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'formulaire.wfcId' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.wfcId}} </td>
+          </ng-container>
+          <ng-container matColumnDef="wfcIdworkflow">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'formulaire.wfcIdworkflow' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.wfcIdworkflow}} </td>
+          </ng-container>
+          <ng-container matColumnDef="wfcIdFormulaire">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'formulaire.wfcIdFormulaire' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.wfcIdFormulaire}} </td>
+        </ng-container>
+        <ng-container matColumnDef="wfcPrimaire">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'formulaire.wfcPrimaire' | translate}} </th>
+          <td mat-cell *matCellDef="let element"> {{element.wfcPrimaire}} </td>
+      </ng-container>
+      <ng-container matColumnDef="statusWcfWorkflow">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'formulaire.statusWcfWorkflow' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.statusWcfWorkflow}} </td>
+    </ng-container>
+              
+              <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                          {{'register.action' | translate}}</span> </th>
+                  <td mat-cell *matCellDef="let element" class="fab">
+                      <button mat-button [mat-menu-trigger-for]="detail">
+                          <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                              yPosition="above">
+                              more_vert
+                          </mat-icon>
+                      </button>
+                      <mat-menu #detail="matMenu">
+                        <button mat-menu-item (click)="visualiserFormulaire(element)">
+                          <mat-icon matTooltip="{{'formulaire.visualiser'| translate}}" color="primary">
+                              visibility
+                          </mat-icon>{{'formulaire.visualiser'| translate}}
+                      </button>
+
+                      </mat-menu>
+
+
+                  </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>-->
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+      </div>
+
+
+    </mat-card>
+
+  </mat-tab>
+
+</mat-tab-group>
+
+

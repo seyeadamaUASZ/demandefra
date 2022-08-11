@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h3 class="float-left">
+      <strong class="foncer">  {{'menu.procedure' | translate}}
+      </strong>
+    </h3>
+
+  </div>
+</div>
+<br>
+<mat-tab-group>
+
+  <mat-tab>
+
+    <ng-template  mat-tab-label>
+      <mat-icon class="mymargin"  color="primary">view_agenda</mat-icon>{{'groupeService'| translate}}<br>
+    </ng-template>
+    <mat-card>
+      <mat-card-header class="card-header centrer">
+        <!-- <mat-card-title>{{'groupeService'| translate}}</mat-card-title>  -->
+      </mat-card-header>
+      <div class="">
+
+        <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAddSecteur()"
+            matTooltip="{{'workflow.addsecteur' | translate}}">
+            <mat-icon>add</mat-icon>
+        </button><br><br>
+        <div class="row container-fluid diminuer">
+          <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let space of spaces">
+            <div class="card card-stats">
+              <div class="card-header card-header-warning card-header-icon"> 
+
+                <button mat-button [mat-menu-trigger-for]="detail" yPosition="above" class="float-right">
+                  <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                    more_vert
+                  </mat-icon>
+                </button>
+                <mat-menu #detail="" x-position="before">
+                  <button mat-menu-item  (click)="accessprocess(space.name)"
+                    matTooltip="Valider">
+                    <mat-icon color="primary"> visibility</mat-icon>{{'utilisateur.details'| translate}}
+                  </button>
+                  </mat-menu>
+                 <h5 class="center">{{space.name}}</h5>
+              </div>
+              <div class="">
+                <div class="stats"> 
+                  <!-- <img src="assets\images\gainde\office-sector.jpg" class="img-responsive"> -->
+                   
+                  <!-- <button  mat-raised-button color="primary" type="button" (click)="accessprocess(space.name)">
+                    Entrer
+                 </button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </mat-tab>
+ 
+</mat-tab-group> 
+

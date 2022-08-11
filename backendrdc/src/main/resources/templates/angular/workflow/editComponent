@@ -1,0 +1,62 @@
+import { Component, OnInit, Input, Inject, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
+import { NotificationService } from '../../../shared/services/notification.service';
+import {#ComponentNameService} from '../../service/#componentName.service';
+import {#ModuleService} from '../../service/#module.service';
+
+@Component({
+	selector: 'app-add-#componentName',
+	templateUrl: './add-#componentName.component.html',
+	styleUrls: ['./add-#componentName.component.scss']
+})
+export class Add#ComponentNameComponent implements OnInit {
+
+	status:any;
+	donnee:any;
+	#componentVariables
+	
+	constructor(private #componentNameService: #ComponentNameService,
+		private #moduleService: #ModuleService,
+    	private router: Router, private formBuilder: FormBuilder,
+    	private translate: TranslateService,
+    	private notification: NotificationService,
+   		@Inject(MAT_DIALOG_DATA) public data: any,
+    	public dialog: MatDialogRef<Add#ComponentNameComponent> ) { }
+	
+	EditForm = this.formBuilder.group({
+		id: [''],
+    	#forms
+    	poOwner: [''],
+    	status: [''],
+    	owner: [''],
+    	idLink: ['']
+    });
+
+	ngOnInit() {
+		#componentInstructionsOnInit
+		if(this.data){
+			this.donnee = this.data.data;
+			this.status = this.data.status;
+			this.EditForm.setValue(this.donnee);
+		}
+  	}
+  	
+  	onSubmit(){
+  		if (this.donnee) {
+      		this.EditForm.value.idLink = this.donnee.id
+    	} else { 
+    		this.EditForm.value.idLink = null 
+    	}
+  		#componentOnSubmitInstructions
+  	}
+  	
+  	closeDialog(){
+  		this.dialog.close({status:false});
+  	}
+  	
+  	#componentFunctions
+  	
+}

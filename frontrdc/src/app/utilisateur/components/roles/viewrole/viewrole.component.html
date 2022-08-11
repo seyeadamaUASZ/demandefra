@@ -1,0 +1,21 @@
+
+  <mat-card-header>
+    <mat-card-title>{{'role.detailprofil' | translate}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-sm-6 col-lg-6 col-md-6">
+        <mat-icon color="primary" matSuffix>perm_identity</mat-icon>&nbsp;
+        <mat-label>{{'role.profil' | translate}} : <strong>{{roles.proLibelle}}</strong></mat-label><br>
+        <hr>
+        <mat-icon color="primary" matSuffix>perm_identity</mat-icon>&nbsp;
+        <mat-label>{{'role.description' | translate}} : <strong>{{role.proDescription}}</strong></mat-label><br>
+        <hr>
+        <div class="buttons">
+          <div class="login">
+              <button mat-raised-button color="primary" (click)="closeDialog()" type="button" >{{'Action.close' | translate}}</button>
+          </div>
+      </div>
+      </div>
+    </div>
+  </mat-card-content>

@@ -1,0 +1,102 @@
+<mat-card>
+    <mat-card-header class="card-header centrer">
+        <mat-card-title>{{'role.liste' | translate}}</mat-card-title>
+        <!-- <span class="header">{{'role.liste' | translate}}</span> -->
+    </mat-card-header>
+    <!-- <mat-form-field class="filtre">
+        <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+        <input matInput (keyup)="applyFilterRoles($event)" placeholder="Search">
+    </mat-form-field> -->
+    <br>
+
+    <mat-form-field appearance="outline">
+        <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+        <input matInput (keyup)="applyFilterRoles($event)">
+      </mat-form-field>
+    <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAdd()"
+        matTooltip="{{'role.add' | translate}}" *accesscode="'create_profil'">
+        <mat-icon>person_add</mat-icon>
+    </button>
+    <mat-menu #detail="matMenu">
+        <form [formGroup]="form">
+          <div *ngFor="let cd of columnDefinitions">
+            &nbsp;<mat-checkbox   [formControlName]="cd.def">{{cd.label}}&nbsp;
+            </mat-checkbox>
+          </div>       
+        </form>
+      </mat-menu>
+      <button class="float-right" mat-button [mat-menu-trigger-for]="detail" xPosition="before">
+        <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+      filter_alt
+        </mat-icon>
+      </button>
+    <div class="mat-elevation-z8">
+       
+        <table mat-table [dataSource]="roleDataSource" matSort>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="proLibelle">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'role.profil' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.proLibelle}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="proDescription">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'role.description' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.proDescription}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                        {{'register.action' | translate}}</span> </th>
+                <td mat-cell *matCellDef="let element" class="fab">
+                    <button mat-button [mat-menu-trigger-for]="detail"   yPosition="above">
+                        <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                          >
+                            more_vert
+                        </mat-icon>
+                    </button>
+                    <mat-menu #detail="matMenu">
+                        <button mat-menu-item (click)="openDialogView(element)">
+
+                            <mat-icon matTooltip="{{'Action.details' | translate}}" color="primary">visibility
+                            </mat-icon>{{'utilisateur.visualiser' | translate}}
+                        </button>
+                        <button mat-menu-item (click)="openDialogEdit(element)" *accesscode="'edit_profil'">
+
+                            <mat-icon matTooltip="{{'Action.edit' | translate}}" color="secondary">edit</mat-icon>
+                            {{'Action.edit' | translate}}
+                        </button>
+
+                        <!-- <button mat-menu-item (click)="confirmationSuppression(element)">
+                            <mat-icon color="warn" matTooltip="{{'Action.delete' | translate}}">delete</mat-icon>
+                            {{'Action.delete' | translate}}
+                        </button> -->
+ 
+
+                         <button mat-menu-item (click)="confirmationSuppression(element)" *accesscode="'delete_profil'">
+                            <mat-icon color="warn" matTooltip="{{'Action.delete' | translate}}">delete</mat-icon>
+                            {{'Action.delete' | translate}}
+                        </button>
+                        <!--
+                        <button mat-menu-item (click)="allocaterights(element)" *accesscode="'set_acces'">
+
+
+                        </button> *accesscode="'set_acces'"-->
+                        <button mat-menu-item (click)="allocaterights(element)" >
+
+
+                            <mat-icon color="secondary" matTooltip="{{'Action.allocate' | translate}}">vpn_key
+                            </mat-icon>{{'Action.allocate' | translate}}
+                        </button>
+
+                    </mat-menu>
+
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+            <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+</mat-card>

@@ -1,0 +1,43 @@
+<div class=" col-sm-12 mt-2 mb-4">
+  <div class="container">
+        <h5>{{('rapportanalyse.ajout') | translate}}</h5>
+  </div>
+</div>
+<div class="container-fluid">
+  <form class="" [formGroup]="EditForm">
+        <div class="row col-sm-12">
+              <div class="col-sm-12">
+                    <mat-form-field appearance="fill">
+                          <mat-label>{{'rapportAnalyse.referentiel' | translate}}</mat-label>
+                          <input matInput type="text" formControlName="referentiel" required>
+                    </mat-form-field>
+              </div> 
+              <div class="col-sm-12">
+                  <mat-form-field appearance="fill">
+                        <mat-label>{{'rapportAnalyse.commentaire' | translate}}</mat-label>
+                        <textarea matInput formControlName="commentaire" required></textarea>
+                  </mat-form-field>
+            </div>                             
+        </div>
+        <div class="row col-sm-12">
+              <div class="col-sm-12">
+                    <input type="file" #fileAnalyse hidden (change)="onFileAnalyse()">
+                    <div class="row container-fluid mt-1 mb-2" (click)="addFileAnalyse()">
+                          <div class="file-upload">
+                                <span class="file-name">{{'rapportAnalyse.analyses' | translate}}</span>
+                                <span *ngIf="analyse" class="sep"></span>
+
+                                <span class="file-name2">{{analyse?.name}}</span>
+
+                                <span class="flex"></span>
+                                <span *ngIf="analyse"><mat-icon color="primary">check</mat-icon></span>
+                          </div>
+                    </div>      
+              </div>
+        </div>
+  </form>    
+</div>
+<div>
+  <button mat-stroked-button type="button" color="warn" mat-dialog-close>{{'btn.fermer' | translate}}</button>
+  <button type="button" (click)="onSubmit()" mat-raised-button color="primary">{{'btn.save' | translate}}</button>          
+</div>        

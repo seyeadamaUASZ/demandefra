@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c641cec9-75cf-4122-b61b-6c92151dfd5c">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nom" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="prenom" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="login" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="adresse" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="telephone" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="email" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+                
+        <parameter name="reference" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="livraison" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>	
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="uti_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_adresse" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_couleur" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_date_creation" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_date_modification" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_nom" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_password" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_prenom" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_telephone" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_app_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_username" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_actived" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_premier_connect" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_pro_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_lng_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uti_thm_id" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="140" y="22" width="289" height="38" uuid="d0c10485-3b4f-4fd5-8871-87ec41de84fd"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Informations Client]]></text>
+			</staticText>
+			<line>
+				<reportElement x="12" y="68" width="530" height="1" uuid="263ed6e1-88ae-4053-806e-8c73a2fe59f5"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="279" splitType="Stretch">
+			<textField>
+				<reportElement x="34" y="36" width="206" height="20" uuid="7b063224-2fe6-46d0-9db7-b72119c02b1a"/>
+				<textFieldExpression><![CDATA[$P{nom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="87" width="206" height="20" uuid="5e6aefb8-df96-4c54-990c-ce89e9e0f59e"/>
+				<textFieldExpression><![CDATA[$P{login}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="275" y="36" width="257" height="20" uuid="2cd30a24-1952-479d-a5fd-6913efd11d7f"/>
+				<textFieldExpression><![CDATA[$P{prenom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="275" y="87" width="257" height="20" uuid="1b7f489a-befd-413f-abe7-e77b855d19cb"/>
+				<textFieldExpression><![CDATA[$P{adresse}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="17" width="205" height="20" uuid="e4a8246e-ba19-4a5f-8f8a-c9caf5ffcc06"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nom]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="16" width="257" height="20" uuid="e15554a6-a4c3-430b-a77d-99a8e521cee2"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prénoms]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="34" y="67" width="206" height="20" uuid="39177040-7640-489b-a975-1822ae183516"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Login]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="67" width="257" height="20" uuid="be578d49-f3b4-467c-8114-c732bce5e947"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Adresse]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="34" y="118" width="206" height="20" uuid="fdc3fddc-893b-4bbe-ad4c-543a9d7dab36"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Téléphone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="118" width="257" height="20" uuid="f54328ac-1f0e-4935-8ecc-3e0b4b20d219"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="275" y="138" width="257" height="20" uuid="ebf03ae0-e7a0-4a54-821e-bf71a0e7cc54"/>
+				<textFieldExpression><![CDATA[$P{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="138" width="206" height="20" uuid="55100512-6ea7-4077-9051-5b4367b6fa55"/>
+				<textFieldExpression><![CDATA[$P{telephone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="275" y="200" width="257" height="20" uuid="ce024a5c-74f1-472a-b537-d052d5ec38cc"/>
+				<textFieldExpression><![CDATA[$P{livraisonl}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="202" width="206" height="20" uuid="76d883df-fb66-42b0-b73c-08603c90efc0"/>
+				<textFieldExpression><![CDATA[$P{refrerence}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="33" y="182" width="206" height="20" uuid="2761754d-c0f4-4d4a-9462-68e6fbc00c24"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Réfrérence du client]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="176" width="257" height="20" uuid="3a025594-bb2c-4b32-9b4c-375adc271ca7"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[adresse de livraison]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

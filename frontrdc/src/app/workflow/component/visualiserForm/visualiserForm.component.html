@@ -1,0 +1,57 @@
+
+<div class="login-page">
+  <div class="login-spacer"></div>
+      <!-- <div id="login-fab" class="mdl-color--accent mdl-color-text--white">
+          <i id="lock-icon" class="material-icons">lock</i>
+      </div> -->
+      <h3 class="card-heading float-left">
+        <strong class="foncer">{{'formulaire.titre' | translate}} : {{donnee.jfrmFormulaire}}
+        </strong>
+    </h3>
+      <!-- <h2 class="card-heading">
+          {{nomForm}} </h2> -->
+      <form class="form" >
+        <div class="form-group">
+        <div *ngFor="let item of champsFormulaire" >
+          <div class="">
+              <div class="form-group input-group mymargin" *ngIf="item.chpWCode=='TextBox'">
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>{{item.chpWLabel}}</mat-label>
+                      <input matInput placeholder={{item.chpWLabel}}
+                          required>
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="">
+            <div *ngIf="item.chpWCode=='CheckBox'">
+              <label>{{item.chpWLabel}}</label>
+              <div  class="inline-form-group">
+                  <label class="cust-check-bx">
+                    <input type="CheckBox"   >
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+            </div>
+          </div>
+
+          <div class="">
+            <div *ngIf="item.chpWCode=='Document'">
+            <input  type="file"   required>
+      </div>
+    </div>
+    </div>
+     <div >
+          <div class="buttons">
+              <div class="login">
+                <button mat-stroked-button color="warn" (click)="fermer()" type="button" >{{'btn_fermer' | translate}}</button>
+                  <button mat-raised-button color="primary" type="submit">{{'btn_enregistrer' | translate}}</button>
+              </div>
+
+          </div>
+        </div>
+        </div>
+      </form>
+
+
+</div>

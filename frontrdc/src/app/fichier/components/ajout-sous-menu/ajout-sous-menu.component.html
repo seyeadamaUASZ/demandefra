@@ -1,0 +1,22 @@
+<mat-card>
+  <div class="card-header">
+    <h3>
+        {{'fichier.addSousMenu' | translate}} 
+    </h3>
+  </div><br>
+    
+  <form class="" [formGroup]="menuForm" (ngSubmit)="onSubmit()">
+    <div class="">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-icon matSuffix>menu</mat-icon>
+                <input matInput placeholder="{{'fichier.nom' | translate}}" type="text" formControlName="menNom" required>
+            </mat-form-field>
+        </div>         
+    </div>        
+    <div class="mat-dialog-actions">
+            <button mat-raised-button color="primary" type="submit">{{'Action.save' | translate}}</button>  
+            <button mat-raised-button color="warn" (click)="closeDialog()" type="button" >{{'Action.close' | translate}}</button>            
+    </div>
+  </form>
+</mat-card>

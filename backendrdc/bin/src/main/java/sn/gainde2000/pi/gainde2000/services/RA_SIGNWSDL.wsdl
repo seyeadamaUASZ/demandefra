@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions name="WSDL_RASign" 
+				  targetNamespace="http://www.confiancefactory.com/WSDL_RASign/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.confiancefactory.com/WSDL_RASign/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+<!-- Policy for first signing and then encrypting all messages, with the certificate
+   included in the message from client to server but only a thumbprint on messages from
+   the server to the client. -->
+  <wsp:Policy wsu:Id="SignEncr" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+  
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:AsymmetricBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <wsp:Policy>
+            <sp:InitiatorToken>
+              <wsp:Policy>
+                <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+                  <wsp:Policy>
+                    <sp:RequireThumbprintReference/>
+                  </wsp:Policy>
+                </sp:X509Token>
+              </wsp:Policy>
+            </sp:InitiatorToken>
+            <sp:RecipientToken>
+              <wsp:Policy>
+                <sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Never">
+                  <wsp:Policy>
+                    <sp:RequireThumbprintReference/>
+                  </wsp:Policy>
+                </sp:X509Token>
+              </wsp:Policy>
+            </sp:RecipientToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:TripleDesRsa15/>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict/>
+              </wsp:Policy>
+            </sp:Layout>
+            <sp:IncludeTimestamp/>
+            <sp:OnlySignEntireHeadersAndBody/>
+          </wsp:Policy>
+        </sp:AsymmetricBinding>
+        <sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body/>
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+          <sp:Body/>
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.confiancefactory.com/WSDL_RASign/">
+			<xsd:element name="Signaturehash">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="id_user" type="xsd:long"/>
+						<xsd:element name="cle_de_signature" type="xsd:string">
+						</xsd:element>
+						<xsd:element name="code_pin_user" type="xsd:string"/>
+						<xsd:element name="hash_a_signer" type="xsd:base64Binary">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="EnregistrerUser">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="prenom_nom" type="xsd:string">
+						</xsd:element>
+						<xsd:element name="cle_de_signature" type="xsd:string">
+						</xsd:element>
+						<xsd:element name="code_pin"
+							type="xsd:string">
+						</xsd:element>
+						<xsd:element name="numero_cni"
+							type="xsd:string" />
+						<xsd:element name="IdAppAppelant"
+							type="xsd:long">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="EnregistrerUserResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="out" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+            <xsd:element name="SignaturehashResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="out" type="tns:SignatureResult"/>
+            		</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SignatureModeArchive">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="id_user" type="xsd:long">
+						</xsd:element>
+						<xsd:element name="cle_de_signature" type="xsd:string">
+						</xsd:element>
+						<xsd:element name="code_pin_user" type="xsd:string">
+						</xsd:element>
+						<xsd:element name="document_a_signer" type="xsd:base64Binary">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SignatureModeArchiveResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="out" type="tns:SignatureResult"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		
+			<xsd:complexType name="SignatureResult">
+				<xsd:sequence>
+					<xsd:element name="ErroInfo" type="xsd:string"></xsd:element>
+					<xsd:element name="Status" type="xsd:string"></xsd:element>
+					<xsd:element name="Content" type="xsd:base64Binary"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="EnregistrerUserRequest">
+		<wsdl:part name="parameters" element="tns:EnregistrerUser"/>
+	</wsdl:message>
+	<wsdl:message name="EnregistrerUserResponse_OutputMessage">
+		<wsdl:part name="parameters" element="tns:EnregistrerUserResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SignaturehashRequest">
+		<wsdl:part element="tns:Signaturehash" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="SignaturehashResponse_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SignaturehashResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SignatureModeArchiveRequest">
+		<wsdl:part element="tns:SignatureModeArchive" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="SignatureModeArchiveResponse_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SignatureModeArchiveResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="IRegistSignPort">
+		<wsdl:operation name="EnregistrerUser">
+			<wsdl:input message="tns:EnregistrerUserRequest"/>
+			<wsdl:output message="tns:EnregistrerUserResponse_OutputMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="Signaturehash">
+			<wsdl:input message="tns:SignaturehashRequest"/>
+			<wsdl:output message="tns:SignaturehashResponse_OutputMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="SignatureModeArchive">
+			<wsdl:input message="tns:SignatureModeArchiveRequest"/>
+			<wsdl:output message="tns:SignatureModeArchiveResponse_OutputMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="RegistSignBinding" type="tns:IRegistSignPort">
+		<wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#SignEncr"/>
+		<wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="EnregistrerUser">
+			<wsdlsoap:operation soapAction="urn:EnregistrerUser"/>
+			<wsdl:input name="EnregistrerUserRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="EnregistrerUserResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="Signaturehash">
+			<wsdlsoap:operation soapAction="urn:Signaturehash"/>
+			<wsdl:input name="SignaturehashRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SignaturehashResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="SignatureModeArchive">
+			<wsdlsoap:operation soapAction="urn:SignatureModeArchive"/>
+			<wsdl:input name="SignatureModeArchiveRequest">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SignatureModeArchiveResponse">
+				<wsdlsoap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+	</wsdl:binding>
+	<wsdl:service name="RA_Sign">
+		<wsdl:port binding="tns:RegistSignBinding" name="IRegistSignPort">
+			<soap:address location="http://localhost:8080/RA_Sign"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,273 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h3 class="float-left">
+      <strong class="foncer"> {{'menu.parametrage' | translate}}
+      </strong>
+    </h3>
+
+  </div>
+</div>
+<br>
+<mat-tab-group [selectedIndex]="tabIndex">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">lock</mat-icon>
+      {{'parametrage.gestionPwd' | translate}}
+    </ng-template>
+
+    <mat-card>
+      <mat-card-header class="card-header">
+        <mat-card-title>{{'parametrage.gestionPwd' | translate}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row" style="margin-top: 15px;">
+          <div class="col-md-4 col-sm-3 col-xs-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-aqua"><i class="fa fa-table"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-number color">{{criterePwd?.pwdCarMin}}<small></small></span><br>
+                <span class="info-box-text color1">{{'criterePwd.caractereMin' | translate}} </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-aqua"><i class="fa fa-sort-numeric-asc"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-number color">{{criterePwd?.pwdDigMin}}</span><br>
+                <span class="info-box-text color1">{{'criterePwd.nombreCaratereNumerique' | translate}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-aqua"><i class="fa fa-font"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-number color">{{criterePwd?.pwdMajMin}}<small></small></span><br>
+                <span class="info-box-text color1">{{'criterePwd.nombreCaratereMaj' | translate}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-aqua"><i class="fa fa-building-o"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-number color">{{criterePwd?.pwdSpcMin}}</span><br>
+                <span class="info-box-text color1">{{'criterePwd.nombreCaratereSpeciaux' | translate}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix visible-sm-block"></div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-aqua"><i class="fa fa-clock-o"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-number color"> {{criterePwd?.pwdDure}}</span><br>
+                <span class="info-box-text color1">{{'criterePwd.dureeValidite' | translate}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+      <div class="mat-dialog-actions droite">
+        <button mat-raised-button color="primary" (click)="openDialogUpdate(criterePwd)">{{'update' |
+          translate}}</button>
+      </div><br>
+    </mat-card>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon color="primary">home</mat-icon>&nbsp;
+      {{'utilisateur.home-design' | translate}}
+    </ng-template>
+    <app-home-design></app-home-design>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon color="primary">domain</mat-icon>&nbsp;
+      {{'groupeService'| translate}}
+    </ng-template>
+    <app-groupeservice></app-groupeservice>
+  </mat-tab>  
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon color="primary">home</mat-icon>&nbsp;
+      {{'gestion.landing-page' | translate}}
+    </ng-template>
+
+    <app-gestion-landing-page></app-gestion-landing-page>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">lock</mat-icon>
+      {{'parametrage.gestionwidget' | translate}}
+    </ng-template>
+    <mat-card>
+      <mat-card-header class="card-header">
+        <mat-card-title>{{'parametrage.gestionwidget' | translate}}</mat-card-title>
+      </mat-card-header>
+      <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAddWidget()"
+        matTooltip="{{'widget.addwidget' | translate}}">
+        <mat-icon>add</mat-icon>
+      </button>
+      <mat-card-content>
+
+        <div class="mat-elevation-z8">
+          <mat-menu #detail="matMenu">
+            <form [formGroup]="form">
+              <div *ngFor="let cd of columnDefinitions">
+                &nbsp;<mat-checkbox   [formControlName]="cd.def">{{cd.label}}&nbsp;
+                </mat-checkbox>
+              </div>       
+            </form>
+          </mat-menu>
+         
+            <button class="float-right" mat-button [mat-menu-trigger-for]="detail" xPosition="before">
+              <mat-icon matTooltip="{{'widget.details'| translate}}" color="secondary">
+            filter_alt
+              </mat-icon>
+            </button>
+          <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceWidget" matSort>
+            <ng-container matColumnDef="wdgNom">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'workflow.wdgNom' | translate}}</th>
+              <td mat-cell *matCellDef="let element"> {{element.wdgNom}}</td>
+            </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="wdgCode">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'workflow.wdgCode' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.wdgCode}} </td>
+            </ng-container>
+            <!-- Weight Column -->
+            <ng-container matColumnDef="wdgDescription">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'workflow.wdgDescription' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.wdgDescription}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef><span style="margin-left: 6%;">
+                  {{'register.action' | translate}}</span> </th>
+              <td mat-cell *matCellDef="let element" class="fab">
+                <button mat-button [mat-menu-trigger-for]="detail" yPosition="above">
+                  <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                    more_vert
+                  </mat-icon>
+                </button>
+                <mat-menu #detail="matMenu">
+                  <button mat-menu-item (click)="openDialogAddAttrTemplateWidget(element)">
+                    <mat-icon matTooltip="{{'Action.edit' | translate}}" color="secondary">
+                      edit</mat-icon>{{'widget.attributiontemplate' | translate}}
+                  </button>
+                  <button mat-menu-item  (click)="openDialogEditAttrTemplateWidget(element)" >
+                    <mat-icon matTooltip="{{'Action.edit' | translate}}" color="secondary">
+                      edit</mat-icon>{{'widget.editattributiontemplate' | translate}}
+                  </button>
+                  
+                  <button mat-menu-item  (click)="openDialogEditWidget(element)">
+                    <mat-icon matTooltip="{{'Action.edit' | translate}}" color="secondary">
+                      edit</mat-icon>{{'Action.edit' | translate}}
+                  </button>
+                  <button mat-menu-item (click)="openDialogDeleteWidget(element)">
+                    <mat-icon color="warn" matTooltip="{{'Action.delete' | translate}}">delete
+                    </mat-icon>{{'Action.delete' | translate}}
+                  </button>
+
+                </mat-menu>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+            <tr mat-row *matRowDef="let row; columns: getDisplayedColumns()"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">lock</mat-icon>
+      {{'parametrage.gestiontemplatewidget' | translate}}
+    </ng-template>
+    <mat-card>
+      <mat-card-header class="card-header">
+        <mat-card-title>{{'parametrage.gestiontemplatewidget' | translate}}</mat-card-title>
+      </mat-card-header>
+      <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAddTemplateWidget()"
+        matTooltip="{{'widget.addwidget' | translate}}">
+        <mat-icon>add</mat-icon>
+      </button>
+      <mat-card-content>
+
+        <div class="mat-elevation-z8">
+          <mat-menu #detailtempl="matMenu">
+            <form [formGroup]="formTempl">
+              <div *ngFor="let cdtempl of columnDefinitionsTempl">
+                &nbsp;<mat-checkbox   [formControlName]="cdtempl.deftempl">{{cdtempl.labeltempl}}&nbsp;
+                </mat-checkbox>
+              </div>       
+            </form>
+          </mat-menu>
+         
+            <button class="float-right" mat-button [mat-menu-trigger-for]="detailtempl" xPosition="before">
+              <mat-icon matTooltip="{{'widget.details'| translate}}" color="secondary">
+            filter_alt
+              </mat-icon>
+            </button> 
+          <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceTempWidget" matSort>
+            <ng-container matColumnDef="wtId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'workflow.wtId' | translate}}</th>
+              <td mat-cell *matCellDef="let element"> {{element.wtId}}</td>
+            </ng-container>
+            <ng-container matColumnDef="wtNom">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'workflow.wtNom' | translate}}</th>
+              <td mat-cell *matCellDef="let element"> {{element.wtNom}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actionTempl">
+              <th mat-header-cell *matHeaderCellDef><span style="margin-left: 6%;">
+                  {{'register.action' | translate}}</span> </th>
+              <td mat-cell *matCellDef="let element" class="fab">
+                <button mat-button [mat-menu-trigger-for]="detail" yPosition="above">
+                  <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                    more_vert
+                  </mat-icon>
+                </button>
+                <mat-menu #detail="matMenu">
+
+                  <button mat-menu-item (click)="openDialogEditTempWidget(element)"  >
+                    <mat-icon matTooltip="{{'Action.edit' | translate}}" color="secondary">
+                      edit</mat-icon>{{'Action.edit' | translate}}
+                  </button>
+                  <button mat-menu-item (click)="deleteTempWidget(element)" >
+                    <mat-icon color="warn" matTooltip="{{'Action.delete' | translate}}">delete
+                    </mat-icon>{{'Action.delete' | translate}}
+                  </button>
+
+                </mat-menu>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="getDisplayedColumnsTempl()"></tr>
+            <tr mat-row *matRowDef="let row; columns: getDisplayedColumnsTempl()"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon color="primary">lock</mat-icon>&nbsp;
+      {{'gestion.page_connexion' | translate}}
+    </ng-template>
+
+    <app-type-connexion></app-type-connexion>
+  </mat-tab>
+</mat-tab-group>
+<br>

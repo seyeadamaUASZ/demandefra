@@ -1,0 +1,29 @@
+<div >
+    <h3 class="card-heading float-left">
+        <strong class="foncer">{{this.taskname}}
+        </strong>
+    </h3><br><br>
+ 
+        <div class="row">
+            <div class="col-sm-12 col-lg-12 col-md-12">
+              
+                <div *ngIf="this.iddoc != null " style="margin-top: 15px;">
+                    <button mat-raised-button color="primary" type="submit" (click)="recuJbpm()">Télécharger le document</button>
+                  </div>
+                   
+                  <table style="margin-top: 15px;">
+                    <div *ngFor="let tskoutpt of taskoutput">
+                      <tr *ngIf="tskoutpt.name != 'processId' && tskoutpt.name != 'containerId' && tskoutpt.name != 'initiator';">
+                        <th>{{tskoutpt.name}} : </th>
+                        <td>{{tskoutpt.value}}</td>
+                      </tr>
+                    </div>
+                
+                  </table>
+            </div>
+        </div> 
+    <mat-card-actions >
+        &nbsp;  &nbsp; <button mat-stroked-button color="warn" (click)="closeDialog()">Fermer</button>
+    </mat-card-actions>
+     
+</div>

@@ -1,0 +1,42 @@
+<div >
+    <h3 class="card-heading float-left">
+        <strong class="foncer">  {{'Action.titleadd' | translate}}
+        </strong>
+    </h3>
+      <form class="" [formGroup]="actionForm" (ngSubmit)="onSubmit()">
+          <div class=""><br>
+              <div class="form-group input-group mymargin"> 
+                               
+                  <mat-form-field appearance="fill">
+                      <mat-icon matSuffix>text_format</mat-icon>
+                      <input matInput placeholder="{{'role.accessrights.code' | translate}}"  formControlName="actCode"
+                          required>
+                      <mat-error *ngIf="f.actCode.errors">{{'role.accessrights.code' | translate}} </mat-error>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                      <mat-icon matSuffix>text_format</mat-icon>
+                      <input matInput placeholder="{{'role.accessrights.name' | translate}}" formControlName="actNom" required>
+                      <mat-error *ngIf="f.actNom.errors"> {{'role.accessrights.name' | translate}} </mat-error>
+                  </mat-form-field>
+              </div>
+          </div>
+         
+          <div class="">
+              <div class="form-group input-group mymargin">
+                  <mat-form-field appearance="fill">
+                      <mat-icon matSuffix>text_format</mat-icon>
+                      <input matInput placeholder="{{'role.accessrights.description' | translate}}" formControlName="actDescription">
+                      <mat-error *ngIf="f.actDescription.errors"> {{'role.accessrights.description' | translate}} </mat-error>
+                  </mat-form-field>
+              </div>              
+          </div>         
+         
+          <div class="buttons">
+              <div>
+                  <button mat-stroked-button color="warn" (click)="closeDialog(0)" type="button" >{{'btn_fermer' | translate}}</button>&nbsp;
+                  <button mat-raised-button color="primary" type="submit">{{'btn_enregistrer' | translate}}</button>
+              </div>
+              
+          </div>
+      </form>
+  </div>

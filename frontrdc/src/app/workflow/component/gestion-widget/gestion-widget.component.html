@@ -1,0 +1,168 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h3 class="float-left">
+      <strong class="foncer"> {{'menu.gestionparametragewidget' | translate}}
+      </strong>
+    </h3>
+
+  </div>
+</div>
+<br>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+      {{'widget.gestionparametragewidget' | translate}}
+    </ng-template>
+    <mat-card class="">
+      <mat-card-header class="card-header">
+          <mat-card-title>{{'widget.gestionparametragewidget' | translate}}</mat-card-title>
+      </mat-card-header><br>
+      <mat-form-field appearance="outline">
+          <mat-label>{{'formulaire.filtre' | translate}}</mat-label>
+          <input matInput (keyup)="applyFilter($event)">
+      </mat-form-field>
+      <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAddConfWidget()"
+      matTooltip="{{'widget.ajoutParamwidget' | translate}}">
+      <mat-icon>person_add</mat-icon>
+    </button>
+      <div class=""> 
+        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+          <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceParamWidget" matSort>
+
+            <ng-container matColumnDef="nomparam">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'widget.nomparam' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.nomparam}} </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="wkfId.name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="wkfId">{{'widget.wkfname' | translate}} </th>
+            <td mat-cell *matCellDef="let element">{{element.workflow?.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="wdgId.wdgNom">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="wdgId">{{'widget.widname' | translate}} </th>
+          <td mat-cell *matCellDef="let element">{{element.widget?.wdgNom}}</td>
+      </ng-container>
+      
+        <ng-container matColumnDef="poOwner.proLibelle">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="poOwner">{{'widget.proname' | translate}} </th>
+          <td mat-cell *matCellDef="let element">{{element.profile?.proLibelle}}</td>
+      </ng-container>
+              
+              <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                          {{'register.action' | translate}}</span> </th>
+                  <td mat-cell *matCellDef="let element" class="fab">
+                      <button mat-button [mat-menu-trigger-for]="detail">
+                          <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                              yPosition="above">
+                              more_vert
+                          </mat-icon>
+                      </button>
+
+
+                      <mat-menu #detail="matMenu">
+                        <button mat-menu-item  (click)="openDialogConfigAttr(element)">
+                          <mat-icon matTooltip="{{'widget.configurer'| translate}}" color="primary">
+                              edit
+                          </mat-icon>{{'widget.configurer'| translate}}
+                      </button>
+                      
+                      </mat-menu>
+
+
+                  </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+
+
+    </mat-card>
+
+  </mat-tab>
+  
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+      {{'widget.gestionconfigurationwidget' | translate}}
+    </ng-template>
+    <mat-card class="">
+      <mat-card-header class="card-header">
+          <mat-card-title>{{'widget.gestionconfigurationwidget' | translate}}</mat-card-title>
+      </mat-card-header><br>
+      <mat-form-field appearance="outline">
+          <mat-label>{{'formulaire.filtre' | translate}}</mat-label>
+          <input matInput (keyup)="applyFilter($event)">
+      </mat-form-field>
+      
+      <div class=""> 
+        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+          <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceConfigWidget" matSort>
+ 
+          <ng-container matColumnDef="wtId.wtNom">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="wtId.wtNom">{{'widget.wtNom' | translate}} </th>
+            <td mat-cell *matCellDef="let element">{{element.widgetTemplate?.wtNom}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="attributabscisse">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="attributabscisse">{{'widget.attributabscisse' | translate}} </th>
+          <td mat-cell *matCellDef="let element">{{element.attributabscisse}}</td>
+      </ng-container>
+      
+        <ng-container matColumnDef="variableordonnee">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="name.name">{{'widget.variableordonnee' | translate}} </th>
+          <td mat-cell *matCellDef="let element">{{element.variableordonnee}}</td>
+      </ng-container>
+              
+              <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                          {{'register.action' | translate}}</span> </th>
+                  <td mat-cell *matCellDef="let element" class="fab">
+                      <button mat-button [mat-menu-trigger-for]="detail">
+                          <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                              yPosition="above">
+                              more_vert
+                          </mat-icon>
+                      </button>
+
+
+                      <mat-menu #detail="matMenu">
+                        <button mat-menu-item  (click)="openDialogEditConfigAttr(element)">
+                          <mat-icon matTooltip="{{'widget.editconfigurer'| translate}}" color="primary">
+                              edit
+                          </mat-icon>{{'widget.editconfigurer'| translate}}
+                      </button>
+
+                      <button mat-menu-item  (click)="supprimerConfig(element)">
+                        <mat-icon matTooltip="{{'widget.deleteconfigurer'| translate}}" color="primary">
+                            delete
+                        </mat-icon>{{'widget.deleteconfigurer'| translate}}
+                    </button>
+                      
+                      </mat-menu>
+
+
+                  </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedConfigWidgetColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedConfigWidgetColumns;"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+
+
+    </mat-card>
+
+  </mat-tab>
+
+</mat-tab-group>
+
+

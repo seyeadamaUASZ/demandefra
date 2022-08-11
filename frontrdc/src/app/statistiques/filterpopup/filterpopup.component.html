@@ -1,0 +1,82 @@
+<div class="container-fluid">
+  <div class="container-fluid mb-2">
+    <h4>{{'demandeAutFra.filtreplus' | translate}}</h4>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <mat-form-field appearance="fill">
+        <mat-label>{{'demandeAutFra.categorie' | translate}}</mat-label>
+        <mat-select multiple [compareWith]="comparewith" [(ngModel)]="search.categorie" name="categorie" type="text"
+          placeholder="Entrer la commune">
+          <mat-option *ngFor="let c of categories" [value]="c">{{c.nom}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-3">
+      <mat-form-field appearance="fill">
+        <mat-label>{{'demandeAutFra.raisonsociale' | translate}}</mat-label>
+        <input matInput [(ngModel)]="search.raisonsociale" name="raisonsociale" type="text"
+          placeholder="Entrer la commune" />
+
+      </mat-form-field>
+    </div>
+    <div class="col-sm-3">
+      <mat-form-field appearance="fill">
+        <mat-label>{{'demandeAutFra.region' | translate}}</mat-label>
+        <mat-select multiple [compareWith]="comparewith" [(ngModel)]="search.region" name="region" 
+          placeholder="Entrer la commune">
+          <mat-option *ngFor="let c of regions" [value]="c">{{c.nomRegion}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-3">
+      <mat-form-field appearance="fill">
+        <mat-label>{{'demandeAutFra.statut' | translate}}</mat-label>
+        <mat-select multiple [compareWith]="comparewith" [(ngModel)]="search.status" name="statut" 
+          placeholder="Entrer la commune">
+          <mat-option *ngFor="let c of statuts" [value]="c">{{c.nom}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-sm-3">
+      <mat-form-field appearance="fill">
+        <mat-label>{{'demandeAutFra.antenneRegionaleDepartementale' | translate}}</mat-label>
+        <mat-select multiple [compareWith]="comparewith" [(ngModel)]="search.antenneRegionaleDepartementale" name="antenneRegionaleDepartementale"  
+          placeholder="Entrer la commune">
+          <mat-option *ngFor="let c of antenneRegionaleDepartementales" [value]="c">{{c.nomAntenne}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-sm-3">
+      <mat-form-field appearance="fill">
+        <mat-label>{{'demandeAutFra.statutJuridique' | translate}}</mat-label>
+        <mat-select multiple [(ngModel)]="search.statutJuridique" name="statutJuridique" id="" type="text"
+          placeholder="Entrer la commune">
+          <mat-option value="GIE">
+            GIE
+          </mat-option>
+          <mat-option value="SARL">
+            SARL
+          </mat-option>
+          <mat-option value="SA">
+            SA
+          </mat-option>
+          <mat-option value="Entreprise uni personnel">
+            Entreprise uni personnel
+          </mat-option>
+
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </div>
+  <div class="container-fluid" mat-dialog-actions>
+    <button mat-stroked-button color="warn" mat-dialog-close>{{'btn.fermer' | translate}}</button>
+    <button mat-stroked-button color="primary" (click)="reset()">{{'btn.reset' | translate}}</button>
+
+    <button mat-raised-button color="primary" (click)="validerFilter()">{{'btn.rechercher' | translate}}</button>
+
+  </div>
+</div>

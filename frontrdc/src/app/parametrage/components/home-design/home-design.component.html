@@ -1,0 +1,143 @@
+<ng-template mat-tab-label>
+  <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+  {{'parametrage.designHome' | translate}}
+</ng-template>
+<br>
+<mat-card-header class="card-header ">
+  <mat-card-title>{{'parametrage.designHome' | translate}}</mat-card-title>
+</mat-card-header>
+<br>
+<div *ngIf="model" class="padding20 white-bg">
+  <div class="spacer30"></div>
+  <div class="row" cdkDropListGroup>
+    <div class="col-6">
+      <div class="form-group" [style.backgroundColor]="model.theme.bgColor" [style.color]="model.theme.textColor">
+        <h3>{{'parametrage.selectprofil' | translate}}</h3>
+        <mat-form-field appearance="fill">
+          <mat-label>{{'profile_select' | translate}}</mat-label>
+          <mat-select [formControl]="profilControl" required [(value)]="profilSelected" [compareWith]="compareProfil"
+            (selectionChange)="profilSelection()">
+            <mat-option>{{'profile_select' | translate}}</mat-option>
+            <mat-option *ngFor="let profil of profils" [value]="profil">
+              {{profil.proLibelle}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="profilControl.hasError('required')">{{'Alert.choose_profile' | translate}}</mat-error>
+        </mat-form-field>
+      </div>
+      <h4>{{'parametrage.selectWidget' | translate}}</h4>
+      <div cdkDropList [cdkDropListData]="widgetByProfilNoAttr" class="example-list"
+        (cdkDropListDropped)="dropAttr($event)">
+        <div class="example-box" *ngFor="let widget of widgetByProfilNoAttr" cdkDrag><i
+            class="fa fa-arrows pull-left"></i>
+          <p>{{widget.wdgNom}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="example-button-row">
+        <button mat-raised-button color="primary" (click)="save()">{{'btn_enregistrer' | translate}}</button>
+      </div>
+      <div cdkDropList [cdkDropListData]="widgetByProfilAttr" class="example-list2"
+        (cdkDropListDropped)="addAttr($event)">
+        <div class="example-box" *ngFor="let item of widgetByProfilAttr" cdkDrag><i class="fa fa-arrows pull-left"></i>
+          <p>{{item.wdgNom}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="model" class="container marginT60  marginB30" style="max-width:500px;">
+  <div class="row" style="padding:30px;" [style.backgroundColor]="model.theme.bgColor"
+    [style.color]="model.theme.textColor">
+    <div class="col-12">
+      <h2>{{model.name}}</h2>
+    </div>
+    <div class="col-12">
+    </div>
+    <div *ngIf="success" class="col-12">
+      <div class="form-group">
+        <label>Your form has been submitted.</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<br>
+<div *ngFor="let widget of widgetByProfilAttr">
+  <!-- <div *ngIf="widget.wdgCode=='nbr_by_mdl'">
+    <app-stats></app-stats>
+  </div>
+  <br>
+  <div *ngIf="widget.wdgCode=='stats_costumer'">
+    <app-stats -costumer>
+      </app-stats-costumer>
+  </div> -->
+  <mat-grid-list [cols]="breakpoint" rowHeight="2:1" (window:resize)="onResize($event)"
+    *ngIf="widget.wdgCode=='nbr_by_mdl'">
+    <mat-grid-tile>
+      <p class="number">{{nbrAppli}}</p>
+      <span class="type">{{'dashboard.applicationscrees' | translate}}</span>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <p class="number">{{nbrModule}}</p>
+      <span class="type">{{'dashboard.modules' | translate}} </span>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <p class="number">{{nbrFichier}}</p>
+      <span class="type">{{'dashboard.fichier' | translate}} </span>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <p class="number">{{nbrFormulaire}}</p>
+      <span class="type">{{'dashboard.formulaire' | translate}} </span>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <p class="number">{{nbrWorkflow}}</p>
+      <span class="type">{{'dashboard.workflow' | translate}} </span>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list [cols]="breakpoint" rowHeight="2:1" (window:resize)="onResize($event)"
+    *ngIf="widget.wdgCode=='stats_costumer'">
+    <mat-grid-tile>
+      <p class="number">{{nbrAdmin}}</p>
+      <span class="type">{{'dashboard.administrateur' | translate}}</span>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <p class="number">{{nbrIntegrateur}}</p>
+      <span class="type">{{'dashboard.integrateurs'| translate}}</span>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <p class="number">{{nbrCommerciaux}}</p>
+      <span class="type">{{'dashboard.commerciaux' | translate}}</span>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <p class="number">{{nbrUser}}</p>
+      <span class="type">{{'dashboard.utilisateur' | translate}} </span>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <p class="number">{{nbrConnect}}</p>
+      <span class="type">{{'dashboard.connectes' | translate}} </span>
+    </mat-grid-tile>
+  </mat-grid-list> 
+
+  <br>
+  <div class="row">
+    <div class="col-sm-6" *ngIf="widget.wdgCode=='lne_app_wkf_fml'">
+      <div style="width: 100%;">
+        <canvas baseChart [chartType]="'line'" [datasets]="chartData1" [labels]="chartLabels1" [options]="chartOptions"
+          [legend]="true" (chartClick)="onChartClick($event)">
+        </canvas>
+      </div>
+    </div>
+    <div class="col-sm-6" *ngIf="widget.wdgCode=='bar_uti_con'">
+      <div style="width: 100%;">
+        <canvas baseChart [chartType]="'bar'" [datasets]="chartData2" [labels]="chartLabels2" [options]="chartOptions"
+          [legend]="true" (chartClick)="onChartClick($event)">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

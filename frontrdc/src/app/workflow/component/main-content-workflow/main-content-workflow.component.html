@@ -1,0 +1,174 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h3 class="float-left">
+      <strong class="foncer"> {{'menu.workflow' | translate}}
+      </strong>
+    </h3>
+  </div>
+  <!-- <div class="col-sm-6">
+    <button mat-mini-fab color="primary" class="route" (click)="openDialogAddWorkflow()"
+      matTooltip="{{'workflow.add' | translate}}">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div> -->
+
+</div><br><br>
+
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">compare_arrows</mat-icon>
+      {{'workflow.liste' | translate}}
+    </ng-template>
+
+
+    <mat-card class="">
+        <mat-card-header class="card-header">
+          <mat-card-title >{{'workflow.liste' | translate}}</mat-card-title>
+        <!-- <span class="header">{{'workflow.liste' | translate}}</span> -->
+      </mat-card-header>
+      <mat-form-field appearance="outline">
+        <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+        <input matInput (keyup)="applyFilter($event)">
+        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+    </mat-form-field>
+      <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAddWorkflow()"
+            matTooltip="{{'workflow.add' | translate}}" *accesscode="'create_wkfl'">
+            <mat-icon>add</mat-icon>
+          </button>
+
+          
+      <div class="mat-elevation-z8">
+        <mat-menu #detail="matMenu">
+          <form [formGroup]="form">
+            <div *ngFor="let cd of columnDefinitions">
+              &nbsp;<mat-checkbox   [formControlName]="cd.def">{{cd.label}}&nbsp;
+              </mat-checkbox>
+            </div>       
+          </form>
+        </mat-menu>
+       
+          <button class="float-right" mat-button [mat-menu-trigger-for]="detail" xPosition="before">
+            <mat-icon matTooltip="{{'workflow.details'| translate}}" color="secondary">
+          filter_alt
+            </mat-icon>
+          </button>
+        <table mat-table class=" mat-elevation-z8" [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="secteur">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'workflow.secteur' | translate}}</th>
+            <td mat-cell *matCellDef="let element"> {{element.wkfSecteur}}</td>
+          </ng-container>
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'workflow.nom' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+          <!-- Weight Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'workflow.description' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}}</td>
+          </ng-container>
+          
+          <!-- <ng-container matColumnDef="Gerer">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Gerer' | translate}} </th>
+            <td mat-cell *matCellDef="let element">
+              <button  *ngIf="element.wkfEtat == 1;" mat-raised-button color="primary" type="button"
+                (click)=" modeliserWorkflow(element)">
+                {{'workflow.terminer' | translate}}
+              </button>
+            </td>
+          </ng-container> -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef><span style="margin-left: 6%;">
+                {{'register.action' | translate}}</span> </th>
+            <td mat-cell *matCellDef="let element" class="fab">
+              <button mat-button [mat-menu-trigger-for]="detail"   yPosition="above">
+                <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                  >
+                    more_vert
+                </mat-icon>
+            </button>
+              <mat-menu #detail="matMenu">
+                <button mat-menu-item (click)="openDialogView(element)">
+                  <mat-icon matTooltip="{{'Action.details'| translate}}" color="primary">
+                    visibility
+                  </mat-icon>{{'Action.visualiser'| translate}}
+                </button>
+                <button mat-menu-item (click)="openDialogEdit(element)" *accesscode="'edit_wkfl'">
+                  <mat-icon matTooltip="{{'Action.edit' | translate}}" color="secondary">
+                    edit</mat-icon>{{'Action.edit' | translate}}
+                </button>
+                <button mat-menu-item (click)=" openDialogDeleteWorkflow(element)" *accesscode="'delete_wkfl'">
+                  <mat-icon color="warn" matTooltip="{{'Action.delete' | translate}}">delete
+                  </mat-icon>{{'Action.delete' | translate}}
+                </button> 
+                <button mat-menu-item [routerLink]="['/workflow/liste-formulairev2/'+element.wkfId+'/'+element.name]">
+                  <mat-icon color="primary" matTooltip="{{'Action.genererformv2' | translate}}">cloud_download
+                  </mat-icon>{{'Action.genererformv2' | translate}}
+                </button>
+                <button mat-menu-item [routerLink]="['/workflow/gestion-task/'+element.wkfId+'/'+element.name]">
+                  <mat-icon color="primary" matTooltip="{{'Action.gerertask' | translate}}">cloud_download
+                  </mat-icon>{{'Action.gerertask' | translate}}
+                </button> 
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+          <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+
+
+    </mat-card>
+
+
+
+  </mat-tab>
+
+  <!--<mat-tab>
+  <ng-template mat-tab-label>
+    <mat-icon class="mymargin" color="primary">compare_arrows</mat-icon>
+    {{'workflow.execution' | translate}}
+  </ng-template>
+   
+  <div fxLayout="container">
+    <mat-card  class="col-md-6 col-lg-6"> 
+        <mat-list>
+            <div mat-subheader>{{'workflow.menuexec' | translate}}</div>
+            <mat-list-item *ngFor="let desc  of workflow">
+              <mat-icon mat-list-icon>folder</mat-icon>
+              <div mat-line> <a [routerLink]="['execution',desc.wkfConteneur]" style="color: green;">{{desc.description}}</a> </div> 
+            </mat-list-item> 
+          </mat-list>
+    </mat-card>
+    
+</div>
+
+</mat-tab>-->
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">compare_arrows</mat-icon>
+      {{'workflow.modeliser' | translate}}
+
+    </ng-template>
+
+    <div fxLayout="container">
+      <mat-card class="col-md-12 col-lg-12">
+        <iframe id="inlineFrameExample" title="Inline Frame Example" width="100%" height="800"
+          [src]="openjbpmlink(jbpmdiagrame)">
+
+        </iframe>
+      </mat-card>
+
+    </div>
+
+  </mat-tab>
+
+  
+
+
+</mat-tab-group>

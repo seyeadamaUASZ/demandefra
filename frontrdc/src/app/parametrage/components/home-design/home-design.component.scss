@@ -1,0 +1,334 @@
+// @import "~bootstrap/scss/bootstrap";
+.position-relative {
+	position: relative;
+}
+
+.add-contact {
+	position: absolute;
+    right: 25px;
+    top: 30px;
+}
+
+.t{
+  //@extend: 1px solid;
+  background-color: rgb(162, 160, 175);
+ }
+
+
+ .petit-card{
+   margin: auto;
+   border-left: 60px solid;
+   border-color: rgb(128, 128, 173);
+ //  border: 1px solid;
+ }
+
+table {
+    width: 100%;
+   margin-top: 30px;
+  }
+  .fab{
+      width: 12%;
+      margin: 0.5%;
+  }
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  .mat-form-field {
+    font-size: 14px;
+    width: 41%;
+    //margin-top: 30px;
+   // margin-left: 10px;
+
+  }
+
+
+  .header{
+  margin-top: 10px;
+  display: block;
+  margin: auto;
+  text-align: center;
+  }
+  .foot{
+    background:rgb(90, 90, 158);
+    text-align: center;
+  }
+  .mymargin{
+   margin: 7px;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 0.5em;
+    padding: 0.5em 0.5em;
+}
+
+
+
+// h3 {
+//   font-weight: normal;
+//   color: #616161;
+//   font-size: 20px;
+//   margin: 8px;
+// }
+
+.entete{
+  width: 100%;
+  background: rgb(233, 230, 230);
+ // margin-top: -5%;
+  position: relative;
+}
+
+// .number{
+
+//   text-align: justify;
+//   margin: auto;
+//  font-family: cursive;
+//   font-size:200%;
+// }
+.type{
+  margin-right: 4px;
+  text-align: justify;
+  margin: auto;
+  font-family: fantasy;
+
+}
+
+
+.card {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+  border: 0;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  border-radius: 6px;
+  color: #333333;
+  background: #fff;
+  width: 100%;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  position: relative;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #eeeeee;
+    border-radius: 0.25rem;
+
+
+
+}
+
+/////
+
+.clearfix{clear:both;}
+.pointer{cursor: pointer;}
+.ucfirst{text-transform: capitalize;}
+.min300{min-height:300px}
+.app-box{
+    padding: 10px;
+    margin-bottom:20px;
+    height: 230px;
+    background: #b5e8d4;
+    overflow: hidden;
+    box-shadow: 1px 1px 4px #ccc;
+}
+.app-box:hover{
+    box-shadow: 1px 1px 4px #999;
+}
+.app-box .remove{
+    position: absolute;
+    right: 21px;
+    top: 0px;
+    color: #545454;
+    display:none;
+}
+.app-box:hover .remove{
+    display:block;
+}
+.inline-btn{
+    background: #00b970;
+    padding: 1px 5px;
+    color: white;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+.box{
+    padding: 10px;
+    margin-bottom:10px;
+    overflow: auto;
+    box-shadow: 1px 1px 4px #ddd;
+}
+.form-group .form-control{
+    font-size:inherit;
+    background-color: inherit;
+}
+
+.dndDropArea{
+    padding: 10px;
+    /* border: dotted #ddd 2px; */
+}
+
+.dndDropArea.empty{
+    min-height:200px;
+    border: dotted #ddd 2px;
+}
+
+.field{
+    padding:5px;
+    margin-bottom:10px;
+    position: relative;
+}
+.field:hover{
+    box-shadow: 1px 1px 4px #ddd;
+}
+.toggle-Wrapper{
+    padding: 15px;
+    background: #d6d6d629;
+}
+.dndHandle{
+    cursor: pointer;
+    color: #999;
+}
+.dndDraggingSource{
+    opacity:0.3;
+}
+.dndPlaceholder{
+    background: rgb(206, 238, 238); border-radius: 2px; padding: 20px;
+    margin-bottom:10px;
+}
+.field .fa{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 24px;
+    vertical-align: middle;
+
+}
+.red{color:#d9534f}
+.fa-trash{color:#d9534f}
+.marginT60{
+    margin-top:60px;
+}
+
+.color-red{color:red;}
+.report-block{
+    padding:10px;
+    background:#f8f8f8;
+    margin-bottom:20px;
+}
+.report-block .row:nth-child(even){
+    background:#fff;
+}
+
+.ftheme{
+    width:100%;
+}
+
+.dndDropArea .field .fa{
+    opacity:0;
+}
+.dndDropArea .field:hover .fa{
+    opacity:1;
+}
+
+.colorpick{
+    height: 25px;
+    background: white;
+    border: none;
+}
+
+
+
+.example-container {
+    width: 400px;
+    max-width: 100%;
+    margin: 0 25px 25px 0;
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  .example-list {
+    border: solid 1px #ccc;
+    min-height: 60px;
+    max-width: 300px;
+    background: #ecececcc;
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
+    padding: 15px;
+  }
+    
+  .example-list2 {
+    border: solid 1px #ccc;
+    min-height: 50%;
+    max-width: 300px;
+    background: #ecececcc;
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
+    //padding: 15px;
+    position: relative;
+    top: 15%;
+  }
+  
+  
+  .example-box {
+    padding: 10px 10px;
+    margin: 5px;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    // display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+  }
+  
+  .cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .example-box:last-child {
+    border: none;
+  }
+  
+  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .btn-widget {
+    padding-top: 0vh;
+    padding-bottom: 0vh;
+    width: 0%;
+
+  }
+  .example-button-row {
+    display: table-cell;
+    width: 600px;
+  }
+  
+  .example-button-row .mat-button-base {
+    margin: 50px 8px 8px 100px;
+  }
+  
+  
+  
+ 

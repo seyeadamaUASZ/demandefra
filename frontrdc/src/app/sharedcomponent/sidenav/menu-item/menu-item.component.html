@@ -1,0 +1,25 @@
+<div>
+<span *ngFor="let menu of menus">
+    <span *ngIf="menu?.sousMenus && menu?.sousMenus.length > 0">
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header [routerLink]="['/'+menu?.menPath]" [routerLinkActive]="['is_active']">
+                  <mat-panel-title>                  
+                      <mat-icon  color={{menu?.menIconeColor}}>{{menu.menIcone}}</mat-icon>
+                      {{'menu.'+menu?.menNom | translate}}                
+                  </mat-panel-title>
+                </mat-expansion-panel-header>                
+                <app-menu-item #menus [menus]="menu.sousMenus"></app-menu-item>                                                               
+              </mat-expansion-panel>
+            </mat-accordion>
+          </span>
+          <!-- Menu feuille -->
+    <span *ngIf="!menu?.sousMenus || menu?.sousMenus.length === 0">
+           <mat-list-item [routerLink]="['/'+menu?.menPath]" [routerLinkActive]="['is_active']">
+                    <!--  sous-menu  -->                   
+                      <mat-icon>{{menu.menIcone}}</mat-icon>
+                      {{'menu.'+menu?.menNom | translate}}                    
+         </mat-list-item>
+    </span>
+</span>
+</div>

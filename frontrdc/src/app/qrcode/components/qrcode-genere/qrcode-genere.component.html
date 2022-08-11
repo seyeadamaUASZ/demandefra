@@ -1,0 +1,52 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="QrcodeForm">
+  <mat-card class="example-card">
+    <mat-card-header class="mat-card-header">
+      <h3 class="card-heading float-left">
+        <strong class="foncer"> {{nomQrcode}}
+        </strong>
+      </h3>
+    </mat-card-header>
+    <mat-card-content class="mat-card-content">
+      <div *ngFor="let field of fields">
+        <app-dynamic-form-field [field]="field" [form]="form"></app-dynamic-form-field>
+      </div>
+      <mat-form-field>
+        <mat-select matInput placeholder="{{'qrcodes.couleur' | translate}}" type="text" formControlName="qrcCouleur">
+          <mat-option style="background-color:#FF0000;" value="0xFFE91C43">Rouge</mat-option>
+          <mat-option style="background-color:#87CEFA;" value="0xFF40BAD0">Bleu</mat-option>
+          <mat-option style="background-color:#EE82EE;" value="0xFF8A4F9E">Violette</mat-option>
+          <mat-option style="background-color:#FFA500;" value="0xFFF4B13D">Orange</mat-option>
+          <mat-option style="background-color:#000000;" value="0xFF000000">Noir</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <input type="file" #file1 style="display: none;" (change)="uploadLogo()">
+      <div class="file_upload" (click)="addFiles1()">
+        <div class="container-fluid row">
+          <mat-icon>get_app</mat-icon>
+        </div>
+        <div class="container-fluid file_titre">
+          {{'qrcode.logo' | translate}}
+        </div>
+        <div class="container-fluid file_name" *ngIf="ffile1">
+          {{ffile1.name}}
+
+        </div>
+      </div>
+    </mat-card-content>
+    <div class="qrcode" *ngFor="let qrcode of qrcodeModeliser">
+      <img src="data:image/png;base64,{{qrcode.qrc_logo}}" style="width: 400%;" class=" center col-lg-12 col-md-12 col-sm-12">
+      <mat-icon matTooltip="{{'qrcodes.btnTelecharger' | translate}}">
+        <a [href]="href" *ngIf="display" (click)="downloadQrcodePersonnalise(qrcode.qrc_id)" download>
+          cloud_download
+        </a>
+      </mat-icon>
+    </div>
+    <mat-card-actions class="mat-card-actions">&nbsp;&nbsp;&nbsp;
+      <button mat-stroked-button color="warn" type="button"
+        (click)="gotoPreviousPage()">{{'Action.cancel' | translate}}</button>
+      <button mat-raised-button color="primary" type="submit"
+        [disabled]="!form.valid">{{'qrcodes.generer' | translate}}</button>
+    </mat-card-actions><br>
+  </mat-card>
+
+</form>

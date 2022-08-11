@@ -1,0 +1,46 @@
+
+<mat-card><br>
+  <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAdd()"
+    matTooltip="{{'widget.addpatner' | translate}}">
+    <mat-icon>add</mat-icon>
+  </button><br>
+
+  <!-- <mat-card-header class="card-header">
+    <span class="header center ">{{'parametre' | translate}}</span>
+  </mat-card-header> -->
+
+  <form [formGroup]="LandingForm" (ngSubmit)="updateParametre()">
+    <div class="row">
+      <div class="centrer"><br><br>
+        <h5 style="font-size: 16px;">&nbsp;{{'landing.imageAccueil' | translate}}</h5><br>
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col-sm-4 col-lg-4 col-md-4" *ngFor="let app of retreivedResponse">
+        <mat-card style="border-radius: 1%" (click)="deletePartner(app)">
+          <a>
+            <mat-icon class="float-right" color="warn" style="zoom:1;" *ngIf=app>close </mat-icon>
+          </a>
+
+          <label class="btn">
+            <img mat-card-sm-image [src]="'data:image/png;base64,'+app.partIm">&nbsp;&nbsp;<br>
+            <mat-icon style="zoom:4;" *ngIf=!app color="primary">image </mat-icon>
+            <input type="file" style="display: none" formControlName="lndIm1" accept='image/*'
+              (change)="onFileChanged1($event)">
+          </label>
+        </mat-card>
+        <span *ngIf="retreivedResponse && !selectedFile1" style="margin:auto; text-align: center;display: block;">
+          &nbsp;&nbsp;&nbsp;&nbsp; {{app.partNom}}
+        </span>
+      </div>
+
+    </div>
+    <br>
+    <!-- &nbsp;&nbsp;
+    <button class="" mat-stroked-button color="warn" type="button" routerLink="/home">{{'btn_fermer'|
+      translate}}</button>&nbsp;&nbsp;
+    <button class="" mat-raised-button color="primary" type="submit">{{'btn_valider'| translate}}</button><br>
+    <mat-spinner class="center" *ngIf="loading" value="indeterminate"></mat-spinner> -->
+  </form>
+</mat-card>

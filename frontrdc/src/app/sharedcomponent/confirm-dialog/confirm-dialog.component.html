@@ -1,0 +1,13 @@
+<div class="centrer"><mat-icon color="warn">warning</mat-icon>
+<h1 mat-dialog-title>
+  {{title|translate}}
+</h1>
+</div>
+<div mat-dialog-content>
+  <p>{{message|translate}}</p>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onConfirm()">{{'Action.yes'|translate}}</button>
+  <button mat-raised-button (click)="onDismiss()">{{'Action.no'|translate}}</button>  
+</div>

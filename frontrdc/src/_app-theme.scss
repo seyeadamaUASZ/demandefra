@@ -1,0 +1,173 @@
+@import '../node_modules/@angular/material/theming';
+//@import './app/shared/nav-bar/navbar-theme';
+
+// Custom Gainde color
+$razroo-primary-blue: (
+  50 : #e7f2f4,
+  100 : #c3dee4,
+  200 : #9cc8d3,
+  300 : #74b2c1,
+  400 : #56a2b3,
+  500 : #3891a6,
+  600 : #32899e,
+  700 : #2b7e95,
+  800 : #24748b,
+  900 : #17627b,
+  A100 : #b3eaff,
+  A200 : #80dcff,
+  A400 : #4dcfff,
+  A700 : #33c8ff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$mat-gainde-vert: (
+  50 : #eaf7ea,
+  100 : #cceccb,
+  200 : #aae0a8,
+  300 : #87d385,
+  400 : #6ec96b,
+  500 : #54c051,
+  600 : #4dba4a,
+  700 : #43b240,
+  800 : #3aaa37,
+  900 : #299c27,
+  A100 : #b5ffa6,
+  A200 : #82ff68,
+  A400 : #6dff4f,
+  A700 : #60ff40,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$mat-gainde-orange: (
+    50 : #fbeae2,
+    100 : #f6cbb7,
+    200 : #f0a988,
+    300 : #e98658,
+    400 : #e56c34,
+    500 : #e05210,
+    600 : #dc4b0e,
+    700 : #d8410c,
+    800 : #d33809,
+    900 : #cb2805,
+    A100 : #fff5f4,
+    A200 : #ffc9c1,
+    A400 : #ff9c8e,
+    A700 : #ff8675,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+@mixin material-custom-theme($theme, $notifications-theme) {
+    $primary: #e7c602;
+    $accent: #e7c602;
+
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    @include notification-theme($notifications-theme);
+
+}
+
+
+
+
+@mixin notification-theme($notifications-theme) {
+  $default-color: map-get($notifications-theme, default);
+  $info-color: map-get($notifications-theme, info);
+  $success-color: map-get($notifications-theme, success);
+  $warn-color: map-get($notifications-theme, warning);
+  $error-color: map-get($notifications-theme, error);
+  .default-notification-overlay,
+  .info-notification-overlay,
+  .success-notification-overlay,
+  .warning-notification-overlay,
+  .error-notification-overlay {
+    font-family: "Material Icons";
+    font-size: 18px;  
+    color:$default-color;
+    &::before {     
+      margin-right: 16px;
+      float: left;    
+      // because we want spaces to be considered in content     
+      white-space: pre;
+    }
+  }
+  .default-notification-overlay {
+    background-color: #000;    
+    &::before {
+      color: #000;
+    }
+  }
+  .info-notification-overlay {
+    background-color: $info-color;    
+    &::before {
+      content: "\e88e";
+      color: $default-color;
+    }
+  }
+  .success-notification-overlay {
+    background-color: $success-color;   
+    &::before {
+      content: "\e86c";
+      color: $default-color;
+    }
+  }
+  .warning-notification-overlay {
+    background-color: $warn-color;    
+    &::before {
+      content: "\e002";
+      color: $default-color;
+    }
+  }
+  .error-notification-overlay {
+    background-color: $error-color;   
+    &::before {
+      content: "\e000";
+      color: $default-color;
+    }
+  }
+}

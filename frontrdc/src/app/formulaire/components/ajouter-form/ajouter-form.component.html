@@ -1,0 +1,33 @@
+<div class="login-page">
+  <div class="login-spacer"></div>
+  <div class="">
+    <h3 class="card-heading float-left">
+      <strong class="foncer"> {{'formulaire.register' | translate}}
+      </strong>
+    </h3>
+    <form class="" [formGroup]="FormulaireForm" (ngSubmit)="onSubmit()"><br><br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{'formulaire.frmNom' | translate}}</mat-label>
+        <mat-icon matSuffix>domain</mat-icon>
+        <input matInput  type="text" formControlName="frmNom" required>
+        <mat-error *ngIf="f.frmNom.errors">
+          {{'formulaire.name-error' | translate}} </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>{{'formulaire.frmDescription' | translate}}</mat-label>
+        <mat-icon matSuffix>account_balance</mat-icon>
+        <input matInput  type="text"
+          formControlName="frmDescription" required>
+      </mat-form-field>
+      <div class="buttons">
+        <div class="login">
+          <button mat-stroked-button color="warn" (click)="closeDialog()"
+            type="button">{{'btn_fermer' | translate}}</button>
+          <button mat-raised-button color="primary" type="submit">{{'btn_valider' | translate}}</button>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

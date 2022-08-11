@@ -1,0 +1,48 @@
+<div >
+  <div class="card-header">
+          
+  <h2> 
+    {{this.workflow.name}}
+  </h2>
+  </div>
+  <form   [formGroup]="formGen"  >
+      <div class="">
+          <div  *ngFor="let frm of form"> 
+            <mat-form-field  *ngIf="frm.code == 'TextBox' ;else etat2" appearance="fill">
+              <mat-icon matSuffix>compare_arrows</mat-icon>
+              <input  matInput placeholder="{{frm.placeHolder}}" type="text" id="{{frm.name}}" formControlName="{{frm.name}}"> 
+          </mat-form-field> 
+          
+          <div #etat2 *ngIf="frm.code == 'CheckBox' ; else etat3">
+              <input  type="checkbox" [(ngModel)]="choix" id="{{frm.name}}" formControlName="{{frm.name}}"> 
+           </div> 
+
+          <div #etat3 *ngIf="frm.code == 'Document' ; else etat4">
+              <input  type="file"  id="doc" formControlName="{{frm.name}}"  (change)="handleUpload($event)" > 
+          </div> 
+          <div #etat4 *ngIf="frm.code == 'DocumentCollection' ; else etat5">
+            <input  type="file"  id="doc" formControlName="{{frm.name}}"  (change)="handleUpload($event)"> 
+        </div> 
+
+          <div #etat5 *ngIf="frm.code == 'ListBox' ; else etat6">
+               <select  id="{{frm.name}}" formControlName="{{frm.name}}">
+                  <option *ngFor="let frm2 of frm.options"> {{frm2.text}}</option>
+              </select>
+          </div> 
+
+          <mat-form-field #etat6 *ngIf="frm.code == 'DatePicker' ;" appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="{{frm.name}}">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+ 
+       </div> 
+ 
+      </div>        
+      <div class="mat-dialog-actions">
+        <button mat-stroked-button color="warn" (click)="closeDialog()" type="button" >{{'Action.close' | translate}}</button>                  
+        <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" >{{'Action.save' | translate}}</button>  
+</div> 
+  </form>
+</div>

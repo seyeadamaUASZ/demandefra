@@ -1,0 +1,30 @@
+<h3 class="card-heading float-left">
+    <strong class="foncer"> {{'workflow.view' | translate}}
+    </strong>
+</h3><br><br>
+<mat-dialog-content>
+    <div >
+       
+    
+        <mat-card-content>
+            <div class="row">
+                <div class="col-sm-12 col-lg-12 col-md-12">
+                    <div class="fond"><br>
+                        &nbsp;<mat-icon svgIcon="street-name"  matSuffix>perm_identity</mat-icon>&nbsp;
+                        <span> {{'nom' | translate}}</span>
+                        <p class="mymargin foncer">{{workflowview.name}}</p>
+                    </div>
+                    <div class="fond"><br>
+                        &nbsp;<mat-icon  matSuffix>format_align_left</mat-icon>&nbsp;
+                        <span> {{'description' | translate}}</span>
+                        <p class="mymargin foncer">{{workflowview.description}}</p>
+                    </div> 
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions >
+            &nbsp;  &nbsp; <button mat-stroked-button color="warn" (click)="closeDialog()">{{'Action.close' | translate}}</button>
+        </mat-card-actions>
+       
+    </div>
+</mat-dialog-content>

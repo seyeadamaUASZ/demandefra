@@ -1,0 +1,28 @@
+<div class=""> 
+      <div> 
+        <p>
+            Tache actuel : {{tsk_name}}
+           </p>
+           <p>
+            <button mat-raised-button color="primary" (click)="showDiv.actiontimer = !showDiv.actiontimer;" type="submit">{{'Action.executer' | translate}}</button>
+           </p>
+          
+           <br>
+           <p *ngIf="showDiv.actiontimer">
+              Tache suivante : {{tasknamesuivant}} 
+              </p> 
+              <p *ngIf="showDiv.actiontimer"> 
+                {{titretimer}} 
+               </p> 
+               <p *ngIf="showDiv.actiontimer">  
+               A faire durant :  {{tskduree}}
+               </p>
+      </div>
+      <br>
+      <div class="mat-dialog-actions">
+        <button mat-stroked-button color="warn" (click)="closeDialog()" type="button">{{'Action.close' |
+          translate}}</button>
+         
+      </div> 
+  </div>
+  

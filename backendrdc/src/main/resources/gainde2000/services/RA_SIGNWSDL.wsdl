@@ -1,0 +1,260 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.confiancefactory.com/WSDL_RASign/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="WSDL_RASign" targetNamespace="http://www.confiancefactory.com/WSDL_RASign/">
+<wsdl:types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.confiancefactory.com/WSDL_RASign/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://www.confiancefactory.com/WSDL_RASign/">
+<xsd:element name="Enroleeyone">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="prenom_nom" type="xsd:string"> </xsd:element>
+<xsd:element name="numero_cni" type="xsd:string"> </xsd:element>
+<xsd:element name="code_pin" type="xsd:string"> </xsd:element>
+<xsd:element name="scan_cni" type="xsd:base64Binary"> </xsd:element>
+<xsd:element name="IdAppAppelant" type="xsd:long"> </xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="EnregistrerBeneficiaire">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="prenom_nom" type="xsd:string"> </xsd:element>
+<xsd:element name="code_pin" type="xsd:string"/>
+<xsd:element name="numero_cni" type="xsd:string"> </xsd:element>
+<xsd:element name="IdAppAppelant" type="xsd:long"> </xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="EnregistrerBeneficiaireResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="IdentificationUtilisateur" type="xsd:string"> </xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="EnroleeyoneResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="statutEnrolement" type="xsd:string"> </xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="SignatureBeneficiaire">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="user_id" type="xsd:long"> </xsd:element>
+<xsd:element name="document_a_signer" type="xsd:base64Binary"> </xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="SignatureBeneficiaireResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="sortie" type="tns:SignatureResult"> </xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="SignatureResult">
+<xsd:sequence>
+<xsd:element name="ErroInfo" type="xsd:string"/>
+<xsd:element name="Status" type="xsd:string"/>
+<xsd:element name="Content" type="xsd:base64Binary"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="Initialisation">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="Prenom_Nom" type="xsd:string"> </xsd:element>
+<xsd:element maxOccurs="1" minOccurs="1" name="Code_PIN" type="xsd:string"> </xsd:element>
+<xsd:element maxOccurs="1" minOccurs="1" name="Numero_CNI" type="xsd:string"> </xsd:element>
+<xsd:element name="IDApplication" type="xsd:long"> </xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="InitialisationResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="out" type="tns:Initalisation_Signataire"> </xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:complexType name="Initalisation_Signataire">
+<xsd:sequence>
+<xsd:element name="DelegationID" type="xsd:long"/>
+<xsd:element name="CleSignataire" type="xsd:string"/>
+<xsd:element name="codePIN" type="xsd:string"/>
+<xsd:element name="IdApplication" type="xsd:long"/>
+<xsd:element name="Status" type="xsd:string"/>
+<xsd:element name="InfoError" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:element name="SignatureLTV">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="IDSignataire" type="xsd:long"> </xsd:element>
+<xsd:element name="Cle_Signataire" type="xsd:string"> </xsd:element>
+<xsd:element name="Code_PIN" type="xsd:string"> </xsd:element>
+<xsd:element name="Contenu_A_Signer" type="xsd:base64Binary"> </xsd:element>
+<xsd:element name="IDApplication" type="xsd:long"> </xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="SignatureLTVResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element name="out" type="tns:SignatureResult"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+</wsdl:types>
+<wsdl:message name="SignatureLTVRequest">
+<wsdl:part element="tns:SignatureLTV" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="SignatureBeneficiaireResponse_OutputMessage">
+<wsdl:part element="tns:SignatureBeneficiaireResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="EnroleeyoneRequest">
+<wsdl:part element="tns:Enroleeyone" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="EnregistrerBeneficiaireResponse_OutputMessage">
+<wsdl:part element="tns:EnregistrerBeneficiaireResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="SignatureLTVResponse">
+<wsdl:part element="tns:SignatureLTVResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="InitialisationResponse">
+<wsdl:part element="tns:InitialisationResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="SignatureBeneficiaireRequest">
+<wsdl:part element="tns:SignatureBeneficiaire" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="EnregistrerBeneficiaireRequest">
+<wsdl:part element="tns:EnregistrerBeneficiaire" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="InitialisationRequest">
+<wsdl:part element="tns:Initialisation" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="EnroleeyoneResponse_OutputMessage">
+<wsdl:part element="tns:EnroleeyoneResponse" name="parameters"> </wsdl:part>
+</wsdl:message>
+<wsdl:portType name="IRegistSignPort">
+<wsdl:operation name="EnregistrerBeneficiaire">
+<wsdl:input message="tns:EnregistrerBeneficiaireRequest"> </wsdl:input>
+<wsdl:output message="tns:EnregistrerBeneficiaireResponse_OutputMessage"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="Enroleeyone">
+<wsdl:input message="tns:EnroleeyoneRequest"> </wsdl:input>
+<wsdl:output message="tns:EnroleeyoneResponse_OutputMessage"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="SignatureBeneficiaire">
+<wsdl:input message="tns:SignatureBeneficiaireRequest"> </wsdl:input>
+<wsdl:output message="tns:SignatureBeneficiaireResponse_OutputMessage"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="Initialisation">
+<wsdl:input message="tns:InitialisationRequest"> </wsdl:input>
+<wsdl:output message="tns:InitialisationResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="SignatureLTV">
+<wsdl:input message="tns:SignatureLTVRequest"> </wsdl:input>
+<wsdl:output message="tns:SignatureLTVResponse"> </wsdl:output>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="RegistSignBinding" type="tns:IRegistSignPort">
+<wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#SignEncr"/>
+<wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="EnregistrerBeneficiaire">
+<wsdlsoap:operation soapAction="urn:EnregistrerSigner"/>
+<wsdl:input name="EnregistrerBeneficiaireRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="EnregistrerBeneficiaireResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="Enroleeyone">
+<wsdlsoap:operation soapAction="Enroleeyone"/>
+<wsdl:input name="EnroleeyoneRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="EnroleeyoneResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="SignatureBeneficiaire">
+<wsdlsoap:operation soapAction="urn:SignatureBeneficiaire"/>
+<wsdl:input name="SignatureBeneficiaireRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="SignatureBeneficiaireResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="Initialisation">
+<wsdlsoap:operation soapAction="urn:Initialisation"/>
+<wsdl:input name="InitialisationRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="InitialisationResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="SignatureLTV">
+<wsdlsoap:operation soapAction="urn:SignatureLTV"/>
+<wsdl:input name="SignatureLTVRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="SignatureLTVResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="RA_Sign">
+<wsdl:port binding="tns:RegistSignBinding" name="IRegistSignPort">
+<wsdlsoap:address location="http://rasign.gainde2000.sn:8080/RA_TIERS1/RA_Sign/services"/>
+</wsdl:port>
+</wsdl:service>
+<wsp:Policy xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" wsu:Id="SignEncr">
+<wsp:ExactlyOne>
+<wsp:All>
+<sp:AsymmetricBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+<wsp:Policy>
+<sp:InitiatorToken>
+<wsp:Policy>
+<sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+<wsp:Policy>
+<sp:RequireThumbprintReference/>
+</wsp:Policy>
+</sp:X509Token>
+</wsp:Policy>
+</sp:InitiatorToken>
+<sp:RecipientToken>
+<wsp:Policy>
+<sp:X509Token sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/Never">
+<wsp:Policy>
+<sp:RequireThumbprintReference/>
+</wsp:Policy>
+</sp:X509Token>
+</wsp:Policy>
+</sp:RecipientToken>
+<sp:AlgorithmSuite>
+<wsp:Policy>
+<sp:TripleDesRsa15/>
+</wsp:Policy>
+</sp:AlgorithmSuite>
+<sp:Layout>
+<wsp:Policy>
+<sp:Strict/>
+</wsp:Policy>
+</sp:Layout>
+<sp:IncludeTimestamp/>
+<sp:OnlySignEntireHeadersAndBody/>
+</wsp:Policy>
+</sp:AsymmetricBinding>
+<sp:SignedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+<sp:Body/>
+</sp:SignedParts>
+<sp:EncryptedParts xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+<sp:Body/>
+</sp:EncryptedParts>
+</wsp:All>
+</wsp:ExactlyOne>
+</wsp:Policy>
+</wsdl:definitions>

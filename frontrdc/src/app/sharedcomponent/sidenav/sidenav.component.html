@@ -1,0 +1,66 @@
+<mat-sidenav-container class="app-sidenav-container font hover" [dir]="dir">
+  <mat-sidenav #sidenav class="app-sidenav mat-elevation-z2" [opened]="!isScreenSmall()"
+    [mode]="isScreenSmall() ? 'over' : 'side'" >
+    <div class="menuitem-container">
+      <mat-toolbar color="primary">
+        <div *ngIf="retreivedLogo" style="height: 40px;">
+          <img class="diminuer center imgLogo" mat-card-sm-image [src]="retreivedLogo" style="width: 70px; align-content: center; margin-top: 10px;">   
+          <p class="center diminue">{{nom_app | uppercase}} </p> 
+        </div>
+        <span *ngIf="!retreivedLogo" class="center diminuee">{{nom_app |uppercase}}</span>
+
+
+      </mat-toolbar>
+      <mat-nav-list>
+        <mat-list-item [routerLink]="['/home']" [routerLinkActive]="['is_active']">
+          <mat-icon svgIcon="home_pi" style="zoom: 0.7;"></mat-icon>{{'dashboard.home' | translate}} 
+        </mat-list-item>
+        <!-- <mat-divider></mat-divider> -->
+      </mat-nav-list>
+
+      <mat-nav-list>
+        <span *ngFor="let menu of menus">
+          <span *ngIf="menu?.sousMenus && menu?.sousMenus.length > 0">
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header class="mat-expansion-panel-header" [routerLink]="['/'+menu?.menPath]"
+                  [routerLinkActive]="['is_active']">
+                  <mat-panel-title>
+                    <!-- Sous Menu  -->
+                    <mat-list-item>
+                      <mat-icon  svgIcon="{{menu?.menIcone}}" style="zoom: 0.7;"></mat-icon>
+                      {{'menu.'+menu?.menNom | translate}}
+                    </mat-list-item>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <app-menu-item #menus [menus]="menu.sousMenus"></app-menu-item>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </span>
+          <span *ngIf="!menu?.sousMenus || menu?.sousMenus.length === 0">
+            <mat-list-item [routerLink]="['/'+menu?.menPath]" [routerLinkActive]="['is_active']">
+              <!-- Menus principaux -->
+              <mat-icon  svgIcon="{{menu?.menIcone}}" style="zoom: 0.7;"></mat-icon>
+              {{'menu.'+menu?.menNom | translate}}
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </span>
+        </span>
+      </mat-nav-list>
+      <br>
+    </div>
+    <br>
+    <div class="copyright-container">
+      <a href="https://www.gainde2000.com/" target="_blank"><span>Copyright &copy; Gainde2000 </span></a>
+      <div fxFlex></div>
+    </div>
+  </mat-sidenav>
+
+  <div class="app-sidenav-content">
+    <app-toolbar (toggleSidenav)="sidenav.toggle()" (toggleDir)="toggleDir()"></app-toolbar>
+    <div class="wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</mat-sidenav-container>

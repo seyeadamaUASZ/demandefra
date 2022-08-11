@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <h3>{{'document.approbation' | translate}}</h3>
+  
+  <div class="container-fluid mt-4 mb-4">
+    <div class="container-fluid mb-2 alert alert-warning">
+      {{'document.codeenvoye' | translate}}
+    </div>
+     <button *ngIf="renvoi" (click)="renvoyer()" mat-stroked-button type="button" color="primary"> <mat-icon>refresh</mat-icon>{{'btn.renvoyercode'}}</button>
+  </div>
+  <div class="container-fluid">
+     <mat-form-field>
+       <mat-label>{{'document.codeapprobation' | translate}}</mat-label>
+       <input matInput name="code" [(ngModel)]="code" type="number">
+     </mat-form-field>
+  </div>
+  <div class="container-fluid mt-4 mb-2">
+    <button type="button" (click)="closeDialog()" mat-flat-button color="warn">{{'btn.fermer'}}</button> &nbsp;
+    <button type="button" (click)="verifyCode()" mat-flat-button color="primary">{{'btn.verifycode'}}</button>
+  </div>
+</div>

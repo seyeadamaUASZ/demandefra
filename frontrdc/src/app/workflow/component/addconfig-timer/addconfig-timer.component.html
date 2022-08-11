@@ -1,0 +1,66 @@
+<div>
+  <div class="">
+    <h3 class="card-heading float-left">
+      <strong class="foncer">{{'workflow.configurertimer' | translate}}
+      </strong>
+    </h3>
+  </div><br>
+  <form  [formGroup]="addTmForm" (ngSubmit)="onSubmit()">
+    <mat-form-field [hidden]="true"> 
+      <input   matInput formControlName="workflowid" />
+  </mat-form-field>
+    <div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>{{'workflow.titretimer' | translate}}</mat-label>
+          <mat-icon matSuffix>compare_arrows</mat-icon>
+          <input matInput placeholder="{{'workflow.titretimer' | translate}}" type="text" formControlName="titretimer">
+        </mat-form-field>  
+        <mat-form-field  appearance="fill">
+          <mat-label>{{'workflow.tmTskActuel' | translate}} </mat-label>
+          <mat-icon matSuffix>compare_arrows</mat-icon>
+          <input matInput type="text" formControlName="tmTskActuel" readonly >
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>{{'workflow.tmTskSuiv' | translate}}</mat-label>
+          <mat-icon matSuffix>compare_arrows</mat-icon>
+          <mat-select placeholder="{{'workflow.tmTskSuiv' | translate}}" formControlName="tmTskSuiv">
+            <mat-option *ngFor="let tsk of tasknfos" [value]="tsk['tskId']">{{tsk['tskName']}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <br /> 
+        {{'workflow.sedeclancheapresunedurer' | translate}} <input (change)="fieldsChange($event)" (click)="setradio('1')"  value="workflow.sedeclancheapresunedurer" type="radio"/><br>
+        {{'workflow.sedeclancheaplusieurreprise' | translate}} <input (change)="fieldsChange($event)" (click)="setradio('2')" value="workflow.sedeclancheaplusieurreprise" type="radio"/><br>
+        {{'workflow.sedeclancheaunedateprecise' | translate}} <input (change)="fieldsChange($event)" (click)="setradio('3')"  value="workflow.sedeclancheaunedateprecise" type="radio"/><br>
+        <mat-form-field appearance="fill" *ngIf="isSelected('1')">
+          <mat-label>{{'workflow.sedeclancheapresunedurer' | translate}}</mat-label>
+          <mat-icon matSuffix>compare_arrows</mat-icon>
+          <input matInput placeholder="Format ex: PnYnMnDTnHnMnS" type="text" formControlName="valuetimer">
+          
+        </mat-form-field>
+        <mat-form-field appearance="fill" *ngIf="isSelected('2')">
+          <mat-label>{{'workflow.sedeclancheaplusieurreprise' | translate}}</mat-label>
+          <mat-icon matSuffix>compare_arrows</mat-icon>
+          <input matInput placeholder="Format ex: Rn/PnYnMnDTnHnMnS" type="text" formControlName="valuetimer">
+        </mat-form-field> 
+        <mat-form-field appearance="fill" *ngIf="isSelected('3')">
+          <mat-label>{{'workflow.sedeclancheaunedateprecise' | translate}}</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="valuetimer">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <br>
+      </div>
+    </div>
+    <div class="mat-dialog-actions">
+      <button mat-stroked-button color="warn" (click)="closeDialog()" type="button">{{'Action.close' |
+        translate}}</button>
+      <mat-spinner class="center" *ngIf="loading" value="indeterminate"></mat-spinner>
+      <button mat-raised-button color="primary" type="submit">{{'Action.save' | translate}}</button>
+
+
+    </div>
+  </form>
+</div>

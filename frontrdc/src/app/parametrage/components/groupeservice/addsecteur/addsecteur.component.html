@@ -1,0 +1,37 @@
+<div>
+    <div class="">
+        <h3 class="card-heading float-left">
+            <strong class="foncer"> {{'workflow.addsecteur' | translate}}
+
+            </strong>
+        </h3>
+        <!-- <h2>
+      {{'workflow.addsecteur' | translate}} 
+  </h2> -->
+    </div>
+    <form class="" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        <div class="">
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label>{{'workflow.nomSecteur' | translate}} </mat-label>
+                    <mat-icon matSuffix>domain</mat-icon>
+                    <input matInput  type="text"
+                        formControlName="codeSecteur" required>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>{{'workflow.decriptionsecteur' | translate}}</mat-label>
+                    <mat-icon matSuffix>description</mat-icon>
+                    <input matInput  type="text"
+                        formControlName="wsSecteur" required>
+                </mat-form-field>              
+            </div>
+        </div>
+        <div class="mat-dialog-actions"> 
+            <button mat-stroked-button color="warn" (click)="closeDialog()"
+                type="button">{{'Action.close' | translate}}</button>
+            <mat-spinner class="center" *ngIf="loading" value="indeterminate"></mat-spinner>
+            <button mat-raised-button color="primary" type="submit">{{'Action.save' | translate}}</button>
+
+        </div>
+    </form>
+</div>

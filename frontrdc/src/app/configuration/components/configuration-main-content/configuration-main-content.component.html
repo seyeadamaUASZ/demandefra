@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h3 class="float-left">
+      <strong class="foncer"> {{'menu.Configuration' | translate}}
+      </strong>
+    </h3>
+  </div>
+</div>
+<br><br>
+<mat-tab-group [selectedIndex]="tabIndex">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon color="primary">language</mat-icon>&nbsp;
+      {{'configuration.tabLangue' | translate}}
+    </ng-template>
+    <app-langue></app-langue>
+
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon svgIcon="paiement_pi" color="primary"></mat-icon>&nbsp;
+      {{'Paiement' | translate}}
+    </ng-template>
+    <app-paiement-config></app-paiement-config>
+
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon color="primary">portrait</mat-icon>&nbsp;
+      {{'Inscription' | translate}}
+    </ng-template>
+    <mat-card class=""> 
+      <mat-card-header class="card-header centrer">
+        <mat-card-title>{{'inscription.choix' | translate}}</mat-card-title>
+      </mat-card-header><br>
+   
+       <div class="mat-elevation-z8" >
+           <table mat-table class=" mat-elevation-z8" [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="select"   >
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox disabled (change)="$event ? masterToggle(profils) : null" [checked]="selectionAction.hasValue() && isAllSelected(profils)"
+                  [indeterminate]="selectionAction.hasValue() && !isAllSelected(profils)" [aria-label]="checkboxLabel(profils)">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row; let i= index" >
+                <mat-checkbox (change)="selected=i" (change)="nouvelUtilisateur($event, row)" 
+                [checked]="selected===i"   [checked]="selectionIsSelected(row)"
+                [aria-label]="checkboxLabel(profils, row)" formControlName="nouvelleInscri" >
+                </mat-checkbox>
+              </td>
+            </ng-container>
+               <ng-container matColumnDef="proLibelle">
+                   <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'role.accessrights.code' | translate}} </th>
+                   <td mat-cell *matCellDef="let element"> {{element.proLibelle}} </td>
+               </ng-container>
+               <ng-container matColumnDef="proDescription">
+                   <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'role.accessrights.name' | translate}} </th>
+                   <td mat-cell *matCellDef="let element"> {{element.proDescription}} </td>
+               </ng-container>
+               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+           </table>
+           <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+           &nbsp;<button  mat-raised-button color="primary" (click)="validateProfils()">{{'btn_valider' | translate}}</button><br>
+       </div>
+   </mat-card>
+    
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon color="primary">view_agenda</mat-icon>&nbsp;
+      {{'menu.management' | translate}}
+    </ng-template>
+    <app-menu></app-menu>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon color="primary">notification_important</mat-icon>&nbsp;
+      {{'notification.gestion-notification' | translate}}
+    </ng-template>
+    <app-notification></app-notification>
+  </mat-tab>
+</mat-tab-group>

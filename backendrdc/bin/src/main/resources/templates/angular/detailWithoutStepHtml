@@ -1,0 +1,12 @@
+  <mat-card-header>
+    <mat-card-title>{{'#module.detail' | translate}}</mat-card-title>
+  </mat-card-header>
+  <mat-dialog-content>
+    <mat-card-content>
+        
+        #steps
+         
+    </mat-card-content>
+  </mat-dialog-content>
+  
+ 

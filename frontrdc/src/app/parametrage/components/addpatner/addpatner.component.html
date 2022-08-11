@@ -1,0 +1,37 @@
+<form [formGroup]="PartnerForm" (ngSubmit)="updateParametre()">
+  <div class="row">
+    <div class="centrer"><br><br>
+      <h5 style="font-size: 16px;">&nbsp;{{'landing.imageAccueil' | translate}}</h5><br>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+        <mat-form-field appearance="fill">
+          <mat-label>{{'register.partNom' | translate}}</mat-label>
+          <mat-icon matSuffix>perm_identity</mat-icon>
+          <input matInput placeholder="{{'register.partNom' | translate}}" type="text" formControlName="partNom"
+            required><br>
+        </mat-form-field>
+        <div>
+          <label class="btn">
+            <img *ngIf=retreivedImage1 mat-card-sm-image [src]="retreivedImage1">&nbsp;&nbsp;<br>
+            <mat-icon style="zoom:4;" *ngIf=!retreivedImage1 color="primary">image </mat-icon>
+            <input type="file" style="display: none" formControlName="partIm" accept='image/*'
+              (change)="onFileChanged1($event)">
+          </label>
+        </div>
+      <span *ngIf="retreivedImage1 && !selectedFile1" style="margin:auto; text-align: center;display: block;">
+        &nbsp;&nbsp;&nbsp;&nbsp; {{'parametrage.selectImage' | translate}}
+      </span>
+    </div>
+
+
+  </div>
+  <br>
+  &nbsp;&nbsp;
+  <button class="" mat-stroked-button color="warn" type="button" (click)="close()">{{'btn_fermer'|
+    translate}}</button>&nbsp;&nbsp;
+  <button class="" mat-raised-button color="primary" type="submit">{{'btn_valider'| translate}}</button><br>
+  <mat-spinner class="center" *ngIf="loading" value="indeterminate"></mat-spinner>
+</form>

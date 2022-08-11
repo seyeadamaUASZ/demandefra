@@ -1,0 +1,275 @@
+.add-contact {
+	position: absolute;
+    right: 22px;
+    top: 10px;
+}
+.image{
+    background: url("/src/assets/images/gainde/ia.jpg");
+}
+
+#test {
+    background-image: url();
+    background-size: cover;
+    /* background: url(http://www.petite-annonce-gratuite.com/layout_images/carte-france.png) no-repeat; 
+    width: 100%;
+    height: 390px;*/
+}
+mat-grid-tile {
+    background: rgb(238, 239, 240);
+  }
+
+@media screen and (min-width: 100%) and (max-width: 100%) {
+    #test {
+        width: 100%;
+        background-size: cover;
+    }
+    
+}
+body{
+    background-image: url("/src/assets/images/gainde/ia1.jpg");
+    background-size: cover;
+
+}
+.right{
+    margin-left: 20%;
+}
+.top{
+    margin-top: 11%;
+}
+.text{
+    font-size: 11px;
+}
+.card{
+background:rgb(53, 163, 163);
+margin-left: 7%;
+margin-right: 7%;
+margin-top: -5%;
+
+}
+.center{
+    margin-bottom: 2%;
+    display: block;
+    margin:auto;
+}
+
+.login-page{
+    height: 100vh;
+    width: 100%;
+    overflow: auto;
+    
+
+}
+
+.login-spacer{
+    height: 8vh;
+}
+
+.login-container{
+    margin: auto;
+    width: 300px;
+    padding: 1vh;
+    background-color: #fff;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+}
+
+#login-fab {
+	border-radius: 50%;
+    height: 56px;
+    margin: auto;
+    min-width: 56px;
+    width: 56px;
+    overflow: hidden;
+    background: #1e88e5;
+    box-shadow: 0 1px 1.5px 0 rgba(0,0,0,.12), 0 1px 1px 0 rgba(0,0,0,.24);
+    margin-top: -35px;
+    text-align: center;
+    left: 0;
+    right: 0;
+}
+
+#lock-icon{
+    line-height: 56px;
+    color: #fff;
+}
+.card-heading{
+    text-align: center;
+    color: rgba(0, 0, 0, 0.31);
+}
+
+.marge{
+    padding-bottom: 40%;
+}
+// .buttons .login{
+//     padding-top: 2vh;
+//     padding-bottom: 2vh;
+// }
+
+// .buttons .login > button{
+//     width: 40%;
+// }
+// button{
+//     margin: 5%;
+// }
+// .buttons .register{
+//     display: flex;
+//     padding-top: 4vh;
+//     padding-bottom: 2vh;
+//     justify-content: space-between;
+// }
+.app-header{
+    color: #fff;
+        background-color: #1e88e5;
+        text-align: center;
+        margin-top: -3px;
+        padding: 2px;
+    -webkit-box-shadow: 2px 4px 58px -20px rgba(0,0,0,1);
+    -moz-box-shadow: 2px 4px 58px -20px rgba(0,0,0,1);
+    box-shadow: 2px 4px 58px -20px rgba(0,0,0,1);
+    }
+.clearfix{clear:both;}
+.pointer{cursor: pointer;}
+.ucfirst{text-transform: capitalize;}
+.min300{min-height:300px}
+.app-box{
+    padding: 10px;
+    margin-bottom:20px;
+    height: 230px;
+    background: #b5e8d4;
+    overflow: hidden;
+    box-shadow: 1px 1px 4px #ccc;
+}
+.app-box:hover{
+    box-shadow: 1px 1px 4px #999;
+}
+.app-box .remove{
+    position: absolute;
+    right: 21px;
+    top: 0px;
+    color: #545454;
+    display:none;
+}
+.app-box:hover .remove{
+    display:block;
+}
+.inline-btn{
+    background: #00b970;
+    padding: 1px 5px;
+    color: white;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+.box{
+    padding: 10px;
+    margin-bottom:10px;
+    overflow: auto;
+    box-shadow: 1px 1px 4px #ddd;
+}
+.form-group .form-control{
+    font-size:inherit;
+    background-color: inherit;
+}
+
+.dndDropArea{
+    padding: 10px;
+    /* border: dotted #ddd 2px; */
+}
+
+.dndDropArea.empty{
+    min-height:200px;
+    border: dotted #ddd 2px;
+}
+
+.field{
+    padding:2px;
+    margin-bottom:5px;
+    position: relative;
+    width: 100%;
+    border:solid 1px lightgray;
+    background-color: white;
+}
+.field:hover{
+    box-shadow: 1px 1px 4px #ddd;
+}
+.toggle-Wrapper{
+    padding: 15px;
+    background: #d6d6d629;
+}
+.dndHandle{
+    cursor: pointer;
+    color: #999;
+}
+.dndDraggingSource{
+    opacity:0.3;
+}
+.dndPlaceholder{
+    background: rgb(206, 238, 238); border-radius: 2px; padding: 20px;
+    margin-bottom:10px;
+}
+.field .fa{
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 24px;
+    vertical-align: middle;
+
+}
+.red{color:#d9534f}
+.fa-trash{color:#d9534f}
+.marginT60{
+    margin-top:60px;
+}
+
+.color-red{color:red;}
+.report-block{
+    padding:10px;
+    background:#f8f8f8;
+    margin-bottom:20px;
+}
+.report-block .row:nth-child(even){
+    background:#fff;
+}
+
+.ftheme{
+    width:100%;
+}
+
+.dndDropArea .field .fa{
+    opacity:0;
+}
+.dndDropArea .field:hover .fa{
+    opacity:1;
+}
+
+.colorpick{
+    height: 25px;
+    background: white;
+    border: none;
+}
+
+.maxheight{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.addremove{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+// .mat-stepper-horizontal {
+//     height: 100%  !important;
+//   }
+
+//   :host ::ng-deep .mat-horizontal-content-container  {
+//     height: 100% !important;
+// }
+// :host ::ng-deep .mat-horizontal-stepper-content{
+//     height: 100% !important;
+// }

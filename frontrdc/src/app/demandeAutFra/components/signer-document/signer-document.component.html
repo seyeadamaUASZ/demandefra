@@ -1,0 +1,9 @@
+<div class="pages" style="overflow: auto;">
+  <div class="col-lg-12" style="height: 75.89285714285714vh;"><object #pdfViewer type="application/pdf" width="100%"
+      height="100%"></object></div>
+  <div class="mat-dialog-actions">
+    <button type="button" mat-flat-button color="warn" mat-dialog-close>{{'btn.fermer'| translate}}</button>
+    <button mat-stroked-button color="primary" *ngIf="status != 6" (click)="signer()" type="button">{{'Action.signer'| translate}}</button>
+    <button mat-stroked-button color="primary" *ngIf="status == 6" (click)="signerAutDefinitive()" type="button">{{'Action.signer'| translate}}</button>
+  </div>
+</div>

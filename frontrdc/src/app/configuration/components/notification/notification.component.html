@@ -1,0 +1,146 @@
+<mat-tab-group>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon color="primary">add_alert</mat-icon>&nbsp;
+            {{'configuration.tabLangue' | translate}}
+        </ng-template>
+        <mat-card class="">
+            <mat-card-header class="card-header">
+                <mat-card-title>{{'notification.liste-notification' | translate}}</mat-card-title>
+            </mat-card-header><br>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+                <input matInput type="text" [(ngModel)]="filter.notification" name="notification">
+            </mat-form-field>&nbsp;
+            <button (click)="searchNotification()" class="ml-5" mat-mini-fab color="primary">
+                <mat-icon>search</mat-icon>
+            </button>
+
+            <button mat-mini-fab color="primary" class="add-contact1" matTooltip="{{'notification.add' | translate}}"
+                (click)="openDialogAdd()">
+                <mat-icon>add_alert</mat-icon>
+            </button>
+            <div class="">
+                <table mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="ntfObjet">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'notification.objet' | translate}}
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.notification.ntfObjet}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="ntfTntId">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'notification.type' | translate}} </th>
+                        <td mat-cell *matCellDef="let element"> {{element.notification.ntfTntId.tntNom}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef><span style="margin-left: 8%;">
+                                {{'register.action' | translate}}</span> </th>
+                        <td mat-cell *matCellDef="let element" class="fab">
+                            <button mat-button [mat-menu-trigger-for]="detail" yPosition="above">
+                                <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                                    more_vert
+                                </mat-icon>
+                            </button>
+                            <mat-menu #detail="matMenu">
+                                <button mat-menu-item (click)="openDialogDetails(element)">
+                                    <mat-icon matTooltip="{{'notification.details'| translate}}" color="primary">
+                                        visibility
+                                    </mat-icon>{{'notification.details'| translate}}
+                                </button>
+                                <button mat-menu-item (click)="openDialogUpdate(element)">
+                                    <mat-icon matTooltip="{{'utilisateur.edit'| translate}}" color="secondary">
+                                        edit
+                                    </mat-icon>{{'utilisateur.edit'| translate}}
+                                </button>
+                                <button mat-menu-item (click)="openDialogDeleteNotification(element)">
+                                    <!-- <mat-icon color="secondary" (click)="statut(element)">lock</mat-icon> -->
+                                    <mat-icon color="warn" matTooltip="{{'utilisateur.supprimer'| translate}}">delete
+                                    </mat-icon>
+                                    {{'notification.supprimer'| translate}}
+                                </button>
+                                <button mat-menu-item (click)="openDialogEvenement(element.notification)">
+                                    <mat-icon color="primary" matTooltip="{{'notification.add-del-event' | translate}}">
+                                        tune
+                                    </mat-icon>{{'notification.add-del-event'| translate}}
+                                </button>
+                            </mat-menu>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-card>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon color="primary">notification_important</mat-icon>&nbsp;
+            {{'configuration.gestionMessage' | translate}}
+        </ng-template>
+
+        <mat-card class="">
+            <mat-card-header class="card-header">
+                <mat-card-title>{{'notification.liste-message' | translate}}</mat-card-title>
+            </mat-card-header><br>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+                <input matInput type="text" [(ngModel)]="recherche.tndType" name="tdnType">
+            </mat-form-field>&nbsp;
+            <button (click)="search()" class="ml-5" mat-mini-fab color="primary">
+                <mat-icon>search</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" class="add-contact1 " matTooltip="{{'notification.add' | translate}}"
+                (click)="openDialogAddMessage()">
+                <mat-icon>notification_important</mat-icon>
+            </button>
+            <div class="">
+                <table mat-table class="mat-elevation-z8" [dataSource]="dataSource1" matSort>
+                    <ng-container matColumnDef="tdnType">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'notification.nom' | translate}}
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.tdnType}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="tdnContenu">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'notification.contenu' | translate}}
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.tdnContenu}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef><span style="margin-left: 8%;">
+                                {{'register.action' | translate}}</span> </th>
+                        <td mat-cell *matCellDef="let element" class="fab">
+                            <button mat-button [mat-menu-trigger-for]="detail" yPosition="above">
+                                <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                                    more_vert
+                                </mat-icon>
+                            </button>
+                            <mat-menu #detail="matMenu">
+                                <button mat-menu-item (click)="oppenDialogUdateNotif(element)">
+                                    <mat-icon matTooltip="{{'notification.edit'| translate}}" color="secondary">
+                                        edit
+                                    </mat-icon>{{'notification.edit'| translate}}
+                                </button>
+                                <button mat-menu-item (click)="openDialogDeleteUser(element)">
+                                    <!-- <mat-icon color="secondary" (click)="statut(element)">lock</mat-icon> -->
+                                    <mat-icon color="warn" matTooltip="{{'utilisateur.supprimer'| translate}}">delete
+                                    </mat-icon>
+                                    {{'notification.supprimer'| translate}}
+                                </button>
+                            </mat-menu>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+        </mat-card>
+
+    </mat-tab>
+
+</mat-tab-group>

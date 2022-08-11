@@ -1,0 +1,157 @@
+.image{
+  background: url("/assets/images/gainde/ia.jpg");
+}
+
+#test {
+  background-image: url();
+  background-size: cover;
+  /* background: url(http://www.petite-annonce-gratuite.com/layout_images/carte-france.png) no-repeat;
+  width: 100%;
+  height: 390px;*/
+}
+
+mat-grid-tile {
+  background: rgb(238, 239, 240);
+}
+
+@media screen and (min-width: 100%) and (max-width: 100%) {
+  #test {
+      width: 100%;
+      background-size: cover;
+  }
+
+}
+body{
+  background-image: url("/assets/images/gainde/ia1.jpg");
+  background-size: cover;
+
+}
+.right{
+  margin-left: 20%;
+}
+.top{
+  margin-top: 11%;
+}
+.text{
+  font-size: 11px;
+}
+
+.center{
+  margin-bottom: 2%;
+  display: block;
+  margin:auto;
+}
+
+.login-page{
+ height: 90vh;
+ //width: 100%;
+  margin-top: -10%;
+ overflow-wrap: scroll;
+}
+
+.login-spacer{
+  height: 12vh;
+}
+
+.login-container{
+  margin: auto;
+  width: 300px;
+  padding: 1vh;
+  background-color: #fff;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+}
+
+#login-fab {
+border-radius: 50%;
+  height: 56px;
+  margin: auto;
+  min-width: 56px;
+  width: 56px;
+  overflow: hidden;
+  background: #1e88e5;
+  box-shadow: 0 1px 1.5px 0 rgba(0,0,0,.12), 0 1px 1px 0 rgba(0,0,0,.24);
+  margin-top: -35px;
+  text-align: center;
+  left: 0;
+  right: 0;
+}
+
+#lock-icon{
+  line-height: 56px;
+  color: #fff;
+}
+.card-heading{
+  text-align: center;
+  color: rgba(0, 0, 0, 0.31);
+}
+
+.buttons .login{
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+}
+
+.buttons .login > button{
+  width: 40%;
+}
+button{
+  margin: 5%;
+}
+.buttons .register{
+  display: flex;
+  padding-top: 4vh;
+  padding-bottom: 2vh;
+  justify-content: space-between;
+}
+.app-header{
+  color: #fff;
+      background-color: #1e88e5;
+      text-align: center;
+      margin-top: -3px;
+      padding: 2px;
+  -webkit-box-shadow: 2px 4px 58px -20px rgba(0,0,0,1);
+  -moz-box-shadow: 2px 4px 58px -20px rgba(0,0,0,1);
+  box-shadow: 2px 4px 58px -20px rgba(0,0,0,1);
+  }
+
+.file-upload{
+  flex: auto;
+  display: flex;
+  flex-direction: row;
+  border: solid 1px lightgray;
+  padding: 3%;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  cursor: pointer;
+
+  .file-name{
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+  }
+  .file-name2{
+    padding-left: 2%;
+    color: #7d9aa1;
+    font-size: 10px;
+    text-overflow: clip;
+  }
+  .sep{
+    margin-left: 2%;
+    border:solid 1px #7d9aa1;
+    height: 100%;
+  }
+  .flex{
+    flex: auto;
+  }
+}
+
+.file-upload:hover{
+  background-color: #e4fdfc;
+
+}

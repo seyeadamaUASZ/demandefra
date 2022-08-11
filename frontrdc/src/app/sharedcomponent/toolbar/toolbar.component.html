@@ -1,0 +1,68 @@
+<mat-toolbar fxShow="true" fxHide.lt-md="true" style="display:flex">
+  <div>
+    <button class="sidenav-toggle" mat-button (click)="toggleSidenav.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <span style="font-weight: 900; font-size: large; margin-left: 400px;">{{profileLibelle | uppercase}}</span>
+  <span class="example-spacer"></span> 
+  
+  <form [formGroup]="userForm">
+    <div class="form">
+      <select class="decorer" [(ngModel)]="currentLangue" #selectedLang (change)="switchLang(selectedLang.value)"
+        formControlName="uti_lng_id" (change)="getLangueId(selectedLang.value)">
+        <option *ngFor="let language of Langues" [value]="language.lngLangue"
+          [selected]="language.lngLangue === translate.currentLang">
+          {{ language.lngLangue}}
+        </option>&nbsp;&nbsp;
+      </select>
+    </div>
+  </form>&nbsp;&nbsp;&nbsp;&nbsp;
+  <button mat-button *ngIf='AfficheApparence===true'  (click)="openSetting()">
+    <mat-icon>settings</mat-icon>
+  </button>
+  
+  <ngx-avatar [matMenuTriggerFor]="menu" [src]="logo" size="40" *ngIf="user?.utiLogo" class="d-flex justify-content-center"></ngx-avatar>
+  <ngx-avatar [matMenuTriggerFor]="menu" name="{{prenom}} {{nom}}" class="aligner" size="40" *ngIf="!user?.utiLogo">
+  </ngx-avatar>
+  
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="openDialog()">
+      <mat-icon >vpn_key</mat-icon>{{'changePwd' | translate}}
+    </button>
+    <button mat-menu-item (click)="openUser()">
+      <mat-icon>account_box</mat-icon> {{'compte' |translate}}
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon >exit_to_app</mat-icon>{{'log_out' |translate}}
+    </button>
+    <button mat-menu-item *ngIf='AfficheApparence===false && profileLibelle == "demandeur"' (click)="desinscrireDialog()">
+      <mat-icon >person_add_disabled</mat-icon>{{'inscription.desinscrire' |translate}}
+    </button>
+  </mat-menu>
+  <mat-menu #notif="">  
+    <mat-card>
+      <div  (click)="openNotif()">
+        <div class="row" *ngFor="let notif of AllNotif">
+          <div class="col-sm-2" class="centrer">
+            &nbsp;<mat-icon color="primary">notifications</mat-icon>
+          </div>
+          <div class="col-sm-8">
+            <div style="font-size: 12px;
+            word-break: break-word;"><b>{{notif.ntfTitre}}</b> <br><span style="font-size: 11px;">{{notif.ntfLibelle}}</span> 
+             <br><span style="font-size: 10px;">{{notif.ntfDate|date:'hh:mm &nbsp; dd.MMM.yy'}}</span>  </div>
+
+          </div>
+          <div class="col-sm-2">
+            <a > 
+              <mat-icon  (click)="supprimerNotif(notif)" color="warn" >clear</mat-icon>
+            </a>
+
+          </div>&nbsp;
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+      <hr>
+    </mat-card>
+  </mat-menu>
+</mat-toolbar>

@@ -1,0 +1,31 @@
+<div>
+    <div class="">
+        <h3 class="card-heading float-left">
+            <strong class="foncer">
+                {{'qrcodes.edit' | translate}}
+            </strong>
+        </h3>
+    </div><br>
+ <form class="" [formGroup]="QrcodeForm" (ngSubmit)="onUpdate()">
+        <div class="">
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label>{{'qrcodes.nom' | translate}}</mat-label>
+                    <input matInput placeholder="{{'qrcodes.nom' | translate}}" type="text" formControlName="qrcNom"
+                        required>
+                </mat-form-field>
+               <mat-form-field appearance="fill">
+                    <mat-label>{{'qrcodes.description' | translate}}</mat-label>
+                    <input matInput placeholder="{{'qrcodes.description' | translate}}" type="text"
+                        formControlName="qrcDescription" required>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="mat-dialog-actions">
+            <button mat-stroked-button color="warn" (click)="closeDialog()"
+                type="button">{{'Action.close' | translate}}</button>
+            <button mat-raised-button color="primary" type="submit">{{'Action.save' | translate}}</button>
+        </div>
+    </form> 
+</div>

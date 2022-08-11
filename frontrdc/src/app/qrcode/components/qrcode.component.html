@@ -1,0 +1,122 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h3 class="float-left">
+      <strong class="foncer"> {{'menu.gestionQrcode' | translate}}
+      </strong>
+    </h3>
+
+  </div>
+</div>
+<br>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+      {{'qrcodes.liste' | translate}}
+    </ng-template>
+    <mat-card>
+      <mat-card-header class="card-header centrer">
+        <mat-card-title >{{'qrcodes.liste' | translate}}</mat-card-title>
+      </mat-card-header>
+      
+      <div class="">
+        <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAddQrcodes()"
+          matTooltip="{{'qrcodes.add' | translate}}" *accesscode="'ajout_qrcode'">
+          <mat-icon>add</mat-icon>
+        </button><br>
+        <div class="row container-fluid diminuer">
+          <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let q of listeQrcode">
+            <div class="card card-stats">
+              <div class="card-header card-header-warning card-header-icon">
+                <button mat-button [mat-menu-trigger-for]="detail" yPosition="above" class="float-right">
+                  <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                    more_vert
+                  </mat-icon>
+                </button>
+                <mat-menu #detail="" x-position="before">
+                  <button mat-menu-item (click)="openDialogEditRapport(q)">
+                    <mat-icon matTooltip="Modification">
+                      edit
+                    </mat-icon>{{'qrcodes.modelise' | translate}}
+                  </button>
+                <button mat-menu-item  color="warn" (click)="openDialogDeleteQrcode(q)" class="pull-right">
+                  <mat-icon matTooltip="{{'qrcodes.delete' | translate}}">
+                    delete
+                  </mat-icon>{{'qrcodes.delete' | translate}}
+
+                </button>
+                <button class="float-left" class="taille"  mat-menu-item color="primary"
+                (click)="openDialogEditQrcodes(q)" *accesscode="'edit_qrcode'">
+                <mat-icon matTooltip="{{'qrcodes.edit' | translate}}">edit</mat-icon>{{'qrcodes.edit' | translate}}
+              </button>
+                </mat-menu>
+                <h5 class="card-category text-black center">{{q.qrcNom}} </h5> 
+              </div>
+              <div class="">
+                <div class="">
+                  <div class="stats"><br>
+                    <img src="data:image/png;base64,{{q.qrcLogo}}" style="width: 45%;" class=" center col-lg-12 col-md-12 col-sm-12"><br><br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+      {{'qrcodes.list' | translate}}
+    </ng-template>
+    <mat-card>
+      <mat-card-header class="card-header centrer">
+        <mat-card-title>{{'qrcodes.list' | translate}} </mat-card-title>
+      </mat-card-header>
+      <br>
+      <br>
+      <mat-spinner class="center" *ngIf="loading" value="indeterminate"></mat-spinner>
+      <div class="row container-fluid">
+        <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let qrcode of qrcodeModeliser">
+          <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+              <button mat-button [mat-menu-trigger-for]="detail" yPosition="above" class="float-right">
+                <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                  more_vert
+                </mat-icon>
+              </button>
+              <mat-menu #detail="" x-position="before">
+                <div *accesscode="'modelize_qrcode'">
+                  <button mat-menu-item (click)=" modeliserQrcode(qrcode)"
+                  *ngIf="qrcode.qrcValider=='Valider'" matTooltip="Reutilisation">
+                  <mat-icon>swap_horiz</mat-icon>{{'qrcodes.modeliser' | translate}}
+                </button>
+              </div>
+              <button mat-menu-item (click)="openDialogDelete(qrcode)">
+                <mat-icon color="warn" matTooltip="supprimer">
+                  delete
+                </mat-icon>supprimer
+              </button>
+              <button mat-menu-item color="primary" class="pull-right" (click)="gotoExprotFile(qrcode.qrcId)" *accesscode="'gen_qrcode'">
+                <mat-icon matTooltip="Details">
+                  settings
+                </mat-icon>{{'qrcodes.generer' | translate}}
+              </button>
+              </mat-menu>
+              <h5 class="center">{{qrcode.qrcNom}} </h5>
+            </div>
+            <div class="">
+              <div class="stats"><br>
+                <img src="data:image/png;base64,{{qrcode.qrcLogo}}" style="width: 45%;" class=" center col-lg-12 col-md-12 col-sm-12"><br><br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </mat-tab>
+  </mat-tab-group>
+
+

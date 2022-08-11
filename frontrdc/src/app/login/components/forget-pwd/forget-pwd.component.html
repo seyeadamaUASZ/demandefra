@@ -1,0 +1,163 @@
+<section class="menu menu2 cid-sjq2uSAeZ4" once="menu" id="menu2-0">
+  <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+    <div class="container">
+      <div class="navbar-brand">
+        <span class="navbar-logo">
+          <a href="index.html#top">
+            <img
+              src="assets/images/group-2.png"
+              alt="Logo"
+              style="height: 3rem"
+            />
+          </a>
+        </span>
+
+        <!-- <span class="navbar-caption-wrap"><a class="navbar-caption text-white text-primary display-7"
+                      href="index.html#top">{{appName}}</a></span> -->
+      </div>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+      <div
+        class="collapse navbar-collapse"
+        id="navbarSupportedContent"
+        style="margin-top: 2%"
+      >
+        <ul class="navbar-nav nav-dropdown row" data-app-modern-menu="true">
+          <li class="nav-item">
+            <a
+              class="nav-link link text-black text-primary display-4"
+              href="index.html#content15-4"
+            >
+              {{ "landing.accueil" | translate }}</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link link text-black text-primary display-4"
+              href="index.html#contentActualite"
+            >
+              {{ "landing.actualites" | translate }}</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link link text-black text-primary display-4"
+              href="index.html#form5-7"
+              >{{ "landing.contact" | translate }}</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link link text-black text-primary display-4"
+              routerLink="/login"
+              >{{ "landing.btnConnexion" | translate }}</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- <form [formGroup]="userForm">
+          <div class="form">
+              <select class="decorer" [(ngModel)]="currentLangue" #selectedLang
+                  (change)="switchLang(selectedLang.value)" formControlName="uti_lng_id"
+                  (change)="getLangueId(selectedLang.value)">
+                  <option *ngFor="let language of Langues" [value]="language.lngLangue"
+                      [selected]="language.lngLangue === translate.currentLang">
+                      {{ language.lngLangue}}
+                  </option>&nbsp;&nbsp;
+              </select>
+          </div>
+      </form>&nbsp;&nbsp;&nbsp;&nbsp; -->
+  </nav>
+</section>
+
+<div class="row container-fluid mt-5">
+  <div class="col-lg-8 col-md-8 col-sm-8">
+    <img
+      *ngIf="!imageAccueil"
+      src="assets/images/demat-1000x667.jpg"
+      srcset="
+        assets/images/demat-1000x667.jpg 2x,
+        assets/images/demat-1000x667.jpg 3x
+      "
+      class="image"
+    />
+  </div>
+  <div *ngIf="imageAccueil" class="col-lg-8 col-md-8 col-sm-8">
+    <img
+      [src]="imageAccueil"
+      srcset="imageAccueil 2x, imageAccueil 3x"
+      class="image"
+    />
+  </div>
+  <div class="col-lg-4 col-md-4 col-sm-4 mat-elevation-z2">
+    <div class="Forgetpwd-page">
+      <div class=""></div>
+      <h2 class="industrialisation">
+        <!-- {{appName}} -->
+      </h2>
+      <br /><br /><br />
+      <div class="Forgetpwd-container">
+        <h3 class="float-left">
+          {{ "forgettenpwd" | translate }}
+        </h3>
+        <br /><br /><br />
+        <form
+          class="Forgetpwd-form"
+          [formGroup]="ForgetPwdForm"
+          (ngSubmit)="onSubmit()"
+        >
+          <mat-form-field appearance="fill">
+            <input
+              matInput
+              placeholder="{{ 'mail' | translate }}"
+              type="email"
+              formControlName="pwrEmail"
+              required
+            />
+          </mat-form-field>
+          <div class="buttons">
+            <div class="Forgetpwd">
+              <button
+                mat-raised-button
+                color="primary"
+                [disabled]="!ForgetPwdForm.valid"
+              >
+                {{ "btn_valider" | translate }}
+              </button>
+            </div>
+            <div class="buttons">
+              <button mat-stroked-button color="primary" routerLink="/login">
+                {{ "btn_fermer" | translate }}</button
+              >&nbsp;
+              <button
+                mat-stroked-button
+                color="primary"
+                routerLink="/login/newPwd"
+              >
+                {{ "btn_code_verification" | translate }}
+              </button>
+            </div>
+            <!-- <div class="center">
+          <button mat-button color="primary" routerLink="/login">{{'btn_fermer' | translate}}?</button>
+        </div> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

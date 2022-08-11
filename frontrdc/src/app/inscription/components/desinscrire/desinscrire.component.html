@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <h3 class="card-heading float-left">
+    <strong class="foncer"> {{'desincrire' | translate}}
+    </strong>
+  </h3>
+  <form [formGroup]="changeForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>{{'inscription.passe'| translate}}</mat-label>
+      <input type="password"  matInput formControlName="oldPwd">
+    </mat-form-field>
+    <button mat-stroked-button color="warn" type="button" (click)="dialogClose()">{{'btn_fermer'|translate}}</button>
+
+    <button mat-raised-button color="primary" type="submit">{{'btn_valider'|translate}}</button>
+  </form>
+
+</div>

@@ -1,0 +1,52 @@
+
+  <h3 class="card-heading float-left">
+      <strong class="foncer"> {{'paiement.view' | translate}}
+      </strong>
+  </h3><br><br>
+<mat-dialog-content>
+    <mat-card-content>
+        <div class="row">
+            <div class="col-sm-6 col-lg-12 col-md-12">
+                <div class="fond"><br>
+                    &nbsp;<mat-icon  matSuffix>perm_identity</mat-icon>&nbsp;
+                    <span> {{'paiement.idFacture' | translate}}</span>
+                    <p class="mymargin foncer">{{paiement?.paiIdFacture}}</p>
+                </div>
+                <div class="fond"><br>
+                    &nbsp;<mat-icon  matSuffix>format_align_left</mat-icon>&nbsp;
+                    <span> {{'paiement.numeroPaiement' | translate}}</span>
+                    <p class="mymargin foncer">{{paiement?.paiReferencePaiement}}</p>
+                </div>
+                <div class="fond"><br>
+                  &nbsp;<mat-icon  matSuffix>portrait</mat-icon>&nbsp;
+                  <span> {{'paiement.prenomPayeur' | translate}}</span>
+                  <p class="mymargin foncer">{{paiement?.paiPrenomPayeur}}</p>
+              </div>
+                <div class="fond"><br>
+                    &nbsp;<mat-icon  matSuffix>portrait</mat-icon>&nbsp;
+                    <span> {{'paiement.nomPayeur' | translate}}</span>
+                    <p class="mymargin foncer">{{paiement?.paiNomPayeur}}</p>
+                </div>
+                <div class="fond"><br>
+                    &nbsp;<mat-icon  matSuffix>date_range</mat-icon>&nbsp;
+                    <span> {{'paiement.date_paiement' | translate}}</span>
+                    <p class="mymargin foncer">{{paiement?.paiDatePaiement|date: 'dd/MM/yyyy hh:mm'}}</p>
+                </div>
+                <div class="fond"><br>
+                    &nbsp;<mat-icon svgIcon="paiement_pi" matSuffix></mat-icon>&nbsp;
+                    <span> {{'paiement.montant' | translate}}</span>
+                    <p class="mymargin foncer">{{paiement?.paiMontant}}</p>
+                </div>
+                <div class="fond"><br>
+                    &nbsp;<mat-icon  matSuffix>check</mat-icon>&nbsp;
+                    <span> {{'paiement.status' | translate}}</span>
+                    <p class="mymargin foncer">{{paiement?.paiStatusTransaction}}</p>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions >
+        &nbsp;  &nbsp; <button mat-stroked-button color="warn" (click)="closeDialog()">{{'Action.close' | translate}}</button>
+    </mat-card-actions>
+</mat-dialog-content>
+ 

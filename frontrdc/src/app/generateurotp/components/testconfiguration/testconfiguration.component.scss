@@ -1,0 +1,114 @@
+
+.login-page{
+    height: 70vh;
+    width: 100%;
+    margin-top: -10%;
+
+}
+// mat-horizontal-stepper{
+//   display: block;
+//   margin: auto;
+//   width:75%;
+// }
+
+.login-spacer{
+    height: 5vh;
+}
+
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+}
+
+#login-fab {
+	border-radius: 50%;
+    height: 56px;
+    margin: auto;
+    min-width: 56px;
+    width: 56px;
+    overflow: hidden;
+    background: #1e88e5;
+    box-shadow: 0 1px 1.5px 0 rgba(0,0,0,.12), 0 1px 1px 0 rgba(0,0,0,.24);
+    margin-top: -35px;
+    text-align: center;
+    left: 0;
+    right: 0;
+}
+
+#lock-icon{
+    line-height: 56px;
+    color: #fff;
+}
+.card-heading{
+    text-align: center;
+    color: rgba(0, 0, 0, 0.31);
+}
+
+.buttons.login{
+    padding-top: 5vh;
+    padding-bottom: 2vh;
+}
+
+
+button{
+    margin: 3%;
+    margin-top: 7px;
+}
+.buttons .register{
+    display: flex;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    justify-content: space-between;
+}
+
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  
+  
+  
+  .right{
+    margin-left: 20%;
+  }
+  .top{
+    margin-top: 11%;
+  }
+  .text{
+    font-size: 11px;
+  }
+  
+  .center{
+    margin-bottom: 2%;
+    display: block;
+    margin:auto;
+  }
+  
+  .login-page{
+   // height: 90vh;
+  //  width: 100%;
+    margin-top: -10%;
+  
+  }
+  
+  .login-spacer{
+    height: 12vh;
+  }
+  
+  .login-container{
+    margin: auto;
+    width: 300px;
+    padding: 1vh;
+    background-color: #fff;
+  }
+  
+  table,mat-paginator{
+    width: 100%;
+  }
+  
+  
+  
+  
+ 
+    

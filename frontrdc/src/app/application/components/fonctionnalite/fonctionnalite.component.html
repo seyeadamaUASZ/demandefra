@@ -1,0 +1,70 @@
+
+<div class="row">
+    <div class="col-sm-6">
+        <h3 class="float-left">
+            <strong class="foncer"> {{'fonctionnalite.liste' | translate}}
+            </strong>
+        </h3>
+    </div>
+    <!--
+    <div class="col-sm-6">
+        <button mat-mini-fab color="primary" class="route" (click)="openDialogAdd()"
+        matTooltip="{{'utilisateur.ajout' | translate}}">
+        <mat-icon>person_add</mat-icon>
+    </button>
+    </div>
+-->
+</div>
+
+<mat-card class="">    
+   <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAddFonctionnalite()"
+      matTooltip="{{'Fonctionnalite.add' | translate}}">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <div class="mat-elevation-z8">
+        <table mat-table class=" mat-elevation-z8" [dataSource]="dataSource" matSort>
+            <!-- Name Column -->
+            <ng-container matColumnDef="fonNom">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'fonctionnalite.nom' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.fonNom}} </td>
+            </ng-container>
+            <!-- <ng-container matColumnDef="fonCode">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'fonctionnalite.code' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.fonCode}} </td>
+            </ng-container> -->
+            <!-- Weight Column -->
+            <ng-container matColumnDef="fonDescription">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'fonctionnalite.description' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.fonDescription}} </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>
+                    <span class="mymargin"> {{'register.action' | translate}}</span> 
+                    </th>
+                <td mat-cell *matCellDef="let element" class="fab">
+                    <button mat-button [mat-menu-trigger-for]="detail">
+                        <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                            yPosition="above">
+                            more_vert
+                        </mat-icon>
+                    </button>
+                    <mat-menu #detail="matMenu">
+                        <button mat-menu-item (click)="openDialogEdit(element)">
+                            <mat-icon matTooltip="{{'Action.edit' | translate}}" color="secondary" >edit</mat-icon> {{'Action.edit' | translate}}
+                        </button>
+                    </mat-menu>
+
+                 <!--   <mat-icon color="warn" matTooltip="Delete" (click)="openDialogDeleteFonctionnalite(element)">delete</mat-icon>-->
+                <!-- <mat-icon *ngIf="!element.fonActived" color="warn" matTooltip="Activer" (click)="openDialogActive(element.fonId)">close</mat-icon>
+                <mat-icon *ngIf="element.fonActived" color="primary" matTooltip="Desctiver"(click)="openDialogDesactive(element.fonId)">done</mat-icon>-->
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        <button class="mymargin" mat-stroked-button color="warn" (click)="fermer()">{{'btn_fermer' | translate}}</button>
+    </div>
+</mat-card>
+ 

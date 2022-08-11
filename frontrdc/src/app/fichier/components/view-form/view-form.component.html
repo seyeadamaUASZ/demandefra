@@ -1,0 +1,67 @@
+<div class="login-page">
+    <div class="login-spacer"></div>
+    <div class="">
+        <!-- <div id="login-fab" class="mdl-color--accent mdl-color-text--white">
+          <i id="lock-icon" class="material-icons">lock</i>
+      </div> -->
+        <!-- <h2 class="card-heading">
+          {{'update' | translate}} </h2> -->
+
+        <h3 class="card-heading float-left">
+            <strong class="foncer">   {{'update' | translate}}
+            </strong>
+        </h3>
+        <form class="">
+            <div class="form-group">
+                <div *ngFor="let item of fields">
+                    <div class="">
+                        <div class="form-group input-group mymargin" *ngIf="item.chpType=='text'">
+
+                            <mat-form-field appearance="fill">
+                                <mat-icon matSuffix>perm_identity</mat-icon>
+                                <input matInput placeholder={{item.chpPlaceholder}} required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="form-group input-group mymargin" *ngIf="item.chpType=='email'">
+                            <mat-form-field appearance="fill">
+                                <mat-icon matSuffix>email</mat-icon>
+                                <input matInput placeholder={{item.chpPlaceholder}} required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="form-group input-group mymargin" *ngIf="item.chpType=='phone'">
+                            <mat-form-field appearance="fill">
+                                <mat-icon matSuffix>phone</mat-icon>
+                                <input matInput placeholder={{item.chpPlaceholder}} required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="form-group input-group mymargin" *ngIf="item.chpType=='number'">
+                            <mat-form-field appearance="fill">
+                                <mat-icon matSuffix>phone</mat-icon>
+                                <input matInput placeholder={{item.chpPlaceholder}} required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="buttons">
+                        <div class="login">
+                            <button mat-stroked-button color="warn" (click)="fermer()"
+                            type="button">{{'btn_fermer' | translate}}</button>
+                            <button mat-raised-button color="primary"
+                                type="submit">{{'btn_enregistrer' | translate}}</button>
+                          
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

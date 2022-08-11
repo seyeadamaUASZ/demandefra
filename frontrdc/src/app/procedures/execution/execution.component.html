@@ -1,0 +1,173 @@
+
+<div class="row">
+  <a routerLink="/procedures/"><mat-icon>keyboard_return</mat-icon>{{'task.retourworkflow' | translate}}</a>
+</div>
+
+<div class="row" style="margin-top: 15px;">
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-aqua"><i class="fa fa-file-o"></i></span>
+
+      <div class="info-box-content">
+
+        <span class="info-box-number color">{{this.nomdemarer}}<small></small></span><br>
+        <span class="info-box-text">{{this.nomwdgtlab}} {{'workflow.process_non_demarrer' | translate}} </span>
+       
+
+      </div>
+      <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+  </div>
+  <!-- /.col -->
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-red"><i class="fa fa-spinner"></i></span>
+
+      <div class="info-box-content">
+
+        <span class="info-box-number color">{{this.encoucours}}</span><br>
+        <span class="info-box-text">{{this.nomwdgtlab}} {{'workflow.process_en_cours' | translate}}</span>
+      
+      </div>
+      <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+  </div>
+  <!-- /.col -->
+
+  <!-- fix for small devices only -->
+  <div class="clearfix visible-sm-block"></div>
+
+  <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info-box">
+      <span class="info-box-icon bg-green"><i class="fa fa-check"></i></span>
+
+      <div class="info-box-content">
+        <span class="info-box-number color">{{this.complete}}</span><br>
+        <span class="info-box-text">{{this.nomwdgtlab}} {{'workflow.process_complete' | translate}}</span>
+      
+      </div>
+      <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+  </div>
+  <!-- /.col -->
+ 
+  <!-- /.col -->
+</div>
+
+<mat-card class=""> 
+  <mat-card-header class="card-header centrer">
+    <mat-card-title>{{'task.liste' | translate}} {{container}}</mat-card-title>
+      <!-- <span class="header">{{'task.liste' | translate}} {{titrepage}} </span> -->
+  </mat-card-header>
+<button mat-mini-fab color="primary" class="add-contact"   (click)="executeProject(elementbutton)" 
+  matTooltip="{{'workflow.creer' | translate}}">
+  <mat-icon>add</mat-icon>
+</button><br>
+ 
+ <!--<table mat-table [dataSource]="this.filledArray" class="mat-elevation-z8">
+  <ng-container *ngFor="let columnName of displayedColumns" [matColumnDef]="columnName">
+    <th mat-header-cell *matHeaderCellDef>{{ columnName }}</th>
+    <td mat-cell  *matCellDef="let row">{{ row[columnName] }}</td>
+    
+  </ng-container>
+  
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table> --> 
+ 
+<!--<div class="table-container mat-elevation-z8">
+  <mat-table #table [dataSource]="this.datatest">
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    <ng-container *ngFor="let column of this.datatest; let colIndex = index" [cdkColumnDef]="column.columnDef">
+      <mat-header-cell *cdkHeaderCellDef>{{ column.header }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row">{{ row[colIndex] }}</mat-cell>
+    </ng-container>
+      
+  </mat-table>
+</div>-->
+
+ <div class="mat-elevation-z8"> 
+      <table mat-table class=" mat-elevation-z8" [dataSource]="dataSource" matSort>
+        
+          
+          <ng-container  matColumnDef="taskid">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'task.taskid' | translate}}  </th>
+              <td mat-cell *matCellDef="let element">  
+                   {{element['task-id']}} </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="taskname">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'task.taskname' | translate}}</th>
+
+              <td mat-cell *matCellDef="let element">{{element['task-name']}} </td>
+          </ng-container>
+          <ng-container matColumnDef="taskactualowner">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'task.taskowner' | translate}}</th>
+            <td mat-cell *matCellDef="let element">{{element['task-actual-owner']}} </td>
+        </ng-container>
+        <ng-container matColumnDef="taskstatus">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'task.taskstatus' | translate}}</th>
+          <td mat-cell *matCellDef="let element" >{{element['task-status']}} </td>
+      </ng-container>
+      <ng-container matColumnDef="taskcreatedon">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'task.taskcreation' | translate}}</th>
+        <td mat-cell *matCellDef="let element"> {{element['task-created-on']['java.util.Date'] | date: 'dd-MM-yyyy HH:mm'}}</td>
+    </ng-container>
+    <ng-container matColumnDef="controle">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'task.controle' | translate}} </th>
+      <td mat-cell *matCellDef="let element">
+        <p *ngIf="element['task-status'] == 'Completed' ;else a"></p> 
+          <button matTooltip="{{'task.reclame' | translate}} " #a *ngIf="element['task-status']  == 'Ready';" mat-raised-button color="primary" type="button" (click)="reclamerOneTask(element['task-container-id'], element['task-id'],this.username)">
+            <mat-icon>touch_app</mat-icon> 
+          </button>
+          
+        </td>
+  </ng-container>
+  <ng-container matColumnDef="processId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+    <td mat-cell *matCellDef="let element" > </td>
+</ng-container>
+          <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef><span >
+                      {{'register.action' | translate}}</span> </th>
+              <td mat-cell *matCellDef="let element" class="fab"> 
+                
+                 <button *ngIf="element['task-status'] == 'Ready' ;else res"  mat-raised-button color="primary" type="button" (click)="openDialogAddTaskTable(element)">
+                  {{this.nomcallto}}
+                 </button>
+                 <button #inprg *ngIf="element['task-status'] == 'Ready' ;"  mat-raised-button color="primary" type="button" (click)="openDialogDetailTask(element)">
+                  Detail
+                 </button> 
+                 <button #res *ngIf="element['task-status'] == 'InProgress' ;else inprg"  mat-raised-button color="primary" type="button" (click)="openDialogAddTaskTable(element)">
+                  {{this.nomcallto}}
+                 </button>
+                 <button #inprg *ngIf="element['task-status'] == 'Reserved' ;"  mat-raised-button color="primary" type="button" (click)="openDialogAddTaskTable(element)">
+                  {{this.nomcallto}}
+                 </button> 
+                 <button #inprg *ngIf="element['task-status'] == 'Completed' ;"  mat-raised-button color="primary" type="button" (click)="openDialogDetailTask(element)">
+                  Detail
+                 </button> 
+                 
+              </td>
+          </ng-container> 
+     
+          
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 50]" showFirstLastButtons></mat-paginator>
+  </div> 
+
+  
+  
+  
+</mat-card> 
+ 

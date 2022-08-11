@@ -1,0 +1,62 @@
+.card-stack{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2em;
+    
+    .card-pay{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 9em;
+        width: 16em;
+        border:solid 1px lightgray;
+        cursor: pointer;
+        &:hover{
+            background-color: rgb(203, 247, 203);
+        }
+    }
+}
+
+.file-upload{
+    flex: auto;
+    display: flex;
+    flex-direction: row;
+    border: solid 1px green;
+    min-height: 7em;
+    padding: 3%;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    cursor: pointer;
+    
+    .file-name{
+      flex-direction: row;
+      display: flex;
+      justify-content: center;
+      justify-items: center;
+      align-items: center;
+    }
+    .file-name2{
+      padding-left: 2%;
+      color: #7d9aa1;
+      font-size: 12px;
+      text-overflow: clip;
+    }
+    .sep{
+      margin-left: 2%;
+      border:solid 1px #e7c602;
+      height: 100%;
+    }
+    .flex{
+      flex: auto;
+    }
+  }
+  
+  .file-upload:hover{
+    background-color: var(--colorPrimary2);
+  
+  }

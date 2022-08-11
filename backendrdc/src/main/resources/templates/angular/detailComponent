@@ -1,0 +1,38 @@
+import { #ModuleService } from '../../service/#module.service';
+import { #Module } from '../../model/#module';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
+import * as fileSaver from 'file-saver';
+import { TranslateService } from '@ngx-translate/core';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+
+
+@Component({
+  selector: 'app-view-#module',
+  templateUrl: './view-#module.component.html',
+  styleUrls: ['./view-#module.component.scss']
+})
+export class View#ModuleComponent implements OnInit {
+  result: any;
+  constructor(private #moduleService: #ModuleService, private dialog: MatDialog,
+    private router: Router, private formbuild: FormBuilder,
+    public dialogRef: MatDialogRef<View#ModuleComponent>,
+     @Inject(MAT_DIALOG_DATA) public donnee: any,
+     private translate: TranslateService, private notification: NotificationService) { }
+
+  
+  
+  ngOnInit() {
+  }
+  
+  closeDialog() {
+    this.dialogRef.close();
+  }
+  
+  
+ 
+
+ 
+}

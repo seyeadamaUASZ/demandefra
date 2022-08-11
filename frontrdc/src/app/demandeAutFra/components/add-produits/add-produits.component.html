@@ -1,0 +1,76 @@
+<div class=" col-sm-12 mt-2 mb-4">
+      <div class="container">
+            <h5>{{('produits.ajout') | translate}}</h5>
+      </div>
+</div>
+<div class="container-fluid">
+      <form class="" [formGroup]="EditForm">
+            <div class="row col-sm-12">
+                  <div class="col-sm-6">
+                        <mat-form-field appearance="fill">
+                              <mat-label>{{'produits.nature' | translate}}</mat-label>
+                              <input matInput type="text" formControlName="nature" required>
+                        </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">
+                        <mat-form-field appearance="fill">
+                              <mat-label>{{'produits.categorie' | translate}}</mat-label>
+                              <mat-select formControlName="categorie" required>
+                                    <mat-option
+                                    *ngFor="let categorie of categories;" [value]="categorie">
+                                    {{categorie.nom}}
+                                    </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                  </div>                  
+            </div>
+            <div class="row col-sm-12">
+                  <div class="col-sm-6">
+                        <mat-form-field appearance="fill">
+                              <mat-label>{{'produits.marque' | translate}}</mat-label>
+                              <input matInput type="text" formControlName="marque" required>
+                        </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">
+                        <mat-form-field appearance="fill">
+                              <mat-label>{{'produits.contenance' | translate}}</mat-label>
+                              <input matInput type="text" formControlName="contenance" required>
+                        </mat-form-field>
+                  </div>
+            </div>
+            <div class="row col-sm-12">
+                  <div class="col-sm-6">
+                        <mat-form-field appearance="fill">
+                              <mat-label>{{'produits.typeemballage' | translate}}</mat-label>
+                              <input matInput type="text" formControlName="typeemballage" required>
+                        </mat-form-field>
+                  </div>
+                  <div class="col-sm-6">
+                        <mat-form-field appearance="fill">
+                              <mat-label>{{'produits.descriptionEtiquette' | translate}}</mat-label>
+                              <input matInput type="text" formControlName="descriptionEtiquette" required>
+                        </mat-form-field>
+                  </div>                  
+            </div>
+            <div class="row col-sm-12">
+                  <div class="col-sm-12">
+                        <input type="file" #fileetiquetteouemballage hidden (change)="onFileAddedetiquetteouemballage()">
+                        <div class="row container-fluid mt-1 mb-2" (click)="addFileetiquetteouemballage()">
+                              <div class="file-upload">
+                                    <span class="file-name">{{'produits.etiquetteouemballage' | translate}}</span>
+                                    <span *ngIf="etiquetteouemballage" class="sep"></span>
+
+                                    <span class="file-name2">{{etiquetteouemballage?.name}}</span>
+
+                                    <span class="flex"></span>
+                                    <span *ngIf="etiquetteouemballage"><mat-icon color="primary" >check</mat-icon></span>
+                              </div>
+                        </div>      
+                  </div>
+            </div>
+      </form>    
+</div>
+<div>
+      <button mat-stroked-button type="button" color="warn" mat-dialog-close>{{'btn.fermer' | translate}}</button>
+      <button type="button" (click)="onSubmit()" mat-raised-button color="primary">{{'btn.ajouter' | translate}}</button>      
+</div>        

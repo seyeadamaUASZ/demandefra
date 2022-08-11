@@ -1,0 +1,27 @@
+.audio-upload>input {
+    display: none;
+}
+.audio-label {
+    cursor: pointer;
+    background-color:  #0f4c75;
+    border-radius: 20px;
+    text-align: center;
+    height: 40px;
+}
+
+.audio-icon {
+    background-color:  #79d70f;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.audio-upload-icon {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 20px;
+}

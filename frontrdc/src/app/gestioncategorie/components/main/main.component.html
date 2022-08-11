@@ -1,0 +1,64 @@
+<mat-card>
+  <mat-card-header class="card-header ">
+    <mat-card-title>{{'categorie.titre' | translate}}</mat-card-title>
+  </mat-card-header>
+  <button mat-mini-fab color="primary" class="add-contact" (click)="openAddCategorie()"
+matTooltip="{{'otp.add' | translate}}">
+<mat-icon>add</mat-icon>
+</button>
+  <mat-form-field appearance="outline">
+    <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+    <input matInput (keyup)="applyFilterModule($event)">
+  </mat-form-field>
+  <div class="" *ngIf="(paiement$ | async) as result" [ngSwitch]="result.dataState">
+    <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+      <mat-spinner></mat-spinner>                  
+  </ng-container>
+
+  <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+      <div class="alert-danger">
+        {{result.errorMessage}}
+      </div>
+  </ng-container>
+    <table mat-table class=" mat-elevation-z8" *ngSwitchCase="DataStateEnum.LOADED" [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'categoire.nom' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+      </ng-container>
+      <ng-container matColumnDef="prix">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'categorie.prix' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.prix}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef><span style="margin-left: 10%;">
+            {{'register.action' | translate}}</span> </th>
+        <td mat-cell *matCellDef="let element" class="fab">
+          <button mat-button [mat-menu-trigger-for]="detail" yPosition="above" class="float-right">
+            <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+              more_vert
+            </mat-icon>
+          </button>
+          <mat-menu #detail="" x-position="before">
+            <button (click)="openDialogEditCategorie(element)" mat-menu-item>
+              <mat-icon matTooltip="{{'application.supprimer'| translate}}" >
+                edit
+              </mat-icon>{{'categorie.edit'| translate}}
+            </button>
+            <button (click)="supprimer(element)" mat-menu-item>
+              <mat-icon matTooltip="{{'application.supprimer'| translate}}" color="warn">
+                delete
+              </mat-icon>{{'categorie.supprimer'| translate}}
+            </button>
+          </mat-menu>
+        </td>
+
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef=" getDisplayedColumns()"></tr>
+      <tr mat-row *matRowDef="let row; columns:  getDisplayedColumns()"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</mat-card>

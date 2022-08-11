@@ -1,0 +1,44 @@
+<div class="login-page">
+  <div class="login-spacer"></div>
+  <div class="">
+    <!-- <div id="login-fab" class="mdl-color--accent mdl-color-text--white">
+      <i id="lock-icon" class="material-icons">domain</i>
+    </div> -->
+    <h3 class="card-heading float-left">
+      <strong class="foncer"> {{'module.register' | translate}}
+      </strong>
+    </h3><br>
+    <!-- <h2 class="card-heading">
+      {{'module.register' | translate}} </h2> -->
+      <br><br>
+    <form class="" [formGroup]="ModuleForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>{{'module.nom' | translate}}</mat-label>
+        <mat-icon matSuffix>perm_identity</mat-icon>
+        <input matInput placeholder="{{'module.nom' | translate}}" type="text" formControlName="modNom" required>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>{{'module.code' | translate}}</mat-label>
+        <mat-icon matSuffix>perm_identity</mat-icon>
+        <input matInput placeholder="{{'module.code' | translate}}" type="text" formControlName="modCode" required>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>{{'module.description' | translate}}</mat-label>
+        <!-- <mat-icon matSuffix>perm_identity</mat-icon> -->
+        <input matInput placeholder="{{'module.description' | translate}}" type="text" formControlName="modDescription" >
+      </mat-form-field>
+      <!--<input matInput placeholder="{{'choix fonctionnalites:' | translate }}" >
+        <div class="" style="padding: 10px;" *ngFor="let f of fonctionnalite">
+              <h3 class="card-category text-black left"><input type="checkbox" class="" id="">{{f.fonNom}} </h3>
+        </div>-->
+      <div class="buttons">
+        <div class="login">
+          <button mat-stroked-button color="warn" (click)="closeDialog()" type="button"
+            routerLink="/application">{{'btn_fermer' | translate}}</button>
+          <button mat-raised-button color="primary" type="submit">{{'btn_valider' | translate}}</button>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

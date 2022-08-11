@@ -1,0 +1,32 @@
+<div class="login-page">
+  <div class="login-spacer"></div>
+  <div class="">
+    <h3 class="card-heading float-left">
+      <strong class="foncer">{{'typedocument.ajout' | translate}}
+      </strong>
+    </h3>
+    <form class="" [formGroup]="FormulaireForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>{{'typedocument.libelle' | translate}}</mat-label>
+        <mat-icon matSuffix>home</mat-icon>
+        <input matInput placeholder="{{'typedocument.libelle' | translate}}" type="text" formControlName="tydLibelle"
+          required>
+      </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>{{'typedocument.description' | translate}}</mat-label>
+      <mat-icon matSuffix>domain</mat-icon>
+      <input matInput placeholder="{{'typedocument.description' | translate}}" type="text" formControlName="tydDescription"
+        required>
+    </mat-form-field>
+      <div class="buttons">
+        <div class="login"><br>
+          <button mat-stroked-button color="warn" (click)="closeDialog()" type="button">{{'Action.close' | translate}}</button>
+          <button mat-raised-button color="primary" type="submit">{{'btn_valider' | translate}}</button>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+

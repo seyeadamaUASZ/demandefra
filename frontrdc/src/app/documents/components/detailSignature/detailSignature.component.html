@@ -1,0 +1,37 @@
+
+  <mat-card-header>
+
+
+  </mat-card-header>
+  <div class="center">
+
+  </div>
+
+
+  <mat-card-content>
+    <div class="row" *ngFor="let user of detail ">
+      <h2>{{'document.usersigner' | translate}} : </h2>
+      <div class="col-sm-12 col-lg-12 col-md-12">
+        <mat-icon color="primary" matSuffix>perm_identity</mat-icon>&nbsp;
+        <mat-label>{{'register.username' | translate}} : {{user.utiUsername}}</mat-label><br>
+        <hr>
+        <mat-icon color="primary" matSuffix>email</mat-icon>&nbsp;
+        <mat-label>{{'register.email' | translate}} : {{user.utiEmail}}</mat-label><br>
+        <hr>
+        <mat-icon color="primary" matSuffix>phone</mat-icon>&nbsp;
+        <mat-label>{{'register.telephone' | translate}} : {{user.utiTelephone}}</mat-label><br>
+        <hr>
+        <mat-icon color="primary" matSuffix>home</mat-icon>&nbsp;
+        <mat-label>{{'register.adresse' | translate}} : {{user.utiAdresse}}</mat-label><br>
+        <hr>
+      </div>
+      <!-- <div class="col-sm-6 col-lg-6 col-md-6">
+        <mat-label>{{'register.adresse' | translate}} : {{user.utiAdresse}}</mat-label><br>
+        <hr>
+      </div> -->
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="closeDialog()">{{'btn_fermer' | translate}}</button>
+
+  </mat-card-actions>

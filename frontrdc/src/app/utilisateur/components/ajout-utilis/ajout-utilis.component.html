@@ -1,0 +1,114 @@
+<mat-tab-group>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon color="primary">portrait</mat-icon>&nbsp;
+            Register
+        </ng-template>
+        <div class="login-page">
+            <div class="login-spacer"></div>
+            <div class="">
+                <h3 class="card-heading float-left">
+                    <strong class="foncer"> {{'register.newUser' | translate}}
+                    </strong>
+                </h3>
+                <form class="" [formGroup]="registreForm" (ngSubmit)="onSubmit()">
+                    <div class="">
+                        <div>
+                            <mat-form-field appearance="fill">
+                                <mat-label>{{'register.prenom' | translate}}</mat-label>
+                                <mat-icon matSuffix>perm_identity</mat-icon>
+                                <input matInput placeholder="{{'register.prenom' | translate}}" type="text"
+                                    formControlName="utiPrenom" required>
+                                <mat-error *ngIf="f.utiPrenom.errors">
+                                    {{'control.prenom' | translate}} </mat-error>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill">
+                                <mat-label>{{'register.nom' | translate}}</mat-label>
+                                <mat-icon matSuffix>perm_identity</mat-icon>
+                                <input matInput placeholder="{{'register.nom' | translate}}" type="text"
+                                    formControlName="utiNom" required>
+                                <mat-error *ngIf="f.utiNom.errors">
+                                    {{'control.nom' | translate}} </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{'register.username' | translate}}</mat-label>
+                        <mat-icon matSuffix>perm_identity</mat-icon>
+                        <input matInput placeholder="{{'register.username' | translate}}" type="text"
+                            formControlName="utiUsername" required>
+                        <mat-error *ngIf="f.utiUsername.errors">
+                            {{'control.username' | translate}} </mat-error>
+                    </mat-form-field>
+                    <div class="">
+                        <div class="form-group input-group mymargin">
+                            <mat-form-field appearance="fill">
+                                <mat-label>{{'register.telephone' | translate}}</mat-label>
+                                <mat-icon matSuffix>phone</mat-icon>
+                                <input matInput placeholder="{{'register.telephone' | translate}}" type="tel"
+                                    pattern="[+]{0,1}[0-9]{0,15}" formControlName="utiTelephone" required>
+                                <mat-error *ngIf="f.utiTelephone.errors">
+                                    {{'control.telephone_mobile' | translate}} </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group input-group mymargin">
+                            <mat-form-field appearance="fill">
+                                <mat-label>{{'register.email' | translate}}</mat-label>
+                                <mat-icon matSuffix>email</mat-icon>
+                                <input matInput placeholder="{{'register.email' | translate}}" type="email"
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" formControlName="utiEmail"
+                                    required>
+                                <mat-error *ngIf="f.utiEmail.errors">
+                                    {{'control.email' | translate}} </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="form-group input-group mymargin">
+                        <mat-form-field appearance="fill">
+                            <mat-label>{{'register.adresse' | translate}}</mat-label>
+                            <mat-icon matSuffix>home</mat-icon>
+                            <input matInput placeholder="{{'register.adresse' | translate}}" type="text"
+                                formControlName="utiAdresse" required>
+                            <mat-error *ngIf="f.utiAdresse.errors">
+                                {{'control.adresse' | translate}} </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group input-group mymargin">
+                        <mat-form-field appearance="fill">
+                            <mat-label>{{'register.profil' | translate}}</mat-label>
+                            <mat-icon matSuffix>work</mat-icon>
+                            <mat-select placeholder="{{'register.profil' | translate}}" formControlName="uti_pro_id"
+                                required>
+                                <mat-option *ngFor="let profile of profiles" [value]="profile">{{profile.proLibelle}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="f.uti_pro_id.errors">
+                                {{'control.profil' | translate}} </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group input-group mymargin" *ngIf="registreForm?.value?.uti_pro_id?.proLibelle?.includes('antenne')">
+                        <mat-form-field appearance="fill">
+                            <mat-label>{{'register.antenne' | translate}}</mat-label>
+                            <mat-icon matSuffix>work</mat-icon>
+                            <mat-select placeholder="{{'register.antenne' | translate}}" formControlName="antenne">
+                                <mat-option *ngFor="let antenne of antennes" [value]="antenne">{{antenne.nomAntenne}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="f.antenne.errors">
+                                {{'control.profil' | translate}} </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="buttons">
+                        <div class="login">
+                            <button mat-stroked-button color="warn" (click)="closeDialog()"
+                                type="button">{{'btn_fermer' | translate}}</button>
+                            <button mat-raised-button color="primary"
+                                type="submit">{{'btn_valider' | translate}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-spinner class="center" *ngIf="loading" value="indeterminate"></mat-spinner>
+</mat-tab-group>

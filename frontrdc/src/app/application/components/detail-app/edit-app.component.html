@@ -1,0 +1,226 @@
+<mat-horizontal-stepper linear #stepper>
+  <mat-step [stepControl]="ApplicationForm">
+    <ng-template matStepLabel>{{'application.information' | translate}}</ng-template><br>
+
+    <mat-card-content>
+      <div class="row">
+        <div class="col-sm-12 col-lg-12 col-md-12">
+
+          <mat-icon color="primary" matSuffix>edit</mat-icon>&nbsp;
+          <mat-label><strong>{{'application.nom_entreprise' | translate}}</strong> : {{application?.appNomEntreprise}}
+          </mat-label><br>
+          <hr>
+          <mat-icon color="primary" matSuffix> text_format</mat-icon>&nbsp;
+          <mat-label><strong>{{'application.nom' | translate}}</strong> : {{application?.appNom}}</mat-label>
+          <br>
+          <hr>
+          <mat-icon color="primary" matSuffix>perm_identity</mat-icon>&nbsp;
+          <mat-label><strong>{{'application.ninea' | translate}}</strong> : {{application?.appNinea}}</mat-label><br>
+          <hr>
+          <mat-icon color="primary" matSuffix>house</mat-icon>&nbsp;
+          <mat-label><strong>{{'application.adresse' | translate}}</strong> : {{application?.appAdresse}}</mat-label>
+          <br>
+          <hr>
+          <mat-icon color="primary" matSuffix>calendar_today</mat-icon>&nbsp;
+          <mat-label><strong>{{'application.date_creation' | translate}}</strong> : {{datePipeString}}</mat-label><br>
+          <hr>
+          <mat-icon color="primary" matSuffix>home</mat-icon>&nbsp;
+          <mat-label><strong>{{'application.secteur' | translate}}</strong> : {{application?.appSecteur}}</mat-label>
+          <br>
+          <hr>
+          <mat-icon color="primary" matSuffix>phone</mat-icon>&nbsp;
+          <mat-label><strong>{{'application.telephone_fixe' | translate}}</strong> : {{application?.appTelephoneFixe}}
+          </mat-label><br>
+          <hr>
+          <mat-icon color="primary" matSuffix>stay_current_portrait</mat-icon>&nbsp;
+          <mat-label><strong>{{'application.telephone_mobile' | translate}} </strong>:
+            {{application?.appTelephoneMobile}}</mat-label><br>
+          <hr>
+          <mat-icon color="primary" matSuffix>email</mat-icon>&nbsp;
+          <mat-label><strong>{{'application.email' | translate}}</strong> : {{application?.appEmail}}</mat-label><br>
+          <hr>
+        </div>
+        <!-- <div class="col-sm-6 col-lg-6 col-md-6">
+          <mat-icon color="primary" matSuffix>home</mat-icon>&nbsp;
+          <mat-label><strong>{{'application.secteur' | translate}}</strong> : {{application?.appSecteur}}</mat-label>
+          <br>
+          <hr>
+          <mat-icon color="primary" matSuffix>phone</mat-icon>&nbsp;
+          <mat-label><strong>{{'application.telephone_fixe' | translate}}</strong> : {{application?.appTelephoneFixe}}
+          </mat-label><br>
+          <hr>
+          <mat-icon color="primary" matSuffix>stay_current_portrait</mat-icon>&nbsp;
+          <mat-label><strong>{{'application.telephone_mobile' | translate}} </strong>:
+            {{application?.appTelephoneMobile}}</mat-label><br>
+          <hr>
+          <mat-icon color="primary" matSuffix>email</mat-icon>&nbsp;
+          <mat-label><strong>{{'application.email' | translate}}</strong> : {{application?.appEmail}}</mat-label><br>
+          <hr>
+        </div> -->
+      </div>
+    </mat-card-content>
+    <div>
+      <button mat-stroked-button color="warn" (click)="closeDialog()">{{'application.close' | translate }}</button>
+      <button mat-raised-button color="primary" matStepperNext>{{'application.next' | translate }}</button>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>{{'application.module' | translate }}</ng-template>
+
+      <div class="container-fluid" >
+        <table   mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          
+        
+          <!-- Position Column -->
+          <ng-container matColumnDef="modNom">
+            <th mat-header-cell *matHeaderCellDef> {{'module.nom' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.modNom}} </td>
+          </ng-container>
+          <ng-container matColumnDef="modDescription">
+            <th mat-header-cell *matHeaderCellDef> {{'module.description' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.modDescription}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef><span>
+                {{'register.action' | translate}}</span> </th>
+            <td mat-cell *matCellDef="let element" class="fab">
+              <button class="mesbuttons" mat-button [mat-menu-trigger-for]="detail" yPosition="above"
+                >
+                <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                  more_vert
+                </mat-icon>
+              </button><br>
+              
+              <mat-menu #detail="" x-position="before">
+                <button class="mesbuttons" mat-menu-item color="primary" (click)="openDialogChoixFonctionnalite(element.modId)">
+                  <mat-icon color="primary">visibility</mat-icon> {{'fonctionnalite.Choix_fonctionnalite' | translate}}
+                </button>
+              </mat-menu>
+            </td>
+
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+              >
+          </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+      </div>
+      <!-- <div class="row container-fluid">
+        <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let m of module">
+          <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+              <button class="mesbuttons" mat-button [mat-menu-trigger-for]="detail" yPosition="above"
+                class="float-right">
+                <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                  more_vert
+                </mat-icon>
+              </button><br>
+              <h5 class="card-category center">{{m.modNom}}</h5>
+              <mat-menu #detail="" x-position="before">
+                <button class="mesbuttons" mat-menu-item (click)="openDialogChoixFonctionnalite(m.modId)">
+                  <mat-icon color="primary">visibility</mat-icon>{{'fonctionnalite.Choix_fonctionnalite' | translate}}
+                </button>
+              </mat-menu>
+
+            </div>
+          </div>
+          
+        </div><br>
+      </div> -->
+
+      <div>
+        <button mat-stroked-button color="warn" matStepperPrevious
+          color="warn">{{'application.back' | translate }}</button>
+        <button mat-raised-button color="primary" matStepperNext
+          color="primary">{{'application.next' | translate }}</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup" [optional]="isOptional">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>{{'application.composant' | translate }}</ng-template>
+      <mat-tab-group mat-align-tabs="start">
+        <mat-tab label="{{'application.workflow' | translate}}">
+          <mat-nav-list role="list">
+            <mat-list-item class="matlist" role="listitem" *ngFor="let workflow of workflows">{{workflow.name}}
+              <mat-divider>
+              </mat-divider>
+            </mat-list-item>
+          </mat-nav-list>
+
+        </mat-tab>
+        <mat-tab label="{{'application.formulaire' | translate}}">
+          <mat-nav-list role="list" >
+            <mat-list-item class="matlist" role="listitem" *ngFor="let formulaire of formulaires">{{formulaire.frmNom}}
+              <mat-divider>
+              </mat-divider>
+            </mat-list-item>
+
+          </mat-nav-list>
+        </mat-tab>
+        <mat-tab label="{{'application.fichier'| translate}}">
+          <mat-nav-list role="list">
+            <mat-list-item class="matlist" role="listitem" *ngFor="let fichier of fichiers">{{fichier.rptNom}}
+              <mat-divider>
+              </mat-divider>
+            </mat-list-item>
+          </mat-nav-list>
+
+        </mat-tab>
+      </mat-tab-group>
+
+      <div class="row">
+        <!-- <div class="col-lg-3 col-md-6 col-sm-6">
+          <mat-form-field appearance="fill">
+            <mat-label>{{'application.choisir_workflow' | translate}}</mat-label>
+            <mat-select [formControl]="workflow" multiple>
+              <mat-option *ngFor="let workflow of workflows" [value]="workflow">{{workflow.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div> -->
+        <!-- <div class="col-lg-3 col-md-6 col-sm-6">
+          <mat-form-field appearance="fill">
+            <mat-label>{{'application.choisir_formulaire'| translate}}</mat-label>
+            <mat-select [formControl]="formulaire" multiple>
+              <mat-option *ngFor="let formulaire of formulaires" [value]="formulaire">{{formulaire.frmNom}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div> -->
+        <!-- <div class="col-lg-3 col-md-6 col-sm-6">
+          <mat-form-field appearance="fill">
+            <mat-label>{{'application.choisir_fichier'| translate}}</mat-label>
+            <mat-select [formControl]="fichier" multiple>7
+              <mat-option *ngFor="let fichier of fichiers" [value]="fichier">{{fichier.fhrNom}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div> -->
+      </div>
+      <div>
+        <button mat-stroked-button matStepperPrevious color="warn">{{'application.back' | translate }}</button>
+        <button mat-raised-button color="primary" matStepperNext routerLink=".."
+          color="primary">{{'application.enregistrer' | translate }}</button>
+      </div>
+    </form>
+  </mat-step>
+  <!-- <mat-step [stepControl]="fourthFormGroup" [optional]="isOptional">
+    <form [formGroup]="fourthFormGroup">
+      <ng-template matStepLabel>{{'application.choix_emplacement' | translate }}</ng-template>
+      <mat-form-field>
+        <mat-label>location</mat-label>
+        <input matInput formControlName="thirdCtrl" type="url" required>
+      </mat-form-field>
+      <div>
+        <button mat-raised-button matStepperPrevious color="warn">{{'application.back' | translate }}</button>
+        <button mat-raised-button (click)="stepper.reset()" color="primary">{{'application.enregistrer' | translate }}</button>
+
+      </div>
+    </form>
+  </mat-step> -->
+
+</mat-horizontal-stepper>

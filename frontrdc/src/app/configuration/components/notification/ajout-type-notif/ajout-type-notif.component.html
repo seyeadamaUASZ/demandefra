@@ -1,0 +1,48 @@
+<div>
+  <div class="">
+    <h3 class="card-heading float-left">
+      <strong class="foncer"> {{'notification.add' | translate}}
+      </strong>
+    </h3>
+  </div><br><br>
+  <form class="" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <div class="">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-select placeholder="{{'notification.type' | translate}}" formControlName="tdnTypeNotif" required>
+            <mat-option [value]="'sms'">SMS
+            </mat-option>
+            <mat-option [value]="'mail'">MAIL
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="f.tdnAnId?.errors">
+            {{'control.typenotification' | translate}} </mat-error>
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+          <mat-icon matSuffix>notification_important</mat-icon>
+          <input matInput placeholder="{{'notification.nom' | translate}}" type="text" formControlName="tdnType"
+            required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-select placeholder="{{'notification.action' | translate}}" formControlName="tdnAnId" required>
+            <mat-option *ngFor="let ty of type" [value]="ty">{{ty.anNom}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="f.tdnAnId?.errors">
+            {{'control.profil' | translate}} </mat-error>
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+          <mat-icon matSuffix>comment</mat-icon>
+          <textarea matInput placeholder="{{'notification.message' | translate}}" type="text"
+            formControlName="tdnContenu" required></textarea>
+        </mat-form-field>
+
+      </div>
+    </div>
+    <div class="mat-dialog-actions">
+      <button mat-stroked-button color="warn" (click)="closeDialog()"
+        type="button">{{'Action.close' | translate}}</button>
+      <button mat-raised-button color="primary" type="submit">{{'Action.save' | translate}}</button>
+    </div>
+  </form>
+</div>

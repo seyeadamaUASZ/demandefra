@@ -1,0 +1,469 @@
+<section class="menu menu2 cid-sjq2uSAeZ4" once="menu" id="menu2-0">
+      <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+          <div class="container">
+              <div class="navbar-brand">
+                  <span class="navbar-logo">
+                      <a href="index.html#top">
+                          <img src="assets/images/group-2.png" alt="Logo" style="height: 3rem;">
+                      </a>
+                  </span>
+              </div>
+              <button class="navbar-toggler" type="button" data-toggle="collapse"
+                  data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <div class="hamburger">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                  </div>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-top: 2%;">
+                  <ul class="navbar-nav nav-dropdown row" data-app-modern-menu="true">
+                      <li class="nav-item"><a class="nav-link link text-black text-primary display-4"
+                              href="index.html#content15-4">
+                              {{'landing.accueil' | translate}}</a></li>                      
+                      <li class="nav-item"><a class="nav-link link text-black text-primary display-4"
+                              href="index.html#contentActualite">
+                              {{'landing.actualites' | translate}}</a></li>
+                      <li class="nav-item"><a class="nav-link link text-black text-primary display-4"
+                              href="index.html#form5-7">{{'landing.contact' | translate}}</a>
+                      </li>
+                      <li class="nav-item"><a class="nav-link link text-black text-primary display-4"
+                              routerLink="/login">{{'landing.btnConnexion' | translate}}</a></li>
+                  </ul>
+              </div>
+          </div>
+      </nav>
+  </section>
+
+<div class=" container-fluid" style="margin-top: 80px;">
+      <form class="container-fluid" [formGroup]="searchForm" style="margin-top: 15px;">
+            <div class="row col-lg-12 col-md-12 col-sm-12 text-center d-flex justify-content-center">
+                  <div class="col-lg-3 col-md-3 col-sm-3">
+                        <mat-form-field appearance="fill">
+                              <mat-label>{{'demandeAutFra.emaildemandeur' | translate}}</mat-label>
+                              <input matInput type="text" formControlName="emaildemandeur"  >
+                        </mat-form-field>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-3">
+                        <mat-form-field appearance="fill">
+                              <mat-label>{{'demandeAutFra.numerodemandeautfra' | translate}}</mat-label>
+                              <input matInput type="text" formControlName="numerodemandeautfra"  >
+                        </mat-form-field>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-3">
+                        <button type="button" mat-raised-button color="primary" class="button-primary mat-elevation-z2"
+                              (click)="onSumbit3()">{{'btn.suivredemande' |
+                              translate}}</button>
+                  </div>                 
+            </div>
+      </form>
+      <hr>     
+      <mat-progress-bar *ngIf="load" [mode]="'indeterminate'"></mat-progress-bar> 
+
+      <div class=" container-fluid mt-3 mb-3">
+            <div class="container-fluid" *ngIf="donnee">
+                  <div class="row status-card">
+                        <div class="col-sm-6 m-auto text-left">
+                              <span *ngIf="donnee.status==1" style="color: blue;">{{'demandeAutFra.brouillon' | translate}}</span>
+                              <span *ngIf="donnee.status==2 || donnee.status==-9" style="color: #ffa500;">{{'demandeAutFra.enCoursChefBureau'| translate}}</span>
+                              <span *ngIf="donnee.status==3 || donnee.status==-9" style="color: orange;">{{'demandeAutFra.enCoursChefDivision'| translate}}</span>
+                              <span *ngIf="donnee.status==4" style="color: rgb(255, 0, 157);">{{'demandeAutFra.telechargerAutPro'| translate}}</span>
+                              <span *ngIf="donnee.status==7" style="color: green;">{{'demandeAutFra.terminer' | translate}}</span>
+                              <span *ngIf="donnee.status==9" style="color: red;">{{'demandeAutFra.renvoyer'| translate}}</span>
+                              <span *ngIf="donnee.status==10" style="color: red;">{{'demandeAutFra.rejeter' | translate}}</span>
+                              <span *ngIf="donnee.status==11" style="color: purple;">{{'demandeAutFra.aPayer' | translate}}</span>
+                        </div>
+
+                        <div class="col-sm-4 text-right align-center center-column">
+                              <span>{{donnee.dateSoumission | date:'shortDate'}}</span>
+                        </div>
+            
+                        <div class="col-sm-2 text-right" *ngIf="donnee.status==4">
+                              <button type="button" mat-flat-button color="primary" (click)="downloadFraPro(donnee.id)">{{'btn.telechargerAutFraProvisoire'
+                                    | translate}}</button>
+                        </div>
+                        <div class="col-sm-2  text-right" *ngIf="donnee.status==11">
+                              <button type="button" mat-flat-button color="primary" (click)="payer(donnee)">{{'btn.payer'
+                                    | translate}}</button>
+                        </div>
+                        <div class="col-sm-2 text-right" *ngIf="donnee.status==1">
+                              <button type="button" mat-flat-button color="primary" (click)="openAddDemande(donnee)">{{'btn.modifierDemande'
+                                | translate}}</button>
+                        </div>
+                        <div class="col-sm-2 text-right" *ngIf="donnee.status==9">
+                              <button type="button" mat-flat-button color="primary" (click)="openAddDemande(donnee)">{{'btn.reprendreDemande'
+                                | translate}}</button>
+                        </div>
+                  </div>
+            </div>
+      </div>
+      <div class="pl-2 pr-2" *ngIf="statut == 9 || statut == 10">
+            <div class="row card mt-5 mb-5 pt-2">
+                  <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                              <div class="container-fluid">
+                                    <h5>{{'demanderejetees.motif' | translate}}</h5>                                    
+                              </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                              <p *ngFor="let commentaire of historique" style="color: red;">{{commentaire.motif}}</p>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 text-right">
+                              <p *ngFor="let commentaire of historique">{{commentaire.dateCommentaire | date: 'shortDate'}}</p>
+                        </div>
+                  </div>  
+            </div>
+      </div>
+
+      <form class="container-fluid" [formGroup]="EditForm" *ngIf="donnee" style="margin-top: 0px;">
+            <mat-horizontal-stepper  [linear]="true">
+                  <mat-step>
+                        <div class="row col-sm-12">
+                              <div class="container mt-3 mb-3">{{'demandeAutFra.infoEntreprise' | translate}}
+                              </div>
+                        </div>
+                        <div class="row col-sm-12">
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.raisonsociale' | translate}}</mat-label>
+                                          <input matInput type="text" formControlName="raisonsociale"   readonly>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.adresseEntreprise' | translate}}</mat-label>
+                                          <input matInput type="text" formControlName="adresseEntreprise"
+                                                readonly>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.telephoneEntreprise' | translate}}
+                                          </mat-label>
+                                          <input matInput type="phone" formControlName="telephoneEntreprise"
+                                                readonly>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.emailEntreprise' | translate}}</mat-label>
+                                          <input matInput type="email" formControlName="emailEntreprise"
+                                                readonly>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.ninea' | translate}}</mat-label>
+                                          <input matInput type="text" formControlName="ninea"   readonly>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.registrecommerce' | translate}}</mat-label>
+                                          <input matInput type="text" formControlName="registrecommerce"
+                                                readonly>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.statutJuridique' | translate}}</mat-label>
+                                          <input matInput type="text" formControlName="statutJuridique"
+                                                readonly>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.numdemande' | translate}}</mat-label>
+                                          <input matInput type="text" formControlName="numdemande"   readonly>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.dateSoumission' | translate}}</mat-label>
+                                          <input matInput type="text" formControlName="dateSoumission"
+                                                readonly>
+                                    </mat-form-field>
+                              </div>
+                        </div>
+                        <div class="mt-3 mb-5">
+                              <button type="button" mat-flat-button color="warn" mat-dialog-close (click)="onClose()">{{'btn.annuler' |
+                                    translate}}</button>&nbsp;&nbsp;&nbsp;
+                              <button type="button" mat-stroked-button color="primary" matStepperNext>{{'btn.suivant' |
+                                    translate}}</button>                              
+                        </div>
+                  </mat-step>
+                  <mat-step>
+                        <div class="row col-sm-12">
+                              <div class="container mt-3 mb-3">{{'demandeAutFra.informationresponsable' | translate}}
+                              </div>
+                        </div>
+                        <div class="row col-sm-12">
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.prenomResponsable' | translate}}</mat-label>
+                                          <input matInput type="text" formControlName="prenomResponsable"
+                                                readonly>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.nomResponsable' | translate}}</mat-label>
+                                          <input matInput type="text" formControlName="nomResponsable"
+                                                readonly>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.civiliteResponsable' | translate}}</mat-label>
+                                          <input matInput type="text" formControlName="civiliteResponsable"
+                                                readonly>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.telephoneResponsable' | translate}}</mat-label>
+                                          <input matInput type="phone" formControlName="telephoneResponsable"
+                                                readonly>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.adresseResponsable' | translate}}</mat-label>
+                                          <input matInput type="text" formControlName="adresseResponsable"
+                                                readonly>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.emailResponsable' | translate}}</mat-label>
+                                          <input matInput type="email" formControlName="emailResponsable"
+                                                readonly>
+                                    </mat-form-field>
+                              </div>
+                        </div>
+                        <div class="mt-3 mb-5">
+                              <button type="button" mat-flat-button color="warn" mat-dialog-close (click)="onClose()">{{'btn.annuler' |
+                                    translate}}</button>&nbsp;&nbsp;&nbsp;
+                              <button type="button" mat-stroked-button color="primary"
+                                    matStepperPrevious>{{'btn.previous' | translate}}</button> &nbsp;&nbsp;&nbsp;
+                              <button type="button" mat-stroked-button color="primary" matStepperNext>{{'btn.suivant' |
+                                    translate}}</button>                                   
+                        </div>
+                  </mat-step>
+                  <mat-step>
+                        <div class="row col-sm-12">
+                              <div class="container mt-3 mb-3">{{'demandeAutFra.infoproduit' | translate}}</div>
+                        </div>
+                        <div class="row col-sm-12">
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.objetDemande' | translate}}</mat-label>
+                                          <input matInput type="text" formControlName="objetDemande"   readonly>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.antenneRegionaleDepartementale' |
+                                                translate}}</mat-label>
+                                          <input matInput type="text" value="{{antenneRegionaleDepartementale}}"
+                                                 readonly>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-sm-4">
+                                    <mat-form-field appearance="fill">
+                                          <mat-label>{{'demandeAutFra.region' | translate}}</mat-label>
+                                          <input matInput type="text" value="{{region}}"  readonly>
+                                    </mat-form-field>
+                              </div>
+                        </div>
+                        <div class="row col-sm-12 mt-3">
+                              <div class="row col-sm-12 ">
+                                    <div class="col-sm-6">
+                                          <h4>Nature des produits</h4>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="row col-sm-12 container-fluid" style="overflow-x:auto;">
+                              <table mat-table class="container-fluid" [dataSource]="dataSourceProduits" matSort>
+                                    <ng-container matColumnDef="Nature">
+                                          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'produits.nature' |
+                                                translate}} </th>
+                                          <td mat-cell *matCellDef="let element"> {{element.nature}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Marque">
+                                          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'produits.marque' |
+                                                translate}} </th>
+                                          <td mat-cell *matCellDef="let element"> {{element.marque}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Contenance">
+                                          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'produits.contenance'
+                                                | translate}} </th>
+                                          <td mat-cell *matCellDef="let element"> {{element.contenance}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Description étiquette">
+                                          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'produits.descriptionEtiquette'
+                                                | translate}} </th>
+                                          <td mat-cell *matCellDef="let element"> {{element.descriptionEtiquette}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Numero FRA"> 
+                                          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'produits.numeroFra' |
+                                                translate}} </th>
+                                          <td mat-cell *matCellDef="let element"> 
+                                                <span *ngIf="statut == 4 || statut == 5 || statut == 6 || statut == 7"> {{element.autFra}} </span>
+                                                <span *ngIf="!(statut == 4 || statut == 5 || statut == 6 || statut == 7)">En attente</span>
+                                          </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Statut">
+                                          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'produits.status' |
+                                                translate}} </th>
+                                          <td mat-cell *matCellDef="let element">
+                                                <button mat-flat-button color="primary"
+                                                      style="background: rgb(238, 175, 4);" *ngIf="element.status == 13">
+                                                      {{'Action.enattente' | translate}}
+                                                </button>
+                                                <button mat-flat-button color="primary"
+                                                      style="background: rgb(4, 238, 43);" *ngIf="element.status == 14">
+                                                      {{'Action.terminee' | translate}}
+                                                </button>
+                                                <button mat-flat-button color="primary"
+                                                      style="background: rgb(9, 240, 59);" *ngIf="element.status == 6">
+                                                      {{'Action.apte' | translate}}
+                                                </button>
+                                                <button mat-flat-button color="primary"
+                                                      style="background: rgb(236, 221, 5);" *ngIf="element.status == 8">
+                                                      {{'Action.encours' | translate}}
+                                                </button>
+                                                <button mat-flat-button color="primary"
+                                                      style="background: rgba(242, 41, 41, 0.8);"
+                                                      *ngIf="element.status == 10">
+                                                      {{'Action.inapte' | translate}}
+                                                </button>
+                                                <button mat-flat-button color="primary"
+                                                      style="background: rgba(242, 41, 41, 0.8);"
+                                                      *ngIf="element.status == 15">
+                                                      {{'Action.retirer' | translate}}
+                                                </button>
+                                          </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="Action">
+                                          <th mat-header-cell *matHeaderCellDef>
+                                                <span>{{'register.action' | translate}}</span>
+                                          </th>
+                                          <td mat-cell *matCellDef="let element" class="fab">
+                                                <button mat-button [mat-menu-trigger-for]="detail" yPosition="above"
+                                                      class="float-right">
+                                                      <mat-icon matTooltip="{{'utilisateur.details'| translate}}"
+                                                            color="secondary">
+                                                            more_vert
+                                                      </mat-icon>
+                                                </button>
+                                                <mat-menu #detail="" x-position="before">
+                                                      <button mat-menu-item color="primary" (click)="previsualiser(element)">
+                                                            <mat-icon>
+                                                                  preview
+                                                            </mat-icon>{{'produits.previsualiser' | translate}}
+                                                      </button>
+                                                      <button mat-menu-item color="primary"
+                                                            (click)="downloadFraDef(element.id)" *ngIf="element.status == 6">
+                                                            <mat-icon>
+                                                                  download
+                                                            </mat-icon>{{'produits.download' | translate}}
+                                                      </button>
+                                                </mat-menu>
+                                          </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                              </table>
+                              <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                        </div>
+                        <div class="mt-3 mb-5">
+                              <button type="button" mat-flat-button color="warn" mat-dialog-close (click)="onClose()">{{'btn.annuler' |
+                                    translate}}</button>&nbsp;&nbsp;&nbsp;
+                              <button type="button" mat-stroked-button color="primary"
+                                    matStepperPrevious>{{'btn.previous' | translate}}</button> &nbsp;&nbsp;&nbsp;
+                              <button type="button" mat-stroked-button color="primary" matStepperNext>{{'btn.suivant' |
+                                    translate}}</button>                                    
+                        </div>
+                  </mat-step>
+                  <mat-step>
+                        <div class="row col-sm-12">
+                              <div class="container mt-3 mb-3">{{'demandeAutFra.documents' | translate}}</div>
+                        </div>
+                        <div class="row col-sm-12">
+                              <div class="col-sm-4">
+                                    <div class="row container-fluid mt-1 mb-2" (click)="openCertificatAnalysesProduit(donnee)">
+                                          <div class="file-upload">
+                                                <span class="file-name">{{'demandeAutFra.certificatanalysesproduit' |
+                                                      translate}}</span>
+                                                <p class="mymargin foncer">
+                                                      <mat-icon class="centrer">download</mat-icon>
+                                                </p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="col-sm-4">
+                                    <div class="row container-fluid mt-1 mb-2" (click)="openRegistreCommerce(donnee)">
+                                          <div class="file-upload">
+                                                <span class="file-name">{{'demandeAutFra.registrecommerceetcreditmobilier'
+                                                      | translate}}</span>
+                                                <p class="mymargin foncer">
+                                                      <mat-icon class="centrer">download</mat-icon>
+                                                </p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="col-sm-4">
+                                    <div class="row container-fluid mt-1 mb-2" (click)="openJuridique(donnee)">
+                                          <div class="file-upload">
+                                                <span class="file-name">{{'demandeAutFra.juridique' | translate}}</span>
+                                                <p class="mymargin foncer">
+                                                      <mat-icon class="centrer">download</mat-icon>
+                                                </p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="col-sm-4">
+                                    <div class="row container-fluid mt-1 mb-2" (click)="openProcessusFabrication()">
+                                          <div class="file-upload">
+                                                <span class="file-name">{{'demandeAutFra.processusfabrication' |
+                                                      translate}}</span>
+                                                <p class="mymargin foncer">
+                                                      <mat-icon class="centrer">download</mat-icon>
+                                                </p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="col-sm-4">
+                                    <div class="row container-fluid mt-1 mb-2" (click)="openCopieNinea(donnee)">
+                                          <div class="file-upload">
+                                                <span class="file-name">{{'demandeAutFra.copieninea' |
+                                                      translate}}</span>
+                                                <p class="mymargin foncer">
+                                                      <mat-icon class="centrer">download</mat-icon>
+                                                </p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="col-sm-4">
+                                    <div class="row container-fluid mt-1 mb-2" (click)="openCniPasseport(donnee)">
+                                          <div class="file-upload">
+                                                <span class="file-name">{{'demandeAutFra.cnipasseport' |
+                                                      translate}}</span>
+                                                <p class="mymargin foncer">
+                                                      <mat-icon class="centrer">download</mat-icon>
+                                                </p>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>   
+                        <button type="button" mat-flat-button color="warn" mat-dialog-close (click)="onClose()">{{'btn.annuler' |
+                              translate}}</button>&nbsp;&nbsp;&nbsp;                     
+                        <button type="button" mat-stroked-button color="primary"
+                                    matStepperPrevious>{{'btn.previous' | translate}}</button>                        
+                  </mat-step>
+            </mat-horizontal-stepper>
+      </form>
+</div>

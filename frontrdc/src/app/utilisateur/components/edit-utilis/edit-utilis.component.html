@@ -1,0 +1,96 @@
+<!-- <div class="app-header">
+    <h1 class="app-heading">{{'insdustrialisation'| translate}}</h1>
+</div> -->
+<div class="login-page">
+    <div class="login-spacer"></div>
+    <div class="">
+        <!-- <div id="login-fab" class="mdl-color--accent mdl-color-text--white">
+          <i id="lock-icon" class="material-icons">edit</i>
+      </div> -->
+        <!-- <h2 class="card-heading">
+          {{'utilisateur.edit-user' | translate}}</h2> -->
+        <h3 class="card-heading float-left">
+            <strong class="foncer"> {{'role.edit' | translate}}
+            </strong>
+        </h3>
+        <form class="" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <div class="">
+                <br><br>
+                <div class="form-group input-group mymargin">
+
+                    <mat-form-field>
+                        <mat-icon matSuffix>perm_identity</mat-icon>
+                        <input matInput placeholder="{{'register.prenom' | translate}}" formControlName="utiPrenom"
+                            required>
+                        <mat-error *ngIf="f.utiPrenom.errors"> {{'control.prenom' | translate}} </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-icon matSuffix>perm_identity</mat-icon>
+                        <input matInput placeholder="{{'register.nom' | translate}}" formControlName="utiNom" required>
+                        <mat-error *ngIf="f.utiPrenom.errors"> {{'control.nom' | translate}} </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="">
+                <div class="form-group input-group mymargin">
+                    <mat-form-field>
+                        <mat-icon matSuffix>phone</mat-icon>
+                        <input matInput placeholder="{{'register.telephone' | translate}}"
+                            formControlName="utiTelephone" type="tel" attern="[+]{0,1}[0-9]{0,15}">
+                        <mat-error *ngIf="f.utiTelephone.errors"> {{'control.telephone_mobile' | translate}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group input-group mymargin">
+                    <mat-form-field>
+                        <mat-icon matSuffix>email</mat-icon>
+                        <input matInput placeholder="{{'register.email' | translate}}" type="email"
+                            formControlName="utiEmail" required email pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                        <mat-error *ngIf="f.utiPrenom.errors"> {{'control.email' | translate}} </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="form-group input-group mymargin">
+                <mat-form-field>
+                    <mat-icon matSuffix>home</mat-icon>
+                    <input matInput placeholder="{{'register.adresse' | translate}}" formControlName="utiAdresse"
+                        required>
+                    <mat-error *ngIf="f.utiPrenom.errors"> {{'control.adresse' | translate}} </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group input-group mymargin">
+                <mat-form-field>
+                    <mat-icon matSuffix>work</mat-icon>
+                    <mat-select placeholder="{{'register.profil' | translate}}" formControlName="uti_pro_id"
+                        [compareWith]="compareProfil" required>
+                        <mat-option *ngFor="let profile of profiles" [value]="profile">{{profile.proLibelle}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="f.uti_pro_id.errors"> {{'control.profil' | translate}} </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group input-group mymargin" *ngIf="userForm?.value?.uti_pro_id?.proLibelle?.includes('antenne')">
+                <mat-form-field appearance="fill">
+                    <mat-label>{{'register.antenne' | translate}}</mat-label>
+                    <mat-icon matSuffix>work</mat-icon>
+                    <mat-select placeholder="{{'register.antenne' | translate}}" formControlName="antenne"
+                        required>
+                        <mat-option *ngFor="let antenne of antennes" [value]="antenne">{{antenne.nomAntenne}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="f.antenne.errors">
+                        {{'control.profil' | translate}} </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="buttons">
+                <div class="login">
+                    <button mat-stroked-button color="warn" (click)="closeDialog()"
+                        type="button">{{'btn_fermer' | translate}}</button>
+                    <button mat-raised-button color="primary" type="submit">{{'btn_enregistrer' | translate}}</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

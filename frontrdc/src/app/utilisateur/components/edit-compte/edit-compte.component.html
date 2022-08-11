@@ -1,0 +1,60 @@
+<!-- <div class="app-header">
+    <h1 class="app-heading">{{'insdustrialisation'| translate}}</h1>
+</div> -->
+<div class="">
+  <!-- <div class="login-spacer"></div> -->
+  <div class="">
+      <!-- <div id="login-fab" class="mdl-color--accent mdl-color-text--white">
+          <i id="lock-icon" class="material-icons">lock</i>
+      </div> -->
+      <h3 class=" foncer">
+         <strong>{{'utilisateur.edit-compte' | translate}}</strong> </h3><br>
+      <form class="" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <div class="">
+              <div class="form-group input-group mymargin">
+                  <mat-form-field>
+                      <mat-icon matSuffix>perm_identity</mat-icon>
+                      <input matInput placeholder="{{'register.prenom' | translate}}"  formControlName="utiPrenom"
+                          required>
+                      <mat-error *ngIf="f.utiPrenom.errors"> {{'control.prenom' | translate}} </mat-error>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <mat-icon matSuffix>perm_identity</mat-icon>
+                      <input matInput placeholder="{{'register.nom' | translate}}" formControlName="utiNom" required>
+                      <mat-error *ngIf="f.utiNom.errors"> {{'control.nom' | translate}} </mat-error>
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="">
+              <div class="form-group input-group mymargin">
+                  <mat-form-field>
+                      <mat-icon matSuffix>phone</mat-icon>
+                      <input matInput placeholder="{{'register.telephone' | translate}}" formControlName="utiTelephone" type="tel" pattern="[+]{0,1}[0-9]{0,15}" required>
+                      <mat-error *ngIf="f.utiTelephone.errors"> {{'control.telephone_mobile' | translate}} </mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="form-group input-group mymargin">
+                  <mat-form-field>
+                      <mat-icon matSuffix>email</mat-icon>
+                      <input matInput placeholder="{{'register.email' | translate}}" type="email" formControlName="utiEmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required email>
+                      <mat-error *ngIf="f.utiEmail.errors"> {{'control.email' | translate}} </mat-error>
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="form-group input-group mymargin">
+              <mat-form-field>
+                  <mat-icon matSuffix>home</mat-icon>
+                  <input matInput placeholder="{{'register.adresse' | translate}}" formControlName="utiAdresse" required>
+                  <mat-error *ngIf="f.utiAdresse.errors"> {{'control.adresse' | translate}} </mat-error>
+              </mat-form-field>
+          </div>
+          <div class="buttons">
+              <div class="login">
+                  <button mat-stroked-button color="warn" (click)="closeDialog()" type="button" >{{'btn_fermer' | translate}}</button>
+                  <button mat-raised-button color="primary" type="submit">{{'btn_enregistrer' | translate}}</button>
+
+              </div>
+          </div>
+      </form>
+  </div>
+</div>

@@ -1,0 +1,209 @@
+<div class="col-md-12 col-lg-12"
+  *ngIf="profile=='administrateur' || profile=='integrateur'">
+  <div class="card">
+    <div class="card-header" style="background-color: #e2e8ee;font-weight: 500;">{{'diagramme.circulaire' | translate}}
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div style="margin-left: auto; margin-right: 0;">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <button mat-button [matMenuTriggerFor]="menu"></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="visualiserBox(parambox='uti')">Visualiser</button>
+            <button mat-menu-item (click)="openPDF()">Télécharger pdf</button>
+            <button mat-menu-item (click)="openExcel()">Télécharger excel</button>
+            <button mat-menu-item (click)="downloadCanvas($event)">Télécharger image</button>
+            <button mat-menu-item (click)="PrintImage($event)">Imprimer graphique</button>
+          </mat-menu>
+        </div>
+      </div>
+      <canvas id="htmlDataCircle" baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+        [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend" [colors]="pieChartColors">
+      </canvas>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12 col-lg-12" *ngIf="profile=='chef bureau'">
+  <div class="card">
+    <div class="card-header" style="background-color: #e2e8ee;font-weight: 500;">{{'diagramme.circulaire' | translate}}
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div style="margin-left: auto; margin-right: 0;">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <button mat-button [matMenuTriggerFor]="menu"></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/demandeatraiterchefbureau']">Visualiser</button>
+            <button mat-menu-item (click)="openPDF()">Télécharger pdf</button>
+            <button mat-menu-item (click)="openExcel()">Télécharger excel</button>
+            <button mat-menu-item (click)="downloadCanvas($event)">Télécharger image</button>
+            <button mat-menu-item (click)="PrintImage($event)">Imprimer graphique</button>
+          </mat-menu>
+        </div>
+      </div>
+      <canvas id="htmlDataCircle" baseChart
+       *ngIf="pieChartDataCircleChefBureau"
+        [data]="pieChartDataCircleChefBureau"
+        [labels]="pieChartLabelsBur"
+         [chartType]="pieChartTypeBur"
+          [options]="pieChartOptions"
+        [plugins]="pieChartPlugins" [colors]="pieChartColorsDemande">
+      </canvas>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12 col-lg-12" *ngIf="profile=='chef division'">
+  <div class="card">
+    <div class="card-header" style="background-color: #e2e8ee;font-weight: 500;">{{'diagramme.circulaire' | translate}}
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div style="margin-left: auto; margin-right: 0;">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <button mat-button [matMenuTriggerFor]="menu"></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/demandeatraiter']">Visualiser</button>
+            <button mat-menu-item (click)="openPDF()">Télécharger pdf</button>
+            <button mat-menu-item (click)="openExcel()">Télécharger excel</button>
+            <button mat-menu-item (click)="downloadCanvas($event)">Télécharger image</button>
+            <button mat-menu-item (click)="PrintImage($event)">Imprimer graphique</button>
+          </mat-menu>
+        </div>
+      </div>
+      <canvas id="htmlDataCircle" baseChart 
+      *ngIf="pieChartDataCircleChefDivision"
+       [data]="pieChartDataCircleChefDivision"
+        [labels]="pieChartLabelsDiv"
+         [chartType]="pieChartTypeDiv" 
+         [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+         [colors]="pieChartColorsDemande">
+      </canvas>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12 col-lg-12" *ngIf="profile=='chef antenne'">
+  <div class="card">
+    <div class="card-header" style="background-color: #e2e8ee;font-weight: 500;">{{'diagramme.circulaire' | translate}}
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div style="margin-left: auto; margin-right: 0;">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <button mat-button [matMenuTriggerFor]="menu"></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/demandeencoursdcsc']">Visualiser</button>
+            <button mat-menu-item (click)="openPDF()">Télécharger pdf</button>
+            <button mat-menu-item (click)="openExcel()">Télécharger excel</button>
+            <button mat-menu-item (click)="downloadCanvas($event)">Télécharger image</button>
+            <button mat-menu-item (click)="PrintImage($event)">Imprimer graphique</button>
+          </mat-menu>
+        </div>
+      </div>
+      <canvas id="htmlDataCircle" baseChart 
+      *ngIf="pieChartDataCircleChefAntenne" 
+      [data]="pieChartDataCircleChefAntenne"
+      [labels]="pieChartLabelsAnt"
+      [chartType]="pieChartTypeAnt"
+      [options]="pieChartOptions"
+      [plugins]="pieChartPlugins"
+      [colors]="pieChartColorsDemande">
+      </canvas>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12 col-lg-12" *ngIf="profile=='agent lanac'">
+  <div class="card">
+    <div class="card-header" style="background-color: #e2e8ee;font-weight: 500;">{{'diagramme.circulaire' | translate}}
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div style="margin-left: auto; margin-right: 0;">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <button mat-button [matMenuTriggerFor]="menu"></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/demandetraiteranac']">Visualiser</button>
+            <button mat-menu-item (click)="openPDF()">Télécharger pdf</button>
+            <button mat-menu-item (click)="openExcel()">Télécharger excel</button>
+            <button mat-menu-item (click)="downloadCanvas($event)">Télécharger image</button>
+            <button mat-menu-item (click)="PrintImage($event)">Imprimer graphique</button>
+          </mat-menu>
+        </div>
+      </div>
+      <canvas id="htmlDataCircle" baseChart *ngIf="pieChartDataCircleLaborantin" [data]="pieChartDataCircleLaborantin"
+        [labels]="pieChartLabelsLanac" [chartType]="pieChartTypeLanac" [options]="pieChartOptions"
+        [plugins]="pieChartPlugins" [colors]="pieChartColorsDemande">
+      </canvas>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12 col-lg-12" *ngIf="profile=='demandeur'">
+  <div class="card">
+    <div class="card-header" style="background-color: #e2e8ee;font-weight: 500;">{{'diagramme.circulaire' | translate}}
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div style="margin-left: auto; margin-right: 0;">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <button mat-button [matMenuTriggerFor]="menu"></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/mesdemandes']">Visualiser</button>
+            <button mat-menu-item (click)="openPDF()">Télécharger pdf</button>
+            <button mat-menu-item (click)="openExcel()">Télécharger excel</button>
+            <button mat-menu-item (click)="downloadCanvas($event)">Télécharger image</button>
+            <button mat-menu-item (click)="PrintImage($event)">Imprimer graphique</button>
+          </mat-menu>
+        </div>
+      </div>
+      <canvas id="htmlDataCircle" baseChart *ngIf="pieChartDataCircleDemandeur" [data]="pieChartDataCircleDemandeur"
+        [labels]="pieChartLabelsDem" [chartType]="pieChartTypeDem" [options]="pieChartOptions"
+        [plugins]="pieChartPlugins" [colors]="pieChartColorsDemande">
+      </canvas>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-12 col-lg-12" *ngIf="profile=='controleur'">
+  <div class="card">
+    <div class="card-header" style="background-color: #e2e8ee;font-weight: 500;">{{'diagramme.circulaire' | translate}}
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div style="margin-left: auto; margin-right: 0;">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <button mat-button [matMenuTriggerFor]="menu"></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/demandeterminee']">Visualiser</button>
+            <button mat-menu-item (click)="openPDF()">Télécharger pdf</button>
+            <button mat-menu-item (click)="openExcel()">Télécharger excel</button>
+            <button mat-menu-item (click)="downloadCanvas($event)">Télécharger image</button>
+            <button mat-menu-item (click)="PrintImage($event)">Imprimer graphique</button>
+          </mat-menu>
+        </div>
+      </div>
+      <canvas id="htmlDataCircle" baseChart *ngIf="pieChartDataCircleControleur" [data]="pieChartDataCircleControleur"
+        [labels]="pieChartLabelsCon" [chartType]="pieChartTypeCon" [options]="pieChartOptions"
+        [plugins]="pieChartPlugins" [colors]="pieChartColorsDemande">
+      </canvas>
+    </div>
+  </div>
+</div>

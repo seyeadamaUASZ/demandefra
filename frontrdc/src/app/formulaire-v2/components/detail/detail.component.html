@@ -1,0 +1,83 @@
+  <div class="">
+    <div mat-dialog-title >
+      {{formChampsList.frmNom}}
+    </div>
+  
+    <mat-dialog-content>
+      <mat-horizontal-stepper>
+        <mat-step class="" 
+          *ngFor="let step of formChampsList.steps; let stepIndex = index">
+          <div class="row container-fluid mt-2 mb-2">
+            {{step.stepName}}
+          </div>
+          <section class="">
+    
+            <div class="" style="display: block !important;" *ngFor="let item of step.champs; let i = index">
+    
+              
+                  <mat-form-field   appearance="fill"  *ngIf="item.chpType=='text' || item.chpType=='relation' || item.chpType=='email' || item.chpType=='phone' || item.chpType=='number'">
+                      <mat-label>{{item.chpLabel}}<span *ngIf="item.chpObligatoire" class="text-danger">*</span></mat-label>
+                      <input matInput type="{{item.chpType=='number'?'number':'text'}}"  id="{{item.chpNom}}" placeholder="{{item.chpPlaceholder}}">
+                  </mat-form-field>
+                 
+                  <mat-form-field *ngIf="item.chpType=='date'" appearance="fill">
+                    <mat-label>{{item.chpLabel}} <label *ngIf="item.chpObligatoire" class="text-danger">*</label></mat-label>
+                    <input matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+    
+                  <mat-form-field appearance="fill" *ngIf="item.chpType=='textarea'">
+                    <mat-label>{{item.chpLabel}} <label *ngIf="item.chpObligatoire" class="text-danger">*</label></mat-label>
+                    <textarea matInput></textarea>
+                  </mat-form-field>
+                 
+                  <div class="mb-2" *ngIf="item.chpType=='file'">
+                    <label>{{item.chpLabel}} </label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+                    <input type="file" class="form-control" id="{{item.chpNom}}" placeholder="{{item.chpPlaceholder}}">
+                  </div>
+                  <div class="container-fluid" *ngIf="item.chpType=='paragraph'">
+                    <p class="form-text">{{item.chpPlaceholder}}</p>
+                  </div>
+                  <mat-form-field appearance="fill"  *ngIf="item.chpType=='autocomplete'">
+                      <mat-label>{{item.chpLabel}}<span *ngIf="item.chpObligatoire" class="text-danger">*</span></mat-label>
+                      <mat-select  id="{{item.chpNom}}">
+                        <mat-option *ngFor="let v of item.values" [value]="v.value">{{v.label}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                    
+                  <div class="=" *ngIf="item.chpType=='checkbox'">
+                    <label>{{item.chpLabel}}</label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+                    <div class="inline-form-group" *ngFor="let v of item.values">
+                      <mat-checkbox > {{v.label}}</mat-checkbox>                
+                    </div>  
+                  </div>
+                  <div class="" *ngIf="item.chpType=='radio'">
+                    <label>{{item.chpLabel}}</label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+                    <mat-radio-group >
+                      <div *ngFor="let v of item.values" class="inline-form-group">
+                        
+                        <mat-radio-button value="{{v.value}}">{{v.label}}</mat-radio-button>
+    
+                      </div>
+                    </mat-radio-group>
+                    
+                  </div>
+                  <div class="container-fluid" *ngIf="item.chpType=='button'" class="btn-cont">
+                    <input type="{{item.subtype}}" (click)="submit()" value="{{item.chpLabel}}" class="btn btn-primary"
+                      id="{{item.chpNom}}">
+                  </div>
+                
+    
+    
+            </div>
+          </section>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </mat-dialog-content>
+    
+    <mat-dialog-actions>
+      <button mat-stroked-button mat-dialog-close color="warn">{{'btn_fermer' | translate}}</button>
+    </mat-dialog-actions>
+  
+  </div>

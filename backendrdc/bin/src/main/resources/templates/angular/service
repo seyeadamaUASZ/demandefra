@@ -1,0 +1,26 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class #ComponentNameService {
+  api = environment.apii;
+  constructor(private http: HttpClient) { }
+
+  create#ComponentName(data #filesarguments){
+  	   const formData = new FormData();
+  	   #joinSelectMultiple
+  	   formData.append('#componentName',JSON.stringify(data));
+  	   #appendFileOnFormData
+       return this.http.post(this.api+"#componentName/create",formData);
+  }
+  get#ComponentNameAll() {
+    return this.http.get(this.api + "#componentName/list")
+  }
+  delete#ComponentName(data) {
+    return this.http.post(this.api + "#componentName/delete", data)
+  }
+
+}

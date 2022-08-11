@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <section class="menu menu2 cid-sjq2uSAeZ4" once="menu" id="menu2-0">
+        <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+            <div class="container">
+                <div class="navbar-brand">
+                    <span class="navbar-logo">
+                        <a href="index.html#top">
+                            <img src="assets/images/group-2.png" alt="Logo" style="height: 3rem;">
+                        </a>
+                    </span>
+                   
+                    <span class="navbar-caption-wrap"><a class="navbar-caption text-white text-primary display-7"
+                            href="index.html#top">{{appName}}</a></span>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-top: 2%;">
+                    <ul class="navbar-nav nav-dropdown row" data-app-modern-menu="true">
+                        <li class="nav-item"><a class="nav-link link text-black text-primary display-4"
+                                href="index.html#content15-4">
+                                {{'landing.accueil' | translate}}</a></li>
+                        <li class="nav-item"><a class="nav-link link text-black text-primary display-4"
+                                href="index.html#contentActualite">
+                                {{'landing.actualites' | translate}}</a></li>
+                        <li class="nav-item"><a class="nav-link link text-black text-primary display-4"
+                                href="index.html#form5-7">{{'landing.contact' | translate}}</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link link text-black text-primary display-4"
+                                (click)="goToLogin()">{{'landing.btnConnexion' | translate}}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <form [formGroup]="userForm">
+                <div class="form">
+                    <select class="decorer" [(ngModel)]="currentLangue" #selectedLang
+                        (change)="switchLang(selectedLang.value)" formControlName="uti_lng_id"
+                        (change)="getLangueId(selectedLang.value)">
+                        <option *ngFor="let language of Langues" [value]="language.lngLangue"
+                            [selected]="language.lngLangue === translate.currentLang">
+                            {{ language.lngLangue}}
+                        </option>&nbsp;&nbsp;
+                    </select>
+                </div>
+            </form>&nbsp;&nbsp;&nbsp;&nbsp;
+        </nav>
+    </section>
+
+    <section class="content15 cid-sjqpP280iH" id="content15-4">
+        <div class="row app-cover">
+            <div class="app-cover-margin">
+                
+                <div class="row col-sm-12">
+                    <div class="col-sm-10">
+                        <span class="mb-5 h1" style="font-size: 30px; font-weight: 900; text-transform: uppercase;">{{'landing.titre' | translate}}</span>
+                    </div>
+                </div>
+                
+                <div class="row col-sm-12 mt-5">
+                    <div class="col-sm-8 app-cover-item-center">
+                        <span class="mb-5 h2" style="text-align: justify;">
+                            {{'landing.information' | translate}}
+                        </span>
+                    </div>
+                </div>
+    
+                <div class="row container-fluid mb-5">
+                    <span class=" app-cover-item-center mt-3 ">
+                        <span class="app-cover-btn-full mat-elevation-z4" (click)="openDialogInscription()">
+                            {{'landing.btnautfra' | translate}}
+                        </span>
+                    </span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span class="app-cover-item-center mt-3 ">
+                        <span class="app-cover-btn-full mat-elevation-z4" (click)="openSuivreDemande()">
+                            {{'landing.btnsuivre' | translate}}
+                        </span>
+                    </span>
+                </div>
+    
+            </div>
+        </div>
+    </section>
+
+    <section class="content17 cid-smaobKzGFE" id="contentActualite">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-12">
+                    <div class="section-head mb-4">
+                        <h3 class="mbr-section-title mb-0 mbr-fonts-style align-center display-5">
+                            <strong>{{'landing.actualite' | translate}}</strong>
+                        </h3>
+                        <hr>
+                    </div>
+                    <!-- content -->
+                    <div class="row col-sm-12 ">
+                        <div class=" col-sm-4">
+                            <mat-card class="example-card">
+                                <img mat-card-image src="assets/images/glass-gaebeb-83-ab-640.jpg" alt="Photo of a Shiba Inu">
+                                <mat-card-content>
+                                  <h4>
+                                    {{'landing.laitiertitre' | translate}}
+                                  </h4>
+                                  <br>
+                                  <p style="text-align: justify;">{{'landing.messagelait' | translate}}</p>
+                                  <p style="font-size: 12px;">03/02/2022</p>
+                                </mat-card-content>
+                               
+                              </mat-card>
+                        </div>
+                        <div class=" col-sm-4">
+                            <mat-card class="example-card">
+                                <img mat-card-image src="assets/images/nuts-g-7-dbf-0-bca-0-1920.jpg" alt="Photo of a Shiba Inu">
+                                <mat-card-content>
+                                  <h4>
+                                    {{'landing.cerealetitre' | translate}}
+                                  </h4>
+                                  <br>
+                                  <p style="text-align: justify;">{{'landing.messagecereale' | translate}}</p>
+                                  <p style="font-size: 12px;">03/02/2022</p>
+                                </mat-card-content>
+                               
+                              </mat-card>
+                        </div>
+                        <div class=" col-sm-4">
+                            <mat-card class="example-card">
+                                <img mat-card-image src="assets/images/the-market-g-6161-c-9304-1920.jpg" alt="Photo of a Shiba Inu">
+                                <mat-card-content>
+                                  <h4>
+                                    {{'landing.fruittitre' | translate}}
+                                  </h4>
+                                  <br>
+                                  <p style="text-align: justify;">{{'landing.messagefruit' | translate}}</p>
+                                  <p style="font-size: 12px;">03/02/2022</p>
+                                </mat-card-content>
+                               
+                              </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features23 cid-sman4cL6PI" id="app-gen" *ngIf="appsPubliees?.length>0">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="pb-container">
+                    <div class="container-fluid">
+                        <h4 class="container-fluid card-title mbr-fonts-style mb-4 display-5">
+                            <div class="container-fluid">
+                                <strong class="float-left">{{'landing.applicationGenerees' | translate}}</strong>
+                            </div>
+                            <div class="container-fluid">
+                                <strong class="float-right"> <a [routerLink]="['/applicationpubliees']">
+                                        {{'landing.appPlus' | translate}}</a></strong>
+                            </div>
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="pb-container">
+                    <a *ngFor="let app of appsPubliees" class="pb-card" target="_blank" [href]="app.appUrl">
+                        <img *ngIf="app?.appImg" [src]="'data:image/png;base64,'+app.appImg" alt="">
+                        <h3 class="pb-h3-hover">{{app.appNom}}</h3>
+                        <p class="small pb-p-hover">
+                            <!-- Card description with lots of great facts and interesting details. -->
+                            {{('app.description'+app.appId) | translate}}
+                        </p>
+                        <div class="go-corner" href="#">
+                            <div class="go-arrow">
+                                →
+                            </div>
+                        </div>
+                        <div class="app-name mat-elevation-z2">
+                            <h3>{{app.appNom}}</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="form5 cid-sjqthaziJ0" id="form5-7">
+        <div class="container">
+            <div class="mbr-section-head">
+                <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-5">
+                    <strong>{{'landing.contact' | translate}}</strong>
+                </h3>
+                <hr>
+            </div>
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
+                    <form [formGroup]="contactForm" method="POST" class="mbr-form form-with-styler"
+                        data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true"
+                            value="mQ33ZwPPIzOk3STQka9Wqm1T3UQOPxfgqmMkkfCuOmTeOGaPb3uhM/2/DffO7LJ35s8WKToTVYTaDxwrtIxO1N7VNzZR1dnrHde8lzmAfzTGBeRPTCH+aiGSWwfnN34e">
+                        <div class="">
+                            <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Merci de nous
+                                avoir contacté. Nous vous reviendrons dans les plus brefs délais.</div>
+                            <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">Oops...!
+                                some
+                                problem!</div>
+                        </div>
+                        <div class="dragArea row">
+                            <div class="col-md col-sm-12 form-group" data-for="name">
+                                <input type="text" name="nom" formControlName="nom" placeholder="{{'landing.nom' | translate}}"
+                                    data-form-field="name" class="form-control" value="" id="name-form5-7">
+                            </div>
+                            <div class="col-md col-sm-12 form-group" data-for="email">
+                                <input type="email" name="email" placeholder="{{'landing.email' | translate}}"
+                                    data-form-field="email" formControlName="email" class="form-control" value="" id="email-form5-7">
+                            </div>
+
+                            <div class="col-12 form-group" data-for="textarea">
+                                <textarea name="message" formControlName="message" placeholder="{{'landing.message' | translate}}"
+                                    data-form-field="textarea" class="form-control" id="textarea-form5-7"></textarea>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button
+                                    type="submit" class="btn btn-primary display-4" (click)="contact()">{{'landing.envoieMessage' |
+                                    translate}}</button></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer7 cid-sjquiyiMtR" once="footers" id="footer7-8">
+        <div class="container">
+            <div class="media-container-row align-center mbr-white">
+                <div class="col-12">
+                    <p class="mbr-text mb-0 mbr-fonts-style display-4">
+                        {{'landing.Copyright' | translate}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

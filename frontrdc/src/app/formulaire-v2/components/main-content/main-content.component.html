@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h3 class="float-left">
+      <strong class="foncer"> {{'menu.formulaire' | translate}}
+      </strong>
+    </h3>
+
+  </div>
+</div>
+<br>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+      {{'formulaire.liste' | translate}}
+    </ng-template>
+    <mat-card>
+      <mat-card-header class="card-header">
+        <mat-card-title>{{'formulaire.liste' | translate}}</mat-card-title>
+        <!-- <span class="header">{{'formulaire.liste' | translate}}</span> -->
+      </mat-card-header>
+      <div class="">
+        <div *accesscode="'create_form'">
+          <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAddForm()"
+            matTooltip="{{'formulaire.addForm' | translate}}">
+            <mat-icon>add</mat-icon>
+          </button><br>
+        </div>
+        <div class="container-fluid">
+          <mat-menu #detail1="matMenu">
+            <form [formGroup]="form">
+              <div *ngFor="let cd of columnDefinitionsNoGeneres">
+                &nbsp;<mat-checkbox [formControlName]="cd.def">{{cd.label | translate}}&nbsp;
+                </mat-checkbox>
+              </div>
+            </form>
+          </mat-menu>
+          <button class="float-right" mat-button [mat-menu-trigger-for]="detail1" xPosition="before">
+            <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+              filter_alt
+            </mat-icon>
+          </button>
+          <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceFormulaireNotGeneres" matSort>
+            <ng-container matColumnDef="frmNom">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'formulaire.frmNom' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.frmNom}} </td>
+            </ng-container>
+            <ng-container matColumnDef="frmDescription">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'formulaire.frmDescription' | translate}} </th>
+  
+              <td mat-cell *matCellDef="let element"> {{element.frmDescription}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef><span>
+                  &nbsp; &nbsp;{{'register.action' | translate}}</span> </th>
+              <td mat-cell *matCellDef="let element" class="fab">
+                <button mat-button [mat-menu-trigger-for]="detail" yPosition="above" class="float-right">
+                  <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                    more_vert
+                  </mat-icon>
+                </button>
+  
+                <mat-menu #detail="" x-position="before">
+  
+                  <button mat-menu-item *ngIf="element.frmValider=='Modeliser'" (click)="validerFormulaire(element)"
+                    matTooltip="Valider">
+                    <mat-icon color="primary">done_outline</mat-icon>{{'formulaire.btnvalider' | translate}}
+                  </button>
+                  <div *accesscode="'edit_form'">
+                    <button mat-menu-item color="primary" (click)="openDialogEditForm(element)">
+                      <mat-icon >
+                        edit
+                      </mat-icon>{{'formulaire.btnmodifier' | translate}}
+                    </button>
+                  </div>
+                  <div >
+                    <button mat-menu-item color="primary" (click)="openDialogDetail(element)">
+                      <mat-icon >
+                        list
+                      </mat-icon>{{'formulaire.detailv2' | translate}}
+                    </button>
+                  </div>
+                  <div *accesscode="'delete_form'">
+                    <button mat-menu-item (click)="supprimerFormulaire(element)">
+                      <mat-icon color="warn" matTooltip="{{'formulaire.btndelete' | translate}}">
+                        delete
+                      </mat-icon>{{'formulaire.btndelete' | translate}}
+                    </button>
+                  </div>
+  
+                </mat-menu>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="getDisplayedColumnsNoGeneres()"></tr>
+            <tr mat-row *matRowDef="let row; columns: getDisplayedColumnsNoGeneres();"></tr>
+          </table>
+          <mat-paginator  [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      
+        
+      </div>
+    </mat-card>
+  </mat-tab>
+
+</mat-tab-group>

@@ -1,0 +1,300 @@
+<div class="container-fluid">
+  <div class="row container-fluid">
+    <div class="col-sm-8 ">
+      {{'formulaire.modeliserForm' | translate}}
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field>
+            <mat-label>{{'formulaire.frmNom' | translate}}</mat-label>
+            <input type="text" matInput [(ngModel)]="formChampsList.frmNom">
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field>
+            <mat-label>{{'formulaire.frmDescription' | translate}}</mat-label>
+            <input matInput [(ngModel)]="formChampsList.frmDescription">
+          </mat-form-field>
+        </div>
+      </div>
+  
+  
+  
+    </div>
+    <div class="row col-sm-4 container-fluid"
+      style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-end;align-items: flex-end;justify-items: flex-end;">
+      <button mat-mini-fab color="primary" (click)="addStep()" matTooltip="{{'formulaire.addstep' | translate}}">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-dialog-content class="mt-1 row">
+    <div class="row">
+      <div class="col-sm-4">
+          <div class="fields row" *ngFor="let item of fieldModels">
+            <div class="row field pointer shadow-bg" [dndDraggable]="item" [dndEffectAllowed]="'copy'"
+              (dndEnd)="onDragEnd($event)">
+              <i [ngClass]="item.chpIcon" class="fa pull-left"></i>
+              <h5 style="margin-top:2%;">{{item.chpLabel}}</h5>
+            </div>
+          </div>
+      </div>
+      <div class="col-sm-8 row">
+  
+          <mat-horizontal-stepper  class="row" style="display: flex; flex-wrap: wrap;" >
+            <mat-step   class="row"
+              *ngFor="let step of formChampsList.steps; let stepIndex = index">
+              <div class="row  mt-2 mb-2">
+                <div class="col-sm-6">
+                  <mat-form-field>
+                    <mat-label>{{'formulaire.stepName' | translate}}</mat-label>
+                    <input type="text" matInput [(ngModel)]="step.stepName">
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-2">
+                  <button *ngIf="formChampsList.steps.length>1" mat-mini-fab color="primary"
+                    (click)="removeStep(stepIndex,step)" matTooltip="{{'formulaire.removestep' | translate}}">
+                    <mat-icon>remove</mat-icon>
+                  </button>
+                </div>
+  
+  
+              </div>
+              <section class="row" style="height: 100% !important; background-color: rgb(252, 248, 248);"
+                dndDropzone (dndDragover)="onDragover($event)" (dndDrop)="onDrop($event,step.champs)" class="dndDropArea">
+  
+                <div class="field" *ngFor="let item of step.champs; let champsIndex = index" (dndStart)="onDragStart($event)"
+                  (dndCanceled)="onDragCanceled($event)" (dndMoved)="onDragged(item, step.champs, 'move')"
+                  [dndEffectAllowed]="'all'" [dndDraggable]="item">
+  
+                  <div class="row">
+                    <div class="col-1"><i class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
+                    <div class="col-7">
+                      <!-- Form added -->
+                      <div *ngIf="item.chpType=='text'">
+                        <label>{{item.chpLabel}}</label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+                        <input type="text" class="form-control" id="{{item.chpNom}}"
+                          placeholder="{{item.chpPlaceholder}}">
+                      </div>
+                      <div *ngIf="item.chpType=='relation'">
+                        <label>{{item.chpLabel}}</label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+                        <input type="text" class="form-control" id="{{item.chpNom}}"
+                          placeholder="{{item.chpPlaceholder}}">
+                      </div>
+                      <div *ngIf="item.chpType=='email'">
+                        <label>{{item.chpLabel}}</label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+                        <input type="email" class="form-control" id="{{item.chpNom}}"
+                          placeholder="{{item.chpPlaceholder}}">
+                      </div>
+                      <div *ngIf="item.chpType=='phone'">
+                        <label>{{item.chpLabel}}</label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+                        <input type="text" class="form-control" id="{{item.chpNom}}"
+                          placeholder="{{item.chpPlaceholder}}">
+                      </div>
+                      <div *ngIf="item.chpType=='number'">
+                        <label>{{item.chpLabel}}</label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+                        <input type="number" class="form-control" id="{{item.chpNom}}" min="{{item.min}}"
+                          max="{{item.max}}" placeholder="{{item.chpPlaceholder}}">
+                      </div>
+                      <div *ngIf="item.chpType=='date'">
+                        <label>{{item.chpLabel}}</label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+                        <input type="date" class="form-control" id="{{item.chpNom}}"
+                          placeholder="{{item.chpPlaceholder}}">
+                      </div>
+                      <div *ngIf="item.chpType=='datetime-local'">
+                        <label>{{item.chpLabel}}</label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+                        <input type="datetime-local" class="form-control" id="{{item.chpNom}}"
+                          placeholder="{{item.chpPlaceholder}}">
+                      </div>
+                      <div *ngIf="item.chpType=='textarea'">
+                        <label>{{item.chpLabel}}</label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+                        <textarea class="form-control" id="{{item.chpNom}}" placeholder="{{item.chpPlaceholder}}">
+                        </textarea>
+                      </div>
+                      <div *ngIf="item.chpType=='file'">
+                        <label>{{item.chpLabel}} </label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+                        <input type="file" class="form-control" id="{{item.chpNom}}"
+                          placeholder="{{item.chpPlaceholder}}">
+                      </div>
+                      <div *ngIf="item.chpType=='paragraph'">
+                        <p class="form-text">{{item.chpPlaceholder}}</p>
+                      </div>
+                      <div *ngIf="item.chpType=='autocomplete'">
+                        <label>{{item.chpLabel}}</label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+                        <select class="form-control" id="{{item.chpNom}}">
+                          <option *ngFor="let v of item.values" [value]="v.value">{{v.label}}</option>
+                        </select>
+                      </div>
+                      <div *ngIf="item.chpType=='checkbox'">
+                        <label>{{item.chpLabel}}</label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+                        <div *ngFor="let v of item.values" class="inline-form-group">
+                          <label class="cust-check-bx">
+                            <input type="checkbox" [value]="v.value" name="{{item.chpNom}}" (click)="toggleValue(v)">
+                            {{v.label}}
+                            <span class="checkmark"></span>
+                          </label>
+                        </div>
+                      </div>
+                      <div *ngIf="item.chpType=='radio'">
+                        <label>{{item.chpLabel}}</label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+                        <div *ngFor="let v of item.values" class="inline-form-group">
+                          <label class="cust-check-bx">
+                            <input type="radio" [value]="v.value" name="{{item.chpNom}}"> {{v.label}}
+                            <span class="checkmark"></span>
+                          </label>
+                        </div>
+                      </div>
+                      <div *ngIf="item.chpType=='button'" class="btn-cont">
+                        <input type="{{item.subtype}}" (click)="submit()" value="{{item.chpLabel}}"
+                          class="btn btn-primary" id="{{item.chpNom}}">
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <i *ngIf="item.toggle" (click)="item.toggle=false" class="fa fa-chevron-up pull-right"></i>
+                      <i *ngIf="!item.toggle" (click)="item.toggle=true" class="fa fa-chevron-down pull-right"></i>
+                      <i (click)="removeField(stepIndex,champsIndex)" class="fa fa-trash pull-right"></i>
+                    </div>
+                  </div>
+                  <div *ngIf="item.toggle" class="toggle-Wrapper">
+                    <div class="form-group">
+                      <label>Required</label>
+                      <i *ngIf="item.chpObligatoire" (click)="item.chpObligatoire=false" class="fa fa-toggle-on red"></i>
+                      <i *ngIf="!item.chpObligatoire" (click)="item.chpObligatoire=true" class="fa fa-toggle-off"></i>
+                      <span class="pull-right ucfirst">{{item.chpType}}</span>
+                    </div>
+                    <div class="form-group">
+                      <label>Label</label>
+                      <input class="form-control" type="text" [(ngModel)]="item.chpLabel" />
+                    </div>
+                    <div *ngIf="item.chpType!='relation'">
+                      <div class="form-group">
+                        <label>Name</label>
+                        <input class="form-control" type="text" [(ngModel)]="item.chpNom" />
+                      </div>
+                    </div>
+                    <div *ngIf="item.chpType=='relation'">
+                      <div class="form-group">
+                        <label>Table relation</label>
+                        <select class="form-control" [(ngModel)]="item.chpNom" (change)="selectId($event.target.value)">
+                          <option *ngFor="let i of tables" [value]="i">{{i}}</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Champs Table relation</label>
+                        <select class="form-control" [(ngModel)]="item.chpChamps">
+                          <option *ngFor="let i of champstable" [value]="i">{{i}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Icon</label>
+                      <select class="form-control" [(ngModel)]="item.chpIcon">
+                        <option *ngFor="let i of icone" [value]="i.icoNom">{{i.icoDescription}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Placeholder</label>
+                      <input class="form-control" type="text" [(ngModel)]="item.chpPlaceholder" />
+                    </div>
+                    <div class="form-group">
+                      <label>Regex</label>
+                      <input class="form-control" type="text" [(ngModel)]="item.chpRegex" />
+                    </div>
+                    <div *ngIf="item.chpRegex" class="form-group">
+                      <label>Error text</label>
+                      <input class="form-control" type="text" [(ngModel)]="item.errorText" />
+                    </div>
+  
+                    <!-- number -->
+                    <div *ngIf="item.chpType=='number'" class="row">
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label>Min</label>
+                          <input class="form-control" type="text" [(ngModel)]="item.min" />
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label>Max</label>
+                          <input class="form-control" type="text" [(ngModel)]="item.max" />
+                        </div>
+                      </div>
+                    </div>
+  
+                    <!-- radio || checkbox || autocomplete -->
+                    <div *ngIf="item.chpType=='radio'|| item.chpType=='checkbox' || item.chpType=='autocomplete'">
+                      <div class="row">
+                        <div class="col-5">
+                          <div class="form-group">
+                            <label>Label</label>
+                          </div>
+                        </div>
+                        <div class="col-5">
+                          <div class="form-group">
+                            <label>Value</label>
+                          </div>
+                        </div>
+                        <div class="col-2">
+                          <div class="form-group">
+                            <label>Action</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngFor="let i of item.values; let valueIndex=index;" class="row">
+                        <div class="col-5">
+                          <div class="form-group">
+                            <input class="form-control" type="text" [(ngModel)]="i.label" />
+                          </div>
+                        </div>
+                        <div class="col-5">
+                          <div class="form-group">
+                            <input class="form-control" type="text" [(ngModel)]="i.value" />
+                          </div>
+                        </div>
+                        <div class="col-2">
+                          <div class="form-group">
+                            <label (click)="removeFieldValue(stepIndex,champsIndex,valueIndex)"><i class="fa fa-trash"></i></label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-5">
+                          <div class="form-group">
+                            <input class="form-control" type="text" [(ngModel)]="value.label" />
+                          </div>
+                        </div>
+                        <div class="col-5">
+                          <div class="form-group">
+                            <input class="form-control" type="text" [(ngModel)]="value.value" />
+                          </div>
+                        </div>
+                        <div class="col-2">
+                          <div class="form-group">
+                            <label (click)="item.values.push({})"><i class="fa fa-plus"></i></label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+  
+  
+  
+  
+                  </div>
+                  <!--  -->
+  
+                </div>
+              </section>
+            </mat-step>
+          </mat-horizontal-stepper>
+  
+  
+      </div>
+  
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button type="button" color="warn" (click)="closeDialog()" mat-stroked-button>{{'btn_fermer' |
+      translate}}</button>
+    <button type="button" (click)="saveForm()" mat-raised-button color="primary">{{'formulaire.btnGenerer' |
+      translate}}</button>
+  </mat-dialog-actions>
+</div>

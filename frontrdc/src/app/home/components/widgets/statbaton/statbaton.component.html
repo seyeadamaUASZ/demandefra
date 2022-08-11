@@ -1,0 +1,384 @@
+<div class="col-md-12 col-lg-12" *ngIf="profile=='administrateur' || profile=='integrateur'">
+      <div class="card">
+        <div class="card-header" style="background-color: #e2e8ee; font-weight: 500;">{{'diagramme.demandes' | translate}}</div>
+        <div class="card-body">
+            <div class="row">
+              <div style="margin-left: auto; margin-right: 0;">
+              <button  mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <button mat-button [matMenuTriggerFor]="menu"></button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="visualiserBox(parambox='uti')">Visualiser</button>
+                <button mat-menu-item (click)="ShowHideButton()">Par mois</button>
+                <button mat-menu-item  (click)="ShowHideButton()">Par années</button>
+                <button mat-menu-item  (click)="openPDF()">Télécharger pdf</button>
+                <button mat-menu-item (click)="openExcel()">Télécharger excel</button>
+                <button mat-menu-item (click)="downloadCanvas($event)">Télécharger image</button>
+                <button mat-menu-item (click)="PrintImage($event)">Imprimer graphique</button>
+              </mat-menu>
+            </div>
+              </div>
+            <div *ngIf="!showMainContent">
+              <div>
+                <div style="display: block" id="htmlDataBaton">
+                  <canvas baseChart id="chh"
+                          [datasets]="barChartDataAnnee"
+                          [labels]="barChartLabelsAnnee"
+                          [options]="barChartOptions"
+                          [legend]="barChartLegendAnnee"
+                          [colors]="barChartColors"
+                          [chartType]="barChartTypeAnnee">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="showMainContent">
+              <div>
+                <div style="display: block" id="htmlDataBaton">
+                  <canvas baseChart
+                          [datasets]="barChartDataMonth1"
+                          [labels]="barChartLabelsMonth1"
+                          [options]="barChartOptions"
+                          [legend]="barChartLegendMonth1"
+                          [colors]="barChartColors"
+                          [chartType]="barChartTypeMonth1">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-lg-12" *ngIf="profile=='chef bureau'">
+      <div class="card">
+        <div class="card-header" style="background-color: #e2e8ee; font-weight: 500;">{{'diagramme.demandes' | translate}}</div>
+        <div class="card-body">
+            <div class="row">
+              <div style="margin-left: auto; margin-right: 0;">
+              <button  mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <button mat-button [matMenuTriggerFor]="menu"></button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="['/demandeatraiterchefbureau']">Visualiser</button>
+                <button mat-menu-item (click)="ShowHideButton()">Par mois</button>
+                <button mat-menu-item  (click)="ShowHideButton()">Par années</button>
+                <button mat-menu-item  (click)="openPDF()">Télécharger pdf</button>
+                <button mat-menu-item (click)="openExcel()">Télécharger excel</button>
+                <button mat-menu-item (click)="downloadCanvas($event)">Télécharger image</button>
+                <button mat-menu-item (click)="PrintImage($event)">Imprimer graphique</button>
+              </mat-menu>
+            </div>
+              </div>
+            <div *ngIf="!showMainContent">
+              <!--<div [chart]="chart3"></div>-->
+              <div>
+                <div style="display: block" id="htmlDataBaton">
+                  <canvas baseChart id="chh"
+                          [datasets]="barChartDataAnnee"
+                          [labels]="barChartLabelsAnnee"
+                          [options]="barChartOptions"
+                          [legend]="barChartLegendAnnee"
+                          [colors]="barChartColors"
+                          [chartType]="barChartTypeAnnee">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="showMainContent">
+              <div>
+                <div style="display: block" id="htmlDataBaton">
+                  <canvas baseChart
+                          [datasets]="barChartDataMonth"
+                          [labels]="barChartLabelsMonth"
+                          [options]="barChartOptions"
+                          [legend]="barChartLegendMonth"
+                          [colors]="barChartColors"
+                          [chartType]="barChartTypeMonth">
+                  </canvas>
+                </div>
+              </div>
+              <!--<div [chart]="chart2"></div>-->
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-lg-12" *ngIf="profile=='chef division'">
+      <div class="card">
+
+        <div class="card-header" style="background-color: #e2e8ee; font-weight: 500;">{{'diagramme.demandes' | translate}}</div>
+        <div class="card-body">
+            <div class="row">
+              <div style="margin-left: auto; margin-right: 0;">
+              <button  mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <button mat-button [matMenuTriggerFor]="menu"></button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="['/demandeterminee']">Visualiser</button>
+                <button mat-menu-item (click)="ShowHideButton()">Par mois</button>
+                <button mat-menu-item  (click)="ShowHideButton()">Par années</button>
+                <button mat-menu-item  (click)="openPDF()">Télécharger pdf</button>
+                <button mat-menu-item (click)="openExcel()">Télécharger excel</button>
+                <button mat-menu-item (click)="downloadCanvas($event)">Télécharger image</button>
+                <button mat-menu-item (click)="PrintImage($event)">Imprimer graphique</button>
+              </mat-menu>
+            </div>
+              </div>
+            <div *ngIf="!showMainContent">
+              <!--<div [chart]="chart3"></div>-->
+              <div>
+                <div style="display: block" id="htmlDataBaton">
+                  <canvas baseChart id="chh"
+                          [datasets]="barChartDataDivision"
+                          [labels]="barChartLabelsAnnee"
+                          [options]="barChartOptions"
+                          [legend]="barChartLegendAnnee"
+                          [colors]="barChartColors"
+                          [chartType]="barChartTypeAnnee">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="showMainContent">
+              <div>
+                <div style="display: block" id="htmlDataBaton">
+                  <canvas baseChart
+                          [datasets]="barChartDataDivision"
+                          [labels]="barChartLabelsMonth"
+                          [options]="barChartOptions"
+                          [legend]="barChartLegendMonth"
+                          [colors]="barChartColors"
+                          [chartType]="barChartTypeMonth">
+                  </canvas>
+                </div>
+              </div>
+              <!--<div [chart]="chart2"></div>-->
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-lg-12" *ngIf="profile=='agent lanac'">
+      <div class="card">
+        <div class="card-header" style="background-color: #e2e8ee; font-weight: 500;">{{'diagramme.demandes' | translate}}</div>
+        <div class="card-body">
+            <div class="row">
+              <div style="margin-left: auto; margin-right: 0;">
+              <button  mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <button mat-button [matMenuTriggerFor]="menu"></button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="['/demandetraiteranac']">Visualiser</button>
+                <button mat-menu-item (click)="ShowHideButton()">Par mois</button>
+                <button mat-menu-item  (click)="ShowHideButton()">Par années</button>
+                <button mat-menu-item  (click)="openPDF()">Télécharger pdf</button>
+                <button mat-menu-item (click)="openExcel()">Télécharger excel</button>
+                <button mat-menu-item (click)="downloadCanvas($event)">Télécharger image</button>
+                <button mat-menu-item (click)="PrintImage($event)">Imprimer graphique</button>
+              </mat-menu>
+            </div>
+              </div>
+            <div *ngIf="!showMainContent">
+              <!--<div [chart]="chart3"></div>-->
+              <div>
+                <div style="display: block" id="htmlDataBaton">
+                  <canvas baseChart id="chh"
+                          [datasets]="barChartDataLanac"
+                          [labels]="barChartLabelsMonth1"
+                          [options]="barChartOptions"
+                          [legend]="barChartLegendMonth1"
+                          [colors]="barChartColors"
+                          [chartType]="barChartTypeMonth1">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="showMainContent">
+              <div>
+                <div style="display: block" id="htmlDataBaton">
+                  <canvas baseChart
+                          [datasets]="barChartDataLanac"
+                          [labels]="barChartLabelsMonth1"
+                          [options]="barChartOptions"
+                          [legend]="barChartLegendMonth1"
+                          [colors]="barChartColors"
+                          [chartType]="barChartTypeMonth1">
+                  </canvas>
+                </div>
+              </div>
+              <!--<div [chart]="chart2"></div>-->
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-lg-12" *ngIf="profile=='chef antenne'">
+      <div class="card">
+        <div class="card-header" style="background-color: #e2e8ee; font-weight: 500;">{{'diagramme.demandes' | translate}}</div>
+        <div class="card-body">
+            <div class="row">
+              <div style="margin-left: auto; margin-right: 0;">
+              <button  mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <button mat-button [matMenuTriggerFor]="menu"></button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="['/demandeencoursdcsc']">Visualiser</button>
+                <button mat-menu-item (click)="ShowHideButton()">Par mois</button>
+                <button mat-menu-item  (click)="ShowHideButton()">Par années</button>
+                <button mat-menu-item  (click)="openPDF()">Télécharger pdf</button>
+                <button mat-menu-item (click)="openExcel()">Télécharger excel</button>
+                <button mat-menu-item (click)="downloadCanvas($event)">Télécharger image</button>
+                <button mat-menu-item (click)="PrintImage($event)">Imprimer graphique</button>
+              </mat-menu>
+            </div>
+              </div>
+            <div *ngIf="!showMainContent">
+              <!--<div [chart]="chart3"></div>-->
+              <div>
+                <div style="display: block" id="htmlDataBaton">
+                  <canvas baseChart
+                          [datasets]="barChartDataMonths"
+                          [labels]="barChartLabelsMonths"
+                          [options]="barChartOptions"
+                          [legend]="barChartLegendMonths"
+                          [colors]="barChartColors"
+                          [chartType]="barChartTypeMonths">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="showMainContent">
+              <div>
+                <div style="display: block" id="htmlDataBaton">
+                  <canvas baseChart
+                          [datasets]="barChartDataMonths"
+                          [labels]="barChartLabelsMonths"
+                          [options]="barChartOptions"
+                          [legend]="barChartLegendMonths"
+                          [colors]="barChartColors"
+                          [chartType]="barChartTypeMonths">
+                  </canvas>
+                </div>
+              </div>
+              <!--<div [chart]="chart2"></div>-->
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-lg-12" *ngIf="profile=='demandeur'">
+      <div class="card">
+        <div class="card-header" style="background-color: #e2e8ee; font-weight: 500;">{{'diagramme.demandes' | translate}}</div>
+        <div class="card-body">
+            <div class="row">
+              <div style="margin-left: auto; margin-right: 0;">
+              <button  mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <button mat-button [matMenuTriggerFor]="menu"></button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="['/mesdemandes']">Visualiser</button>
+                <button mat-menu-item (click)="ShowHideButton()">Par mois</button>
+                <button mat-menu-item  (click)="ShowHideButton()">Par années</button>
+                <button mat-menu-item  (click)="openPDF()">Télécharger pdf</button>
+                <button mat-menu-item (click)="openExcel()">Télécharger excel</button>
+                <button mat-menu-item (click)="downloadCanvas($event)">Télécharger image</button>
+                <button mat-menu-item (click)="PrintImage($event)">Imprimer graphique</button>
+              </mat-menu>
+            </div>
+              </div>
+            <div *ngIf="!showMainContent">
+              <!--<div [chart]="chart3"></div>-->
+              <div>
+                <div style="display: block" id="htmlDataBaton">
+                  <canvas baseChart
+                          [datasets]="barChartDataDemandeur"
+                          [labels]="barChartLabelsMonth"
+                          [options]="barChartOptions"
+                          [legend]="barChartLegendMonth"
+                          [colors]="barChartColors"
+                          [chartType]="barChartTypeMonth">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="showMainContent">
+              <div>
+                <div style="display: block" id="htmlDataBaton">
+                  <canvas baseChart
+                          [datasets]="barChartDataDemandeur"
+                          [labels]="barChartLabelsMonth"
+                          [options]="barChartOptions"
+                          [legend]="barChartLegendMonth"
+                          [colors]="barChartColors"
+                          [chartType]="barChartTypeMonth">
+                  </canvas>
+                </div>
+              </div>
+              <!--<div [chart]="chart2"></div>-->
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-lg-12" *ngIf="profile=='controleur'">
+      <div class="card">
+        <div class="card-header" style="background-color: #e2e8ee; font-weight: 500;">{{'diagramme.demandes' | translate}}</div>
+        <div class="card-body">
+            <div class="row">
+              <div style="margin-left: auto; margin-right: 0;">
+              <button  mat-icon-button [matMenuTriggerFor]="menu" aria-label="">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <button mat-button [matMenuTriggerFor]="menu"></button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="['/demandeterminee']">Visualiser</button>
+                <button mat-menu-item (click)="ShowHideButton()">Par mois</button>
+                <button mat-menu-item  (click)="ShowHideButton()">Par années</button>
+                <button mat-menu-item  (click)="openPDF()">Télécharger pdf</button>
+                <button mat-menu-item (click)="openExcel()">Télécharger excel</button>
+                <button mat-menu-item (click)="downloadCanvas($event)">Télécharger image</button>
+                <button mat-menu-item (click)="PrintImage($event)">Imprimer graphique</button>
+              </mat-menu>
+            </div>
+              </div>
+            <div *ngIf="!showMainContent">
+              <!--<div [chart]="chart3"></div>-->
+              <div>
+                <div style="display: block" id="htmlDataBaton">
+                  <canvas baseChart id="chh"
+                    [datasets]="barChartDataControleur"
+                    [labels]="barChartLabelsMonth1"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegendMonth1"
+                    [colors]="barChartColors"
+                    [chartType]="barChartTypeMonth1">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="showMainContent">
+              <div>
+                <div style="display: block" id="htmlDataBaton">
+                  <canvas baseChart id="chh"
+                    [datasets]="barChartDataControleur"
+                    [labels]="barChartLabelsMonth1"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegendMonth1"
+                    [colors]="barChartColors"
+                    [chartType]="barChartTypeMonth1">
+                  </canvas>
+                </div>
+              </div>
+              <!--<div [chart]="chart2"></div>-->
+            </div>
+        </div>
+      </div>
+    </div>

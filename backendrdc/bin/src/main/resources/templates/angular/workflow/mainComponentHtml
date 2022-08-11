@@ -1,0 +1,216 @@
+<div class="" [ngSwitch]="profilLibelle">
+        <ng-container *ngSwitchCase="'#demandeur'">
+                <mat-card class="">
+                        <mat-card-header class="card-header">
+                                <span class="header">{{ '#module.list' | translate }}</span>
+                        </mat-card-header>
+                        <mat-form-field appearance="outline">
+                                <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+                                <input matInput (keyup)="applyFilter($event)">
+                        </mat-form-field>
+                        <button *ngIf="#module" mat-mini-fab color="primary" class="add-contact"
+                                (click)="openDialogAdd()" matTooltip="{{'#module.add' | translate}}">
+                                <mat-icon>add</mat-icon>
+                        </button>
+                        
+                        <div class="">
+                                
+                                <button class="float-right" mat-button (click)="select.open({position:0})"
+                                        yPosition="above">
+                                        <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                                                filter_alt
+                                        </mat-icon>
+                                        <mat-select style="visibility: hidden;" [disableOptionCentering]="false" #select
+                                                [(ngModel)]="selectedColumns" multiple>
+                                                <mat-option *ngFor="let c of columnDefinitions" [value]="c">
+                                                        {{('#module.'+c) | translate}}</mat-option>
+                                        </mat-select>
+                                </button>
+                                <table mat-table class=" mat-elevation-z8" [dataSource]="dataSource" matSort>
+                                        #columnsTable
+                                        <ng-container matColumnDef="action">
+                                                <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                                                                {{'register.action' | translate}}</span> </th>
+                                                <td mat-cell *matCellDef="let element" class="fab">
+                                                        <button mat-button [mat-menu-trigger-for]="detail"
+                                                                yPosition="above">
+                                                                <mat-icon
+                                                                        matTooltip="{{'utilisateur.details'| translate}}"
+                                                                        color="secondary">
+                                                                        more_vert
+                                                                </mat-icon>
+                                                        </button>
+                                      
+                                                                <mat-menu #detail="matMenu">
+                                                                        <button mat-menu-item
+                                                                        (click)="openDialogDetail#Module(element)">
+
+                                                                        <mat-icon
+                                                                                matTooltip="{{'Action.view' | translate}}"
+                                                                                color="primary">visibility
+                                                                        </mat-icon>{{'Action.view' | translate}}
+                                                                </button>
+                                                                <button  mat-menu-item
+                                                                        (click)="openDialogEdit(element)">
+
+                                                                        <mat-icon
+                                                                                matTooltip="{{'Action.edit' | translate}}"
+                                                                                color="primary">edit
+                                                                        </mat-icon>{{'Action.edit' | translate}}
+                                                                </button>
+                                                                        
+                                                                </mat-menu>
+                                                        </td>
+                                                </ng-container>
+                                                <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+                                                <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+                                        </table>
+                                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                                </div>
+                        </mat-card>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+                <mat-tab-group>
+                        <mat-tab label="{{'#module.list' | translate}}">
+                                <mat-card class="">
+                                        <mat-card-header class="card-header">
+                                                <span class="header">{{ '#module.list' | translate }}</span>
+                                        </mat-card-header>
+                                        <mat-form-field appearance="outline">
+                                                <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+                                                <input matInput (keyup)="applyFilter($event)">
+                                        </mat-form-field>
+                                        <button *ngIf="#module" mat-mini-fab color="primary" class="add-contact"
+                                                (click)="openDialogAdd()"
+                                                matTooltip="{{'#module.add' | translate}}">
+                                                <mat-icon>add</mat-icon>
+                                        </button>
+                                       
+                                        <div class="">
+                                                <button class="float-right" mat-button (click)="select2.open({position:0})"
+                                        yPosition="above">
+                                        <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                                                filter_alt
+                                        </mat-icon>
+                                        <mat-select style="visibility: hidden;" [disableOptionCentering]="false" #select2
+                                                [(ngModel)]="selectedColumns" multiple>
+                                                <mat-option *ngFor="let c of columnDefinitions" [value]="c">
+                                                        {{('#module.'+c) | translate}}</mat-option>
+                                        </mat-select>
+                                </button>
+                                                <table mat-table class=" mat-elevation-z8" [dataSource]="dataSource2"
+                                                        matSort>
+                                                        #columnsTable
+                                                        
+                                                        <ng-container matColumnDef="action">
+                                                                <th mat-header-cell *matHeaderCellDef><span
+                                                                                style="margin-left: 0%;">
+                                                                                {{'register.action' | translate}}</span>
+                                                                </th>
+                                                                <td mat-cell *matCellDef="let element" class="fab">
+                                                                        <button mat-button
+                                                                                [mat-menu-trigger-for]="detail"
+                                                                                yPosition="above">
+                                                                                <mat-icon
+                                                                                        matTooltip="{{'utilisateur.details'| translate}}"
+                                                                                        color="secondary">
+                                                                                        more_vert
+                                                                                </mat-icon>
+                                                                        </button>
+                                                                        <mat-menu #detail="matMenu">
+                                                                         <button mat-menu-item
+                                                                        (click)="openDialogDetail#Module(element)">
+
+                                                                        <mat-icon
+                                                                                matTooltip="{{'Action.view' | translate}}"
+                                                                                color="primary">visibility
+                                                                        </mat-icon>{{'Action.view' | translate}}
+                                                                </button>
+                                                                
+                                                                                #actionButtons
+                                                                        </mat-menu>
+                                                                </td>
+                                                        </ng-container>
+                                                        <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()">
+                                                        </tr>
+                                                        <tr mat-row
+                                                                *matRowDef="let row; columns: getDisplayedColumns();">
+                                                        </tr>
+                                                </table>
+                                                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                                                </mat-paginator>
+                                        </div>
+                                </mat-card>
+                        </mat-tab>
+                        <mat-tab label="{{'#module.listtraite' | translate}}">
+                                <mat-card class="">
+                                        <mat-card-header class="card-header">
+                                                <span class="header">{{ '#module.list' | translate }}</span>
+                                        </mat-card-header>
+                                        <mat-form-field appearance="outline">
+                                                <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+                                                <input matInput (keyup)="applyFilter($event)">
+                                        </mat-form-field>
+                                        <button *ngIf="#module" mat-mini-fab color="primary" class="add-contact"
+                                                (click)="openDialogAdd()"
+                                                matTooltip="{{'#module.add' | translate}}">
+                                                <mat-icon>add</mat-icon>
+                                        </button>
+                                        
+                                        <div class="">
+                                               <button class="float-right" mat-button (click)="select3.open({position:0})"
+                                        yPosition="above">
+                                        <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                                                filter_alt
+                                        </mat-icon>
+                                        <mat-select style="visibility: hidden;" [disableOptionCentering]="false" #select3
+                                                [(ngModel)]="selectedColumns" multiple>
+                                                <mat-option *ngFor="let c of columnDefinitions" [value]="c">
+                                                        {{('#module.'+c) | translate}}</mat-option>
+                                        </mat-select>
+                                </button>
+                                                <table mat-table class=" mat-elevation-z8"
+                                                        [dataSource]="dataSourceTraites" matSort>
+                                                        #columnsTable
+                                                        <ng-container matColumnDef="action">
+                                                                <th mat-header-cell *matHeaderCellDef><span
+                                                                                style="margin-left: 0%;">
+                                                                                {{'register.action' | translate}}</span>
+                                                                </th>
+                                                                <td mat-cell *matCellDef="let element" class="fab">
+                                                                        <button mat-button
+                                                                                [mat-menu-trigger-for]="detail"
+                                                                                yPosition="above">
+                                                                                <mat-icon
+                                                                                        matTooltip="{{'utilisateur.details'| translate}}"
+                                                                                        color="secondary">
+                                                                                        more_vert
+                                                                                </mat-icon>
+                                                                        </button>
+                                                                        <mat-menu #detail="matMenu">
+                                                                         <button mat-menu-item
+                                                                        (click)="openDialogDetail#Module(element)">
+
+                                                                        <mat-icon
+                                                                                matTooltip="{{'Action.view' | translate}}"
+                                                                                color="primary">visibility
+                                                                        </mat-icon>{{'Action.view' | translate}}
+                                                                </button>
+                                                                
+                                                                        </mat-menu>
+                                                                </td>
+                                                        </ng-container>
+                                                        <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()">
+                                                        </tr>
+                                                        <tr mat-row
+                                                                *matRowDef="let row; columns: getDisplayedColumns();">
+                                                        </tr>
+                                                </table>
+                                                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                                                </mat-paginator>
+                                        </div>
+                                </mat-card>
+                        </mat-tab>
+                </mat-tab-group>
+        </ng-container>
+</div>

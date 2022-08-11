@@ -1,0 +1,51 @@
+<div class="">
+  <div class=""></div>
+  <div class="">
+    <h3 class="card-heading float-left">
+      <strong class="foncer pt-5 mt-5"> {{'facture.titre' | translate}}
+      </strong>
+    </h3>
+    <form class="" [formGroup]="factureForm" (ngSubmit)="onSubmit()">
+      <div class="">
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>{{'facture.id' | translate}}</mat-label>
+            <mat-icon matSuffix>perm_identity</mat-icon>
+            <input matInput  type="number" formControlName="idFacture" required readonly>
+            <mat-error *ngIf="f.idFacture.errors">
+              {{'control.idFacture' | translate}} </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>{{'facture.montant' | translate}}</mat-label>
+            <mat-icon matSuffix>perm_identity</mat-icon>
+            <input matInput  type="number" formControlName="montantFacture" required readonly>
+            <mat-error *ngIf="f.montantFacture.errors">
+              {{'control.montantFacture' | translate}} </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>{{'facture.nomPayeur' | translate}}</mat-label>
+        <mat-icon matSuffix>perm_identity</mat-icon>
+        <input matInput type="text" formControlName="nomPayeur" required readonly>
+        <mat-error *ngIf="f.nomPayeur.errors">
+          {{'control.nomPayeur' | translate}} </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>{{'facture.prenomPayeur' | translate}}</mat-label>
+        <mat-icon matSuffix>perm_identity</mat-icon>
+        <input matInput  type="text" formControlName="prenomPayeur" required readonly>
+        <mat-error *ngIf="f.prenomPayeur.errors">
+          {{'control.prenomPayeur' | translate}} </mat-error>
+      </mat-form-field>
+
+      <div class="buttons">
+        <div class="login">
+          <button mat-stroked-button color="warn" (click)="closeDialog()"
+            type="button">{{'btn_fermer' | translate}}</button>
+          <button mat-raised-button color="primary" type="submit">{{'btn_valider' | translate}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

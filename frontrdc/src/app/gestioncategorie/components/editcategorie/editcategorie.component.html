@@ -1,0 +1,37 @@
+<div >
+  <div class="">
+    <br>
+    <h3 class="card-heading float-left">
+      <strong class="foncer"> {{'categorie.ajoutcategorie' | translate}}
+      </strong>
+    </h3><br><br>
+
+    <mat-dialog-content>
+      <div class="">
+        <form class="" [formGroup]="EditForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="fill">
+            <mat-label>{{'categorie.nom' | translate}}</mat-label>
+            <input matInput type="text" formControlName="nom" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>{{'categorie.prix' | translate}}</mat-label>
+            <textarea matInput formControlName="prix" required>
+    </textarea>
+          </mat-form-field>
+
+          <div class="buttons">
+            <div class="login">
+              <button mat-raised-button color="primary" type="submit">{{'btn_valider' | translate}}</button>
+              <button mat-stroked-button color="warn" (click)="closeDialog()" type="button">{{'btn_fermer' |
+                translate}}</button>
+
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </mat-dialog-content>
+  </div>
+
+

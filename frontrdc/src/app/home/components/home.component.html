@@ -1,0 +1,151 @@
+<div class="row">
+  <div class="col-sm-12" *ngIf="profile=='administrateur' || profile=='integrateur'">    
+    <div class="row" style="margin-top:15px;">
+      <div class="col-md-12">
+        <p><strong>Utilisateurs</strong></p>
+      </div>      
+      <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="info-box" (click)="visualiserBox(parambox='uti')">
+          <span class="info-box-icon bg-aqua"><i class="fa fa-user-o"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text color1" style="font-size: 16px;">{{nbrUser}}</span><br>
+            <span class="info-box-number color" style="font-size: 16px; margin-top: 15px; color: #000;">{{'dashboard.utilisateur' | translate}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <p><strong>Profils</strong></p>
+      </div>      
+      <div class="col-md-4 col-sm-4 col-xs-12" *ngFor="let stat of stats">
+        <div class="info-box">
+          <span class="info-box-icon bg-aqua"><i class="fa fa-user-o"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text color1" style="font-size: 16px;">{{stat[1]}}</span><br> 
+            <span class="info-box-number color" style="font-size: 16px; margin-top: 15px; color: #000;">{{stat[0]}}(s)</span>           
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div class="col-sm-12" *ngIf="profile=='chef bureau'">
+  <app-statfolder></app-statfolder>
+</div>
+
+<div class="col-sm-12" *ngIf="profile=='chef division'">
+  <app-statfolder1></app-statfolder1>
+</div>
+
+<div class="col-sm-12" *ngIf="profile=='demandeur'">
+  <app-statfolder2></app-statfolder2>
+</div>
+
+<div class="col-sm-12" *ngIf="profile=='agent lanac'">
+  <app-statfolder3></app-statfolder3>
+</div>
+
+<div class="col-sm-12" *ngIf="profile=='chef antenne'">
+  <app-statfolder4></app-statfolder4>
+</div>
+
+<div class="col-sm-12" *ngIf="profile=='controleur'">
+  <app-statfolder5></app-statfolder5>
+</div>
+
+<div id="mySidepanel" class="sidepanel">
+  <a class="closebtn" (click)="closeNav()">×</a>
+  <div class="container">
+    <div class="col-lg-6 col-md-6">
+      <p> <strong>{{'dashboard.filtrediagramme' | translate}}</strong> </p>
+      <mat-form-field>
+        <mat-label>{{'widget.nom' | translate}}</mat-label>
+        <mat-select name="selecteddiagramme?s" (selectionChange)="changeWebsite()" [(ngModel)]="selecteddiagrammes"
+          id="" type="text" placeholder="Widgets" multiple>
+          <mat-option [checked]="isfirst" *ngFor="let w of widgets;let isfirst = first" [value]="w">
+            {{w.widgetTemplate.wtNom}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-6 col-md-6">
+      <p> <strong>filtrer par profils</strong> </p>
+      <input type="checkbox" (click)="toggleDisplay1()">{{'dashboard.filtreutilisateur' | translate}}<br>
+      <input type="checkbox" (click)="toggleDisplay2()"> {{'dashboard.filtreprofil' | translate}}
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12">
+  <mat-card>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="row" *ngIf="selecteddiagrammes?.length<=0">
+            <div class="col-sm-6" *ngFor="let w of widgets">
+  
+              <div *ngIf="w.widgetTemplate.wtNom=='Diagramme en baton'">
+                <app-statbaton></app-statbaton>
+              </div>
+  
+              <div *ngIf="w.widgetTemplate.wtNom=='courbe'" style="margin-top: 25px;">
+                <app-appstatarea></app-appstatarea>
+              </div>
+  
+              <div *ngIf="w.widgetTemplate.wtNom=='Diagramme circulaire'">
+                <app-appstatcirculaire></app-appstatcirculaire>
+              </div>
+              <div *ngIf="w.widgetTemplate.wtNom=='Diagramme en barres horizontales empilees'" style="margin-top: 25px;">
+                <app-appstathoriempile></app-appstathoriempile>
+              </div>
+  
+              <div *ngIf="w.widgetTemplate.wtNom=='Diagramme en colonne empilée'" style="margin-top: 25px;">
+                <app-appcolonneemp></app-appcolonneemp>
+              </div>
+  
+              <div *ngIf="w.widgetTemplate.wtNom=='Diagramme à bulles'" style="margin-top: 25px;">
+                <app-appstatbulle></app-appstatbulle>
+              </div>
+            </div>
+          </div>
+  
+          <div class="row" *ngIf="selecteddiagrammes?.length>0">
+            <div class="col-sm-6" *ngFor="let w of selecteddiagrammes">
+              <div *ngIf="w.widgetTemplate.wtNom=='Diagramme en baton'">
+                <app-statbaton></app-statbaton>
+              </div>
+  
+              <div *ngIf="w.widgetTemplate.wtNom=='courbe'" style="margin-top: 25px;">
+                <app-appstatarea></app-appstatarea>
+              </div>
+  
+              <div *ngIf="w.widgetTemplate.wtNom=='Diagramme circulaire'" style="margin-top: 25px;">
+                <app-appstatcirculaire></app-appstatcirculaire>
+              </div>
+  
+              <div *ngIf="w.widgetTemplate.wtNom=='Diagramme en barres horizontales'" style="margin-top: 25px;">
+                <app-appstathorizontal></app-appstathorizontal>
+              </div>
+  
+              <div *ngIf="w.widgetTemplate.wtNom=='Diagramme en barres horizontales empilees'" style="margin-top: 25px;">
+                <app-appstathoriempile></app-appstathoriempile>
+              </div>
+  
+              <div *ngIf="w.widgetTemplate.wtNom=='Diagramme en colonne empilée'" style="margin-top: 25px;">
+                <app-appcolonneemp></app-appcolonneemp>
+              </div>
+  
+              <div *ngIf="w.widgetTemplate.wtNom=='Diagramme à bulles'" style="margin-top: 25px;">
+                <app-appstatbulle></app-appstatbulle>
+              </div>
+  
+              <div *ngIf="w.widgetTemplate.wtNom=='Diagramme de dispersion 3D'" style="margin-top: 25px;">
+                <app-app3d></app-app3d>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+

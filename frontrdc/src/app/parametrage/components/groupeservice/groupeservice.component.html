@@ -1,0 +1,38 @@
+<!-- <div class="row">
+  <div class="col-sm-6">
+    <h3 class="float-left">
+      <strong class="foncer">  {{'menu.procedure' | translate}}
+      </strong>
+    </h3>
+
+  </div>
+</div> -->
+<br>
+<!-- <mat-tab-group>
+
+  <mat-tab>
+
+    <ng-template  mat-tab-label>
+      <mat-icon class="mymargin"  color="primary">view_agenda</mat-icon>{{'groupeService'| translate}}<br>
+    </ng-template> -->
+    <mat-card>
+      <mat-card-header class="card-header">
+        <mat-card-title>{{'groupeService'| translate}}</mat-card-title> 
+      </mat-card-header>
+      <div class="">
+
+        <button mat-mini-fab color="primary" class="add-contact"  (click)="openDialogAddSecteur()"
+            matTooltip="{{'workflow.addsecteur' | translate}}">
+            <mat-icon>add</mat-icon>
+        </button><br><br>
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6  heightboxservice" *ngFor="let space of spaces"> 
+                 <h5 class="center">{{space.codeSecteur}}</h5>  
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  <!-- </mat-tab>
+ 
+</mat-tab-group>  -->
+

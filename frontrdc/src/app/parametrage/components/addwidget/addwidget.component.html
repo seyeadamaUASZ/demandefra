@@ -1,0 +1,46 @@
+ 
+    <div>
+      <div class="">
+          <h3 class="card-heading float-left">
+              <strong class="foncer"> {{'widget.addwidget' | translate}}
+  
+              </strong>
+          </h3>
+          <!-- <h2>
+        {{'workflow.addsecteur' | translate}} 
+    </h2> -->
+      </div>
+      <form class="" [formGroup]="addForm" (ngSubmit)="onSubmit()">
+          <div class="">
+              <div>
+                  <mat-form-field appearance="fill">
+                      <mat-label>{{'workflow.wdgNom' | translate}} </mat-label>
+                      <mat-icon matSuffix>domain</mat-icon>
+                      <input matInput  type="text"
+                          formControlName="wdgNom" required>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                    <mat-label>{{'workflow.wdgCode' | translate}}</mat-label>
+                    <mat-icon matSuffix>description</mat-icon>
+                    <input matInput  type="text"
+                        formControlName="wdgCode" required>
+                        <mat-error *ngIf="!f.name">
+                          {{'workflow.name-error' | translate}} </mat-error>
+                </mat-form-field>
+                  <mat-form-field appearance="fill">
+                      <mat-label>{{'workflow.wdgDescription' | translate}}</mat-label>
+                      <mat-icon matSuffix>description</mat-icon>
+                      <input matInput  type="text"
+                          formControlName="wdgDescription" required>
+                  </mat-form-field> 
+                              
+              </div>
+          </div>
+          <div class="mat-dialog-actions"> 
+              <button mat-stroked-button color="warn" (click)="closeDialog()"
+                  type="button">{{'Action.close' | translate}}</button> 
+              <button mat-raised-button color="primary" type="submit">{{'Action.save' | translate}}</button>
+  
+          </div>
+      </form>
+  </div>

@@ -1,0 +1,45 @@
+<mat-dialog-content>
+    <div class="login-page">
+        <div class="">
+            <div  class="center">
+                <ngx-avatar name="{{user.utiPrenom}} {{user.utiNom}}" *ngIf="!user.utiLogo" size="80"></ngx-avatar>
+                <ngx-avatar [src]="logo" *ngIf="user.utiLogo"  size="80"></ngx-avatar>
+            </div>
+            <div class="">
+                <ul>
+                    <li *ngFor="let file of files" [@fadeInOut]="file.state">
+                        <mat-progress-bar [value]="file.progress"></mat-progress-bar>
+                        <span id="file-label">
+                            {{file.data.name}}
+                            <a title="Retry" (click)="retryFile(file)" *ngIf="file.canRetry">
+                                <mat-icon>refresh</mat-icon>
+                            </a>
+                            <a title="Cancel" (click)="cancelFile(file)" *ngIf="file.canCancel">
+                                <mat-icon>cancel</mat-icon>
+                            </a>
+                        </span>
+                    </li>
+                </ul>
+                <div class="login-spacer"></div>
+    
+                <input type="file" class="right" formControlName="file" accept="{{accept}}" (change)="fileChangeEvent($event)" required/>
+    
+                <image-cropper
+                    [imageChangedEvent]="imageChangedEvent"
+                    [maintainAspectRatio]="true"
+                    [aspectRatio]="1 / 1"
+                    format="jpg"
+                    (imageCropped)="imageCropped($event)"
+                ></image-cropper>
+            </div>
+        </div>
+        <div class="buttons">
+            <div class="login">
+                <button mat-stroked-button color="warn" (click)="closeDialog()"
+                    type="button">{{'btn_annuler' | translate}}</button>
+                <button mat-raised-button color="primary" (click)="onSubmit()"
+                    type="button">{{'btn_terminer' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

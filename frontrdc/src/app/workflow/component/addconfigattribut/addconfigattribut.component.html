@@ -1,0 +1,97 @@
+ 
+<!--<div class="row" cdkDropListGroup>
+  <div class="col-6">
+    <h3>{{'widget.selecttemplate' | translate}}</h3>
+    <div
+      cdkDropList
+      [cdkDropListData]="widgetTempNoAttr"
+      class="example-list"
+      cdkDropListSortingDisabled
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of widgetTempNoAttr" cdkDrag>{{item.wtNom}}</div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <h3>{{'widget.listtemplate' | translate}}</h3>
+    <div
+    cdkDropList
+    [cdkDropListData]="widgetTemAttr"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let item of widgetTemAttr" cdkDrag>{{item.wtNom}}</div>
+  </div>
+  </div>
+  </div>-->
+
+      
+    
+    <div class="row">
+      <form class="col-lg-12 col-md-12" [formGroup]="registreForm" > 
+      <div class="row">
+        <mat-form-field [hidden]="true"> 
+        <input  matInput formControlName="idparamwidget" />
+      </mat-form-field>
+        <div class="form-group" >
+          <h3>{{'widget.listedestemplatesselectdiagramme' | translate}}</h3>
+          <mat-form-field appearance="fill">
+            <mat-label>{{'selectdiagramme' | translate}}</mat-label>
+            <mat-select placeholder="{{'parametrage.selectdiagramme' | translate}}" formControlName="wtemplate"
+            required> 
+            <mat-option *ngFor="let itematrr of restant1" [value]="itematrr.wtId">{{itematrr.wtNom}}</mat-option> 
+        </mat-select>
+       
+          </mat-form-field>
+        </div> 
+      </div> 
+      
+      <div class="row" >
+        
+      <div class="col-lg-6 col-md-6">
+        
+        <div class="form-group" >
+          <h3>{{'parametrage.attributabscisse' | translate}}</h3>
+          <mat-form-field appearance="fill">
+            <mat-label>{{'attributordonnee' | translate}}</mat-label>
+            
+        <mat-select placeholder="{{'parametrage.attributabscisse' | translate}}" formControlName="attributabscisse"
+        required> 
+        <mat-option [value]='"Mois"'>{{'Mois'}}</mat-option>
+          <mat-option [value]='"annees"'>{{'Années'}}</mat-option>
+    </mat-select>
+          </mat-form-field>
+        </div> 
+      </div>
+      <div class="col-lg-6 col-md-6">
+        
+        <div class="form-group" >
+          <h3>{{'parametrage.variableordonnee' | translate}}</h3>
+          <mat-form-field appearance="fill">
+            <mat-label>{{'variableordonnee' | translate}}</mat-label>
+            <mat-select placeholder="{{'parametrage.variableordonnee' | translate}}" formControlName="variableordonnee"
+            required> 
+            <mat-option *ngFor="let champs of champsextract" [value]="champs.chpw_id">{{champs.chpw_name}}</mat-option> 
+        </mat-select>
+       
+          </mat-form-field>
+        </div> 
+      </div>
+    </div>
+  
+    </form>
+    </div>
+    
+     
+
+  <div class="row">
+    <div class="col-6">
+      <div class="mat-dialog-actions"> 
+        <button mat-stroked-button color="warn" (click)="closeDialog()"
+            type="button">{{'Action.close' | translate}}</button> 
+        <button mat-raised-button color="primary"  (click)="save()">{{'Action.save' | translate}}</button>
+
+    </div>
+    </div>
+  </div>
+
+ 

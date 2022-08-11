@@ -1,0 +1,65 @@
+<div class="login-page">
+    <div class="login-spacer"></div>
+    <div class="">
+        <!-- <div id="login-fab" class="mdl-color--accent mdl-color-text--white">
+            <i id="lock-icon" class="material-icons">lock</i>
+        </div> -->
+        <!-- <h2 class="card-heading">
+            {{'update' | translate}}</h2> -->
+            <h3 class="card-heading float-left">
+                <strong class="foncer">{{'parametrage.gestionPwd' | translate}}
+                </strong>
+            </h3>
+            <div class="login-spacer1"></div>
+
+        <form class="" [formGroup]="criterePwdForm" (ngSubmit)="onSubmit()">
+            <div class="">
+                <div class="form-group input-group mymargin">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{'criterePwd.caractereMin' | translate}}</mat-label>
+                        <!-- <mat-icon matSuffix>sort_by_alpha</mat-icon> -->
+                        <input matInput placeholder="{{'criterePwd.caractereMin' | translate}}"  formControlName="pwdCarMin" type="number" required>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="form-group input-group mymargin">
+                <mat-form-field appearance="fill">
+                    <mat-label>{{'criterePwd.nombreCaratereNumerique' | translate}}</mat-label>
+                    <!-- <mat-icon matSuffix>dialpad</mat-icon> -->
+                <input matInput placeholder="{{'criterePwd.nombreCaratereNumerique' | translate}}" formControlName="pwdDigMin" type="number" required>
+            </mat-form-field>
+            </div>
+            <div class="">
+                <div class="form-group input-group mymargin">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{'criterePwd.nombreCaratereMaj' | translate}}</mat-label>
+                        <!-- <mat-icon matSuffix>text_format</mat-icon> -->
+                        <input matInput placeholder="{{'criterePwd.nombreCaratereMaj' | translate}}" formControlName="pwdMajMin" type="number" required>
+                    </mat-form-field>
+                </div>
+                <div class="form-group input-group mymargin">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{'criterePwd.nombreCaratereSpeciaux' | translate}}</mat-label>
+                        <!-- <mat-icon matSuffix>alternate_email</mat-icon> -->
+                        <input matInput placeholder="{{'criterePwd.nombreCaratereSpeciaux' | translate}}" formControlName="pwdSpcMin" type="number" required>
+                    </mat-form-field>
+                </div>
+                <div class="form-group input-group mymargin">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{'criterePwd.dureeValidite' | translate}}</mat-label>
+                        <!-- <mat-icon matSuffix>hourglass_top</mat-icon> -->
+                        <input matInput placeholder="{{'criterePwd.dureeValidite' | translate}}" formControlName="pwdDure" type="number" required>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="login">
+                    <button mat-stroked-button color="warn" (click)="closeDialog()" type="button" >{{'btn_fermer' | translate}}</button>
+                    <button mat-raised-button color="primary" type="submit">{{'btn_enregistrer' | translate}}</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>
+  

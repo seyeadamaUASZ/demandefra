@@ -1,0 +1,52 @@
+.position-relative {
+	position: relative;
+}
+
+.add-contact {
+	position: absolute;
+    //right: 40px;
+    //top: 90px;
+   margin-left: 65%;
+}
+
+.add-contact1 {
+	position: absolute;
+    right: 40px;
+    top: 90px;
+   margin-left: 90%;
+}
+
+
+  mat-form-field{
+    width: 30%;
+    margin-left: 1%;
+
+  }
+  .filtre{
+    margin-left: 1%;
+
+  }
+
+  .fab{
+      width: 12%;
+      margin: 0.5%;
+  }
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+ 
+  mat-card{
+    
+table {
+  width: 100%;
+  margin-top: 20px;
+ }
+  }
+  .header{
+  margin-top: 10px;
+  display: block;
+  margin: auto;
+  text-align: center;
+  color: white;
+  }
+ 

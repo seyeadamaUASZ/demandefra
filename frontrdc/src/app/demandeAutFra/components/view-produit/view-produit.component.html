@@ -1,0 +1,113 @@
+<div class="row container-fluid scroll" style="overflow: auto;">
+      <form class="container-fluid" [formGroup]="EditForm">
+            <div class="container-fluid">
+                  <h4>{{'produits.titre' | translate}}</h4>
+            </div>
+            <div class="pl-2 pr-2" *ngIf="donnee.status == 10">
+                  <div class="row card mt-5 mb-5 pt-2">
+                        <div class="col-sm-6">
+                              <div class="container-fluid">
+                                    <h4>{{'motifRejet.commentaire' | translate}}</h4>
+                              </div>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                        </div>
+                        <div class="row container-fluid">
+                              <div class="container-fluid pt-2">
+                                    <h4 class="text-danger" *ngFor="let commentaire of motifRejet"><strong>{{commentaire.motif}}</strong></h4>
+                              </div>
+                        </div>
+                  </div>
+
+            </div>           
+            <div class="row col-md-12 col-lg-12 col-sm-12" *ngIf="statut == 6 || statut == 7 || statut == 10">
+                  <div class="row col-sm-12">
+                        <div class="col-sm-6">
+                              <mat-form-field appearance="fill">
+                                    <mat-label>{{'rapportanalyse.referentiel' | translate}}</mat-label>
+                                    <input matInput type="text" value="{{rapportanalyse.referentiel}}" required readonly>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-sm-6">
+                              <mat-form-field appearance="fill">
+                                    <mat-label>{{'rapportanalyse.commentaire' | translate}}</mat-label>
+                                    <input matInput type="text" value="{{rapportanalyse.commentaire}}" required readonly>
+                              </mat-form-field>
+                        </div>
+                  </div>
+            </div>            
+            <div class="row col-md-12 col-lg-12 col-sm-12">
+                  <div class="row col-sm-12">
+                        <div class="col-sm-6">
+                              <mat-form-field appearance="fill">
+                                    <mat-label>{{'produits.nature' | translate}}</mat-label>
+                                    <input matInput type="text" formControlName="nature" required readonly>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-sm-6">
+                              <mat-form-field appearance="fill">
+                                    <mat-label>{{'produits.categorie' | translate}}</mat-label>
+                                    <input matInput type="text" value="{{categorie}}" required readonly>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-sm-6">
+                              <mat-form-field appearance="fill">
+                                    <mat-label>{{'produits.marque' | translate}}
+                                    </mat-label>
+                                    <input matInput type="text" formControlName="marque" required readonly>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-sm-6">
+                              <mat-form-field appearance="fill">
+                                    <mat-label>{{'produits.contenance' | translate}}</mat-label>
+                                    <input matInput type="text" formControlName="contenance" required readonly>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-sm-6">
+                              <mat-form-field appearance="fill">
+                                    <mat-label>{{'produits.typeemballage' | translate}}</mat-label>
+                                    <input matInput type="text" formControlName="typeemballage" required readonly>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-sm-6">
+                              <mat-form-field appearance="fill">
+                                    <mat-label>{{'produits.desciptionEtiquette' | translate}}</mat-label>
+                                    <input matInput type="text" formControlName="descriptionEtiquette" required readonly>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-sm-6" *ngIf="statut == 4 || statut == 5 || statut == 6 || statut == 7">
+                              <mat-form-field appearance="fill">
+                                    <mat-label>{{'produits.autFra' | translate}}</mat-label>
+                                    <input matInput type="text" formControlName="autFra" required readonly>
+                              </mat-form-field>
+                        </div>
+                  </div>
+                  <div class="row col-sm-12">
+                        <div class="col-sm-6">
+                              <div class="row container-fluid" (click)="openEtiquetteouemballage()">
+                                    <div class="file-upload">
+                                          <span class="file-name">{{'produits.etiquetteouemballage' | translate}}</span>
+                                          <p class="mymargin foncer">
+                                                <mat-icon class="centrer">download</mat-icon>
+                                          </p>
+                                    </div>
+                              </div>
+                        </div> 
+                        <div class="col-sm-6" *ngIf="statut == 6 || statut == 7 || statut == 10">
+                              <div class="row container-fluid" (click)="openAnalyse()">
+                                    <div class="file-upload">
+                                          <span class="file-name">{{'rapportanalyse.analyse' | translate}}</span>
+                                          <p class="mymargin foncer">
+                                                <mat-icon class="centrer">download</mat-icon>
+                                          </p>
+                                    </div>
+                              </div>
+                        </div>                       
+                  </div>
+                  <div style="margin-top: 15px; margin-left: 20px;">
+                        <button type="button" mat-flat-button color="warn" mat-dialog-close>{{'btn.fermer' |
+                              translate}}</button>
+                  </div>
+            </div>
+      </form>
+</div>

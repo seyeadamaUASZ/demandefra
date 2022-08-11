@@ -1,0 +1,65 @@
+<!-- <mat-card> -->
+  <!-- <mat-card-header class="">
+    <mat-card-title >{{'notification.add' | translate}}</mat-card-title>
+
+  </mat-card-header> -->
+  <h3 class="card-heading float-left">
+    <strong class="foncer"> {{'notification.add' | translate}}
+    </strong>
+</h3>
+  
+  <mat-form-field>
+    <mat-label>{{'profile_select' | translate}}</mat-label>
+    <mat-select [formControl]="profilControl" required [(value)]="profilSelected" [compareWith]="compareProfil" (selectionChange)="profilSelection()">
+      <mat-option>{{'profile_select' | translate}}</mat-option>
+      <mat-option *ngFor="let profil of profils" [value]="profil">
+        {{profil.proLibelle}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="profilControl.hasError('required')">{{'Alert.choose_profile' | translate}}</mat-error>     
+  </mat-form-field><br>
+  <!-- <mat-form-field >
+      <mat-label>{{'notification.filtre' | translate}}</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search">
+  </mat-form-field>
+  <br> -->
+  <!-- <div class="">
+    <table mat-table class=" mat-elevation-z8" [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="utiUsername">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'register.nom' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element?.utiUsername}} </td>
+        </ng-container>
+        <ng-container matColumnDef="utiPrenomNom">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'register.username' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element?.utiPrenom}} {{element?.utiNom}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div><br> -->
+  <form class="" [formGroup]="NotificationForm" (ngSubmit)="onSubmit()">
+    <div class="">
+        <div>
+            <mat-form-field>
+                <mat-icon matSuffix>perm_identity</mat-icon>
+                <input matInput placeholder="{{'notification.objet' | translate}}" type="text" formControlName="ntfObjet" required>
+            </mat-form-field>
+            <mat-form-field *ngIf="!isAudio">
+                <mat-icon matSuffix>comment</mat-icon>
+                <textarea matInput placeholder="{{'notification.message' | translate}}" type="text" formControlName="ntfText" required></textarea>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-icon matSuffix>portrait</mat-icon>
+                <input matInput placeholder="{{'notification.signature' | translate}}" type="text" formControlName="ntfSignature" required>
+            </mat-form-field>
+        </div>         
+    </div>        
+    <div class="mat-dialog-actions">            
+      <button mat-stroked-button color="warn" (click)="closeDialog()" type="button" >{{'Action.close' | translate}}</button>            
+      <button mat-raised-button color="primary" type="submit">{{'Action.save' | translate}}</button>  
+    </div>
+</form>
+<!-- </mat-card> -->

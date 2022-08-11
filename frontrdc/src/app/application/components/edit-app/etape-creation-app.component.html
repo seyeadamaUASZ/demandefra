@@ -1,0 +1,250 @@
+<!-- <button mat-raised-button (click)="isOptional = !isOptional">
+  {{!isOptional ? 'Enable optional steps' : 'Disable optional steps'}}
+</button> -->
+
+<mat-horizontal-stepper linear #stepper>
+  <mat-step [stepControl]="applicationForm">
+    <ng-template matStepLabel>{{'application.register' | translate}}</ng-template>
+
+    <form class="app_form" [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-icon matSuffix>home</mat-icon>
+        <input matInput placeholder="{{'application.nom' | translate}}" type="text" formControlName="appNom" required>
+        <mat-error *ngIf="f.appNom.errors">
+          {{'control.nom' | translate}} </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-icon matSuffix>account_balance</mat-icon>
+        <input matInput placeholder="{{'application.nom_entreprise' | translate}}" type="text"
+          formControlName="appNomEntreprise" required>
+        <mat-error *ngIf="f.appNomEntreprise.errors">
+          {{'control.secteur' | translate}} </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-icon matSuffix>domain</mat-icon>
+        <input matInput placeholder="{{'application.secteur' | translate}}" type="text" formControlName="appSecteur"
+          required>
+        <mat-error *ngIf="f.appSecteur.errors">
+          {{'control.secteur' | translate}} </mat-error>
+      </mat-form-field>
+
+      <div class="">
+        <mat-form-field>
+          <mat-icon matSuffix>perm_identity</mat-icon>
+          <input matInput placeholder="{{'application.ninea' | translate}}" type="text" formControlName="appNinea">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-icon matSuffix>house</mat-icon>
+          <input matInput placeholder="{{'application.adresse' | translate}}" type="text" formControlName="appAdresse">
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <mat-icon matSuffix>phone</mat-icon>
+        <input matInput placeholder="{{'application.telephone_fixe' | translate}}" type="tel"
+          formControlName="appTelephoneFixe" pattern="[+]{0,1}[0-9]{0,15}">
+        <mat-error *ngIf="f.appTelephoneFixe.errors">
+          {{'control.telephone_fixe' | translate}} </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-icon matSuffix>stay_current_portrait</mat-icon>
+        <input matInput placeholder="{{'application.telephone_mobile' | translate}}" type="tel"
+          formControlName="appTelephoneMobile" pattern="[0-9]{9}">
+        <mat-error *ngIf="f.appTelephoneMobile.errors">
+          {{'control.telephone_mobile' | translate}} </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-icon matSuffix>work</mat-icon>
+        <input matInput pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          placeholder="{{'application.email' | translate}}" type="email" formControlName="appEmail">
+        <mat-error *ngIf="f.appEmail.errors">
+          {{'control.email' | translate}} </mat-error>
+      </mat-form-field>
+      <!-- <mat-form-field>
+        <input matInput formControlName="appDateCreation" 
+          placeholder="{{'application.date_creation' | translate}}">
+         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> 
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field> -->
+      <div>
+        <button mat-stroked-button color="warn" (click)="closeDialog()"
+          type="button">{{'btn_fermer' | translate}}</button>
+        <button mat-raised-button matStepperNext color="primary"
+          type="submit">{{'application.next' | translate}}</button>
+      </div>
+
+      <!-- <div class="buttons">
+        <div class="login">
+          <button mat-raised-button color="warn" (click)="closeDialog()" type="button"
+          >{{'btn_fermer' | translate}}</button>
+          <button mat-raised-button matStepperNext color="primary" type="submit">{{'application.next' | translate}}</button>
+        </div>
+      </div> -->
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+    <form [formGroup]="secondFormGroup" >
+      <ng-template matStepLabel>{{'application.choix_module' | translate }}</ng-template>
+      <mat-form-field appearance="outline" style="width: 30%;">
+        <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+        <input matInput (keyup)="applyFilterModule($event)">
+      </mat-form-field>
+      <div class="row container-fluid" >
+        <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (click)="$event.stopPropagation()"
+               (change)="$event ? masterToggle() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()"
+              (change)="$event ? lierModule($event,row)  : null"
+              [checked]="selection.isSelected(row)"
+                            >
+              </mat-checkbox>
+            </td>
+          </ng-container>
+        
+          <!-- Position Column -->
+          <ng-container matColumnDef="modNom">
+            <th mat-header-cell *matHeaderCellDef> {{'module.nom' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.modNom}} </td>
+          </ng-container>
+          <ng-container matColumnDef="modDescription">
+            <th mat-header-cell *matHeaderCellDef> {{'module.description' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.modDescription}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef><span>
+                {{'register.action' | translate}}</span> </th>
+            <td mat-cell *matCellDef="let element" class="fab">
+              <button class="mesbuttons" mat-button [mat-menu-trigger-for]="detail" yPosition="above"
+                >
+                <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                  more_vert
+                </mat-icon>
+              </button><br>
+              
+              <mat-menu #detail="" x-position="before">
+                <button class="mesbuttons" mat-menu-item color="primary" (click)="openDialogChoixFonctionnalite(element.modId)">
+                  <mat-icon color="primary">visibility</mat-icon> {{'fonctionnalite.Choix_fonctionnalite' | translate}}
+                </button>
+
+                <!-- <button class="mesbuttons"  mat-menu-item (click)="openDialogChoixFonctionnalite(m.modId)" >
+                  <mat-icon color="primary">visibility</mat-icon>{{'fonctionnalite.Choix_fonctionnalite' | translate}}
+                </button> -->
+              </mat-menu>
+            </td>
+
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+              >
+          </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+        <!-- <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let m of module">
+          <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+              <button class="mesbuttons" mat-button [mat-menu-trigger-for]="detail" yPosition="above"
+                class="float-right">
+                <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                  more_vert
+                </mat-icon>
+              </button><br>
+              
+              <mat-menu #detail="" x-position="before">
+                <button class="mesbuttons" mat-menu-item color="primary" (click)="openDialogChoixFonctionnalite(m.modId)">
+                  <mat-icon color="primary">visibility</mat-icon> {{'fonctionnalite.Choix_fonctionnalite' | translate}}
+                </button> -->
+
+                <!-- <button class="mesbuttons"  mat-menu-item (click)="openDialogChoixFonctionnalite(m.modId)" >
+                  <mat-icon color="primary">visibility</mat-icon>{{'fonctionnalite.Choix_fonctionnalite' | translate}}
+                </button> -->
+              <!-- </mat-menu>
+              <h3 class="card-category text-white center"> {{m.modNom}} -->
+                <!-- <input type="checkbox" [checked]="m.modAppId"  (change)="m.modAppId = !m.modAppId" (click)="lierModule(m.modId)" formControlName="check"> -->
+                <!-- <mat-checkbox class="float-left" style="margin: -5%;" [(ngModel)]="isChecked" (change)="lierModule($event,m.modId)">
+                </mat-checkbox>
+              </h3>
+            </div>
+          </div> -->
+          <!-- <div class="card-footer">
+            <div class="stats center">
+
+            
+            </div>
+          </div><br> -->
+        <!-- </div> -->
+
+      </div>
+      <div>
+        <button mat-stroked-button matStepperPrevious color="warn">{{'application.back' | translate }}</button>
+        <button mat-raised-button matStepperNext color="primary">{{'application.next' | translate }}</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup" [optional]="isOptional">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>{{'application.choix_composant' | translate }}</ng-template>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <mat-form-field appearance="fill">
+            <mat-label>{{'application.choisir_workflow'| translate}}</mat-label>
+            <mat-select [formControl]="workflow" multiple [(ngModel)]="workflowSelected">
+              <mat-option #matOption *ngFor="let workflow of workflows"
+                (click)="clickedOptionWorkflow(matOption.selected,workflow.wkfId)" [value]="workflow">{{workflow.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <mat-form-field appearance="fill">
+            <mat-label>{{'application.choisir_formulaire'| translate}}</mat-label>
+            <mat-select [formControl]="formulaire" multiple [(ngModel)]="formulaireSelected">
+              <mat-option #matOption *ngFor="let formulaire of formulaires"
+                (click)="clickedOptionFormulaire(matOption.selected,formulaire.frmId)" [value]="formulaire">
+                {{formulaire.frmNom}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <mat-form-field appearance="fill">
+            <mat-label>{{'application.choisir_fichier' | translate}}</mat-label>
+            <mat-select [formControl]="fichier" multiple [(ngModel)]="fichierSelected">
+              <mat-option #matOption *ngFor="let fichier of fichiers" [value]="fichier"
+                (click)="clickedOptionFichier(matOption.selected,fichier.rptId)" [value]="fichier">{{fichier.rptNom}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div>
+        <button mat-stroked-button matStepperPrevious color="warn">{{'application.back' | translate }}</button>
+        <button mat-raised-button matStepperNext color="primary" routerLink=".."
+          (click)="enregistrer()">{{'application.enregistrer'| translate }}</button>
+      </div>
+    </form>
+  </mat-step>
+  <!-- <mat-step [stepControl]="fourthFormGroup" [optional]="isOptional">
+    <form [formGroup]="fourthFormGroup">
+      <ng-template matStepLabel>{{'application.choix_emplacement' | translate }}</ng-template>
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="thirdCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+      </mat-form-field>
+      <div>
+        <button  mat-raised-button matStepperPrevious color="warn">{{'application.back' | translate }}</button>
+        <button  mat-raised-button (click)="stepper.reset()" color="primary">{{'application.enregistrer' | translate }}</button>
+      </div>
+    </form>
+  </mat-step> -->
+
+</mat-horizontal-stepper>

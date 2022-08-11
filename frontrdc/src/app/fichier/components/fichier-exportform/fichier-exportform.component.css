@@ -1,0 +1,25 @@
+.example-card { 
+  width: 60%;
+  margin: 10px auto; 
+}  
+
+.mat-card-header {   
+    text-align: center;   
+}
+
+.mat-card-title {   
+    text-align: center;
+   
+    width:100%;
+}
+
+.mat-card-content{
+    text-align: center;   
+    width:100%;
+}
+.qrcode{
+    text-align: center;
+    width: 20%;
+    
+}
+

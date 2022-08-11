@@ -1,0 +1,120 @@
+
+<div class="login-page">
+  <div class="login-spacer"></div>
+     
+      
+    <div class="row container-fluid">
+      <h3 class="card-heading float-left">
+        <strong class="foncer">  {{nomForm}}
+        </strong>
+    </h3>
+    </div>
+      
+      <form class="row col-sm-12 form container-fluid" >
+        <div class="form-group container-fluid">
+        <div *ngFor="let item of champs" >
+          <div class="container-fluid">
+              <div class="form-group input-group mymargin" *ngIf="item.chpType=='text'">
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>{{item.chpPlaceholder}}</mat-label>
+                      <input matInput placeholder={{item.chpPlaceholder}}
+                          required>
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="container-fluid">
+              <div class="form-group input-group mymargin" *ngIf="item.chpType=='email'">
+                  <mat-form-field appearance="fill">
+                    <mat-label>{{item.chpPlaceholder}} </mat-label>
+                      <input matInput placeholder={{item.chpPlaceholder}} required>
+                  </mat-form-field>
+              </div>
+          </div>
+          <div class="container-fluid">
+            <div class="form-group input-group mymargin" *ngIf="item.chpType=='phone'">
+                <mat-form-field appearance="fill">
+                    <mat-label>{{item.chpPlaceholder}} </mat-label>
+                    <input matInput placeholder={{item.chpPlaceholder}}  required>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="container-fluid">
+          <div class="form-group input-group mymargin" *ngIf="item.chpType=='number'">
+              <mat-form-field appearance="fill">
+                <mat-label>{{item.chpPlaceholder}} </mat-label>
+                  <input matInput placeholder={{item.chpPlaceholder}}  required>
+              </mat-form-field>
+          </div>
+      </div>
+      <div class="container-fluid">
+        <div class="form-group input-group mymargin" *ngIf="item.chpType=='datetime-local'">
+            <mat-form-field appearance="fill">
+                <mat-label>{{item.chpPlaceholder}} </mat-label>
+                <input matInput  type="{{item.chpType}}" placeholder={{item.chpPlaceholder}}  required>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="container-fluid">
+      <div class="form-group input-group mymargin" *ngIf="item.chpType=='date'">
+          <mat-form-field appearance="fill">
+            <mat-label>{{item.chpPlaceholder}} </mat-label>
+              <input matInput type="{{item.chpType}}" placeholder={{item.chpPlaceholder}}  required>
+          </mat-form-field>
+      </div>
+  </div>
+      <div class="container-fluid">
+      <div *ngIf="item.chpType=='radio'">
+        <label>{{item.chpLabel}}</label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+        <div *ngFor="let v of item.values" class="inline-form-group">
+            <label class="cust-check-bx">
+              <input type="radio" [value]="v.value" name="{{item.name}}" > {{v.label}}
+              <span class="checkmark"></span>
+            </label>
+          </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div *ngIf="item.chpType=='checkbox'">
+        <label>{{item.chpLabel}}</label> <label *ngIf="item.chpObligatoire" class="text-danger">*</label>
+        <div *ngFor="let v of item.values" class="inline-form-group">
+            <label class="cust-check-bx">
+              <input type="checkbox" [value]="v.value" name="{{item.name}}" > {{v.label}}
+              <span class="checkmark"></span>
+            </label>
+          </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div *ngIf="item.chpType=='autocomplete'">
+        <mat-form-field appearance="fill">
+            <mat-label>{{item.chpPlaceholder}} </mat-label>
+          <mat-select placeholder={{item.chpPlaceholder}}
+              required>
+              <mat-option *ngFor="let v of item.values" [value]="v.value">{{v.label}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div *ngIf="item.chpType=='file'">
+            <p>{{item.chpPlaceholder}}</p>
+            <input type="file" required>
+      </div>
+   </div>
+    </div>
+     <div >
+          <div class="row col-sm-12 container-fluid">
+                <button mat-stroked-button color="warn" (click)="fermer()" type="button" >{{'btn_fermer' | translate}}</button>
+                  <button mat-raised-button color="primary" type="submit">{{'btn_enregistrer' | translate}}</button>
+
+          </div>
+        </div>
+        </div>
+      </form>
+
+
+</div>

@@ -1,0 +1,49 @@
+<div>
+  <div class="">
+      <h3 class="card-heading float-left">
+          <strong class="foncer">{{'workflow.widgetparamadd' | translate}}
+          </strong>
+      </h3>
+  </div><br>
+  <form class="" [formGroup]="addConfWidgetForm" (ngSubmit)="onSubmit()">
+      <div class="">
+          <div>
+            <mat-form-field [hidden]="true"> 
+            <input   matInput formControlName="workflowid" />
+        </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>{{'formulaire.nomparam' | translate}} </mat-label>
+                <mat-icon matSuffix>compare_arrows</mat-icon>
+                <input matInput type="text" formControlName="nomparam" required> 
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>{{'workflow.widgetname' | translate}}</mat-label>
+              <mat-icon matSuffix>compare_arrows</mat-icon>
+              <mat-select placeholder="{{'workflow.widgetname' | translate}}" formControlName="wdgId" required>
+                  <mat-option *ngFor="let wdgt of widget" [value]="wdgt.wdgId">{{wdgt.wdgNom}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>  
+          <mat-form-field appearance="fill">
+            <mat-label>{{'workflow.profil' | translate}}</mat-label>
+            <mat-icon matSuffix>compare_arrows</mat-icon>
+            <mat-select placeholder="{{'workflow.profilename' | translate}}" formControlName="proId" required>
+                <mat-option *ngFor="let pro of profiles" [value]="pro['proId']">{{pro['proLibelle']}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field> 
+          
+   
+          </div>
+      </div>
+
+      <div class="mat-dialog-actions">
+          <button mat-stroked-button color="warn" (click)="closeDialog()"
+              type="button">{{'Action.close' | translate}}</button>
+          <mat-spinner class="center" *ngIf="loading" value="indeterminate"></mat-spinner>
+          <button mat-raised-button color="primary" type="submit">{{'Action.save' | translate}}</button>
+
+
+      </div>
+  </form>
+</div>

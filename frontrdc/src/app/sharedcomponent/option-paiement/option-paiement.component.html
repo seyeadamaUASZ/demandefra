@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="container-fluid mb-3">
+    <h3 class="container-fluid">{{'paiement.option' | translate}}</h3>
+  </div>
+  <div class=" card-stack">
+      <div class="card-pay" (click)="selectTypePaiementManuel(false)">
+        {{'paiement.electronique' | translate}} <br>
+        <div class="mt-2" style="color:red;">
+          {{'paiement.pasdisponible' | translate}}
+        </div>
+        
+      </div>
+       
+    
+      <div class="card-pay" (click)="selectTypePaiementManuel(true)">
+        {{'paiement.manuel' | translate}}
+      </div>
+      
+  </div>
+  <div *ngIf="manuel" class="container-fluid mt-2">
+    <div class="container-fluid">
+      <input type="file" accept=".jpg, .png, .jpeg, .pdf" #filerecupaiement hidden
+            (change)="onFileAddedrecupaiement()">
+      <div class="row container-fluid mt-1 mb-2"
+            (click)="addFilerecupaiement()">
+            <div class="file-upload">
+                  <span class="file-name">
+                        {{'demandeAutFra.recupaiement' | translate}}
+                  </span>
+                  <span *ngIf="recupaiement" class="sep"></span>
+
+                  <span class="file-name2">
+                        {{recupaiement?.name}}
+                  </span>
+
+                  <span class="flex">
+                  </span>
+                  <span *ngIf="recupaiement">
+                        <mat-icon color="primary">check</mat-icon>
+                  </span>
+            </div>
+      </div>
+</div>
+  </div>
+  <div class="container-fluid mt-3" mat-dialog-actions>
+    <button mat-stroked-button color="warn" mat-dialog-close>{{'btn.fermer'| translate}}</button>
+    <button *ngIf="recupaiement!=null" (click)="paiementManuel()" mat-raised-button color="primary">{{'btn.envoyerRecu' | translate}}</button>
+  </div>
+</div>

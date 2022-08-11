@@ -1,0 +1,44 @@
+<div class="login-page">
+  <div class="login-spacer"></div>
+  <h3 class="card-heading float-left">
+    <strong class="foncer"> {{ 'application.publication.titre' | translate}}
+    </strong>
+  </h3>
+
+  <div class="container-fluid">
+    <mat-form-field>
+      <mat-label>{{'application.publication.appUrl' | translate}}</mat-label>
+      <input name="appUrl" [(ngModel)]="app.appUrl" matInput type="url">
+    </mat-form-field>
+    <div class="row">
+      <div class="container-fluid center">
+        <img *ngIf="imgSRC" alt="img" id="imageId" class="centrer mat-elevation-z3" [src]="imgSRC" style="width:500px;height:290px;">
+      </div>
+      <br>
+      <br>
+      <input accept="image/*" type="file" placeholder="Sélectionnez un ou des fichiers" #file style="display: none;"
+        (change)="onFilesAdded()" />
+      <div class="container-fluid centrer">
+        {{fileSelected?.name}}
+      </div>
+      <br>
+      <br>
+      <div class="container-fluid centrer">
+        <button mat-stroked-button color="primary" (click)="addFiles()">{{'application.publication.btnChargerImg' |
+          translate}}</button>
+      </div>
+    </div>
+    <br>
+    <br>
+  </div>
+
+
+  <div class="buttons">
+    <div class="login col-sm-6">
+      <button mat-stroked-button color="warn" (click)="closeDialog()" type="button">{{'btn_fermer' |
+        translate}}</button>&nbsp;
+      <button mat-raised-button color="primary" type="button" (click)="publier()">{{'btn_valider' | translate}}</button>
+
+    </div>
+  </div>
+</div>

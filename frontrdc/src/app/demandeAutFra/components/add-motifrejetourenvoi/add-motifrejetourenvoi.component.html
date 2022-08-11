@@ -1,0 +1,15 @@
+<mat-dialog-content>
+  <div class="container-fluid">
+    <form class="" [formGroup]="EditForm">
+      <mat-form-field appearance="fill">
+          <mat-label>{{'motifrejetourenvoi.motif' | translate}}</mat-label>
+          <textarea matInput formControlName="motif" required></textarea>
+      </mat-form-field>
+    </form>
+    <div>
+      <button type="button" *ngIf="profilLibelle == 'chef division'" (click)="onSubmit()" mat-raised-button color="primary">{{'btn.valider' | translate}}</button>
+      <button type="button" *ngIf="profilLibelle == 'chef bureau'" (click)="onSubmit1()" mat-raised-button color="primary">{{'btn.valider' | translate}}</button>
+      <button type="button" mat-flat-button color="warn" mat-dialog-close>{{'btn.fermer' | translate}}</button>
+    </div>
+  </div>
+</mat-dialog-content>

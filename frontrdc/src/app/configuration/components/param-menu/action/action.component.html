@@ -1,0 +1,49 @@
+<!-- <span class="route">{{'dashboard.home' | translate }} > {{'dashboard.parametrage' | translate }}</span> -->
+<mat-card>
+  <mat-card-header class="card-header centrer">
+    <mat-card-title>{{'menu.'+menu.menNom | translate}} : {{'Action.list' | translate}}</mat-card-title>
+    <!-- <span class="header">{{'menu.'+menu.menNom | translate}} : {{'Action.list' | translate}}</span> -->
+  </mat-card-header><br>
+  <div class="row">
+    <div class="column-search-field">
+      <mat-form-field class="filtre" appearance="outline">
+        <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+        <input matInput (keyup)="applyFilter($event)">
+      </mat-form-field>
+    </div>
+    <div class="column-add-button">
+      <button mat-mini-fab color="primary" matTooltip="{{'Action.add' | translate}}">
+        <mat-icon (click)="openDialogAdd()">add_box</mat-icon>
+      </button>
+      <button mat-mini-fab color="accent" matTooltip="{{'Back' | translate}}">
+        <mat-icon (click)="back()">arrow_right_alt</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div>
+    <table #table mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort>
+      <!-- Position Column -->
+      <ng-container matColumnDef="actCode">
+        <th mat-header-cell *matHeaderCellDef> {{'role.accessrights.code' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.actCode}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="actNom">
+        <th mat-header-cell *matHeaderCellDef> {{'role.accessrights.name' | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.actNom}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="actDescription">
+        <th mat-header-cell *matHeaderCellDef> {{'role.accessrights.description' | translate}}</th>
+        <td mat-cell *matCellDef="let element"> {{element.actDescription}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator><br>
+  </div>
+</mat-card>

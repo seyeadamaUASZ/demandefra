@@ -1,0 +1,12 @@
+<div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop($event)">
+  <div class="example-box" *ngFor="let timePeriod of nomform" [cdkDragData]="timePeriod" cdkDrag>{{timePeriod}}</div>
+</div>
+
+<div class="mat-dialog-actions">
+  <button mat-stroked-button color="warn" (click)="closeDialog()"
+      type="button">{{'Action.close' | translate}}</button>
+  
+  <button mat-raised-button color="primary" type="submit">{{'Action.save' | translate}}</button>
+
+
+</div>

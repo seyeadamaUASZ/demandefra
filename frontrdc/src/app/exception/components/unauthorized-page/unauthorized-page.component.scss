@@ -1,0 +1,33 @@
+
+.center{
+  margin-bottom: 2%;
+  display: block;
+  margin:auto;
+  text-align: center;
+}
+
+.login-container{
+  display: block;
+  margin: auto;
+  width: 400px;
+  padding: 2vh;
+  background: rgb(233, 217, 217);  
+}
+
+.buttons {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  
+}
+
+.buttons > button{
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  justify-content:center;
+  margin: auto;
+}

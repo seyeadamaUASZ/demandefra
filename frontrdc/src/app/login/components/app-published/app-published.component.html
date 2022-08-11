@@ -1,0 +1,101 @@
+<section class="menu menu2 cid-sjq2uSAeZ4 mb-5" once="menu" id="menu2-0">
+  <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
+      <div class="container">
+          <div class="navbar-brand">
+              <span class="navbar-logo">
+                  <a href="index.html#top">
+                      <img *ngIf="appLogo" src="{{appLogo}}" alt="Logo" style="height: 3rem;">
+                  </a>
+              </span>
+              <span *ngIf="!appLogo" class="navbar-caption-wrap"><a class="navbar-caption text-white text-primary display-7"
+                      href="index.html#top">{{appName}}</a></span>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse"
+              data-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <div class="hamburger">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+              </div>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-top: 2%;">
+              <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+                  <li class="nav-item"><a class="nav-link link text-white text-primary display-4"
+                          href="index.html#content15-4">
+                          {{'landing.apropos' | translate}}</a></li>
+                  <li class="nav-item"><a class="nav-link link text-white text-primary display-4"
+                          href="index.html#features3-5">
+                          {{'landing.services' | translate}}</a></li>
+                  <li class="nav-item"><a class="nav-link link text-white text-primary display-4"
+                          href="index.html#content17-g">
+                          FAQ</a></li>
+                          <li class="nav-item"><a class="nav-link link text-white text-primary display-4"
+                            href="index.html#app-gen"  >
+                            {{'landing.applicationGenerees' | translate}}</a></li>
+                  <li class="nav-item"><a class="nav-link link text-white text-primary display-4"
+                          href="index.html#form5-7">{{'landing.contact' | translate}}</a>
+                  </li>
+                  <li class="nav-item"><a class="nav-link link text-white text-primary display-4"
+                          (click)="goToLogin()">{{'landing.btnConnexion' | translate}}</a></li>
+              </ul>
+
+              <div class="navbar-buttons mbr-section-btn" style="margin-top: -3%;">
+                  <a class="btn btn-primary display-4" (click)="openDialogInscription()" target="_blank">
+                      {{'landing.btnInscription' | translate}}</a>
+              </div>
+
+          </div>
+      </div>
+      <form [formGroup]="userForm">
+          <div class="form">
+              <!-- <span class="mymargin">
+            </span>&nbsp; -->
+              <select class="decorer" [(ngModel)]="currentLangue" #selectedLang
+                  (change)="switchLang(selectedLang.value)" formControlName="uti_lng_id"
+                  (change)="getLangueId(selectedLang.value)">
+                  <option *ngFor="let language of Langues" [value]="language.lngLangue"
+                      [selected]="language.lngLangue === translate.currentLang">
+                      {{ language.lngLangue}}
+                      <!-- <mat-icon  [svgIcon]="language?.lngIcone" style="zoom: 1;"></mat-icon> -->
+
+                  </option>&nbsp;&nbsp;
+              </select>
+          </div>
+      </form>&nbsp;&nbsp;&nbsp;&nbsp;
+  </nav>
+</section>
+<div class="slider1 cid-smak60k9CB " id="slider1-d"></div>
+<div class="container-fluid mt-5 mb-5" style="margin-top: 7%;">
+    <!-- <hr>
+    <h2 >Bibliothèque d'applications <span class="" style="float: right;align-items: center;justify-content: center;">Nombre: {{appsPubliees?.length}}</span></h2> 
+    <hr> -->
+</div>
+
+<div class="pb-container" *ngIf="appsPubliees?.length==0"> {{'landing.pasdepublication' | translate}}</div>
+<div *ngIf="appsPubliees?.length>0" class="container-fluid ">
+
+  <div  class="pb-container">
+    
+    <a *ngFor="let app of appsPubliees" class="pb-card" (click)="goLink(app.appUrl)" >
+        <img *ngIf="app?.appImg" [src]="'data:image/png;base64,'+app.appImg" alt="">
+        <h3 class="pb-h3-hover">{{app.appNom}}</h3>
+        <p class="small pb-p-hover">
+            <!-- Card description with lots of great facts and interesting details. -->
+            {{('app.description'+app.appId) | translate}}
+        </p>
+        <div class="go-corner" href="#">
+          <div class="go-arrow">
+            →
+          </div>
+        </div>
+        <div class="app-name mat-elevation-z2"><h3>{{app.appNom}}</h3></div>
+      </a>
+      
+    
+  </div>
+
+  
+
+</div>

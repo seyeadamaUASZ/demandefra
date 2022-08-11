@@ -1,0 +1,33 @@
+<div >
+  <div class="">
+      <h3 class="card-heading float-left">
+          <strong class="foncer">   {{'typedocument.edit' | translate}}
+          </strong>
+        </h3>
+      <!-- <h2>
+          {{'fonctionnalite.edit' | translate}}
+      </h2> -->
+  </div>
+  <form class="" [formGroup]="FormulaireForm" (ngSubmit)="onSubmit()">
+      <div>
+          <div>
+
+              <mat-form-field>
+                  <mat-icon matSuffix>files-pi</mat-icon>
+                  <input matInput placeholder="{{'typedocument.libelle' | translate}}" formControlName="tydLibelle" required>
+              </mat-form-field>
+              <mat-form-field>
+                  <mat-icon matSuffix>settings</mat-icon>
+                  <input matInput placeholder="{{'typedocument.description' | translate}}"
+                      formControlName="tydDescription" required>
+              </mat-form-field>
+          </div>
+      </div>
+      <div class="mat-dialog-actions">
+          <button mat-stroked-button color="warn" (click)="closeDialog()"
+          type="button">{{'Action.close' | translate}}</button>
+          <button  mat-raised-button color="primary" type="submit">{{'Action.save' | translate}}</button>
+
+      </div>
+  </form>
+</div>

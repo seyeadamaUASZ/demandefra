@@ -1,0 +1,36 @@
+<mat-card class="">
+    <mat-card-header class="card-header">
+        <span class="header">{{'fichier.listSousMenu' | translate}}</span>
+    </mat-card-header>
+    <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAddSousMenu()"
+      matTooltip="{{'fichier.addSousMenu' | translate}}">
+      <mat-icon>add</mat-icon>
+    </button><br>
+    <mat-form-field class="filtre">
+        <mat-label>{{'utilisateur.filtre'| translate}}</mat-label>
+        <input matInput (keyup)="applyFilter($event)">
+    </mat-form-field>
+
+    <div class="container-fluid">
+        <table mat-table class=" mat-elevation-z8" [dataSource]="dataSource" matSort>   
+            <ng-container matColumnDef="menNom">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'fichier.nomSousMenu' | translate}} </th>
+                <td mat-cell *matCellDef="let sousMenu"> {{sousMenu.menNom}} </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                        {{'register.action' | translate}}</span> </th>
+                <td mat-cell *matCellDef="let sousMenu" class="fab">
+                    <mat-icon matTooltip="{{'fichier.addDelMenu' | translate}}" color="primary" (click)="openDialogEditSousMenu(sousMenu)">
+                        edit
+                    </mat-icon>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+</mat-card>

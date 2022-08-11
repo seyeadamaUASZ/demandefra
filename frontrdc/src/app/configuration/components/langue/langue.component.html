@@ -1,0 +1,172 @@
+
+<mat-tab-group [selectedIndex]="tabIndex">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon color="primary">language</mat-icon>&nbsp;
+      {{'configuration.langue.tabGestionLangue' | translate}}
+    </ng-template>
+    <mat-card class="">
+      <mat-card-header class="card-header">
+        <mat-card-title>{{'configuration.langue.titre' | translate}}</mat-card-title>
+      </mat-card-header><br>
+      <mat-form-field appearance="outline">
+        <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+        <input matInput (keyup)="applyFilter($event)">
+        
+      </mat-form-field>
+
+      <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogEditLangue2()" matTooltip="{{'configuration.addLangue' | translate}}">
+        <mat-icon>add</mat-icon>
+      </button>
+
+      <div class="">
+        <table mat-table class="mat-elevation-z8" [dataSource]="dataSource" >
+          <ng-container matColumnDef="lngCode">
+            <th mat-header-cell *matHeaderCellDef > {{'configuration.langue.lngCode' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.lngCode}} </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="lngLibelleComplet">
+            <th mat-header-cell *matHeaderCellDef > {{'configuration.langue.lngLibelleComplet' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.lngLibelleComplet}} </td>
+          </ng-container>
+          <ng-container matColumnDef="lngLangue">
+            <th mat-header-cell *matHeaderCellDef > {{'configuration.langue.lngLangue' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.lngLangue}} </td>
+          </ng-container>
+          <ng-container matColumnDef="lngIcone">
+            <th mat-header-cell *matHeaderCellDef > {{'configuration.langue.lngIcone' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.lngIcone}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                    {{'register.action' | translate}}</span> </th>
+            <td mat-cell *matCellDef="let element" class="fab">
+                <button mat-button [mat-menu-trigger-for]="detail">
+                    <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                        yPosition="above">
+                        more_vert
+                    </mat-icon>
+                </button>
+
+
+                <mat-menu #detail="matMenu">
+                    <button mat-menu-item (click)="openDialogEditLangue(element)">
+                        <mat-icon matTooltip="{{'utilisateur.edit'| translate}}" color="secondary">
+                            edit
+                        </mat-icon>{{'utilisateur.edit'| translate}}
+                    </button>
+                    
+                    <button mat-menu-item (click)="supprimerLangue(element)">
+                        <mat-icon color="warn" matTooltip="{{'utilisateur.supprimer'| translate}}">delete
+                        </mat-icon>
+                        {{'utilisateur.supprimer'| translate}}
+                    </button>
+                    
+                    
+                </mat-menu>
+
+
+            </td>
+        </ng-container>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+
+    </mat-card>
+
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon color="primary">translate</mat-icon>&nbsp;
+      {{'configuration.traduction.tabGestionTraduction' | translate}}
+    </ng-template>
+    <mat-card class="">
+      <mat-card-header class="card-header">
+        <mat-card-title>{{'configuration.traduction.titre' | translate}}</mat-card-title>
+      </mat-card-header><br>
+      <mat-form-field appearance="outline" [style.width.%]="50">
+        <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+        <input  matInput (keyup)="applyFilterTraduction($event)">
+        
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="float-right" style="margin-right:1%">
+        <mat-label>{{'configuration.traduction.langueListName' | translate}}</mat-label>
+        <mat-select name="selectedLangue" [(value)]="selectedLangue" (selectionChange)="listTraduction(selectedLangue)">
+          <mat-option *ngFor="let l of langues " [value]="l">{{'langue.'+l.lngLangue | translate }}</mat-option>
+        </mat-select>
+        
+      </mat-form-field>
+
+      <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogEditTraduction()" matTooltip="{{'configuration.addTraduction' | translate}}">
+        <mat-icon>add</mat-icon>
+      </button>
+
+      <div class="">
+        <table #tableTraduction mat-table class="mat-elevation-z8" [dataSource]="dataSourceTraduction" >
+          <ng-container matColumnDef="reference">
+            <th mat-header-cell *matHeaderCellDef > {{'configuration.traduction.reference' | translate}} </th>
+            <td mat-cell *matCellDef="let element"> <b><code>{{element.reference}}</code></b> </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="defaultLangue">
+            <th mat-header-cell *matHeaderCellDef > {{'langue.fr' | translate}} </th>
+            <td mat-cell *matCellDef="let element" > 
+              <div style="word-break:break-all !important;">
+                {{element.defaultLangue}}
+              </div> 
+          </td>
+          </ng-container>
+          <ng-container matColumnDef="selectedLangue">
+            <th mat-header-cell *matHeaderCellDef > {{'langue.'+selectedLangue?.lngLangue | translate}} </th>
+            <td mat-cell *matCellDef="let element" > 
+              <div style="word-break:break-all !important;">
+                {{element.selectedLangue}} 
+              </div>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsTraductions"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsTraductions;"></tr>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                    {{'register.action' | translate}}</span> </th>
+            <td mat-cell *matCellDef="let element" class="fab">
+                <button mat-button [mat-menu-trigger-for]="detailtrd">
+                    <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                        yPosition="above">
+                        more_vert
+                    </mat-icon>
+                </button>
+
+
+                <mat-menu #detailtrd="matMenu">
+                    <button mat-menu-item (click)="openDialogUpdateTraduction(element)">
+                        <mat-icon matTooltip="{{'utilisateur.edit'| translate}}" color="secondary">
+                            edit
+                        </mat-icon>{{'utilisateur.edit'| translate}}
+                    </button>
+                    
+                    <button mat-menu-item (click)="supprimerTraduction(element)">
+                        <mat-icon color="warn" matTooltip="{{'utilisateur.supprimer'| translate}}">delete
+                        </mat-icon>
+                        {{'utilisateur.supprimer'| translate}}
+                    </button>
+                    
+                    
+                </mat-menu>
+
+
+            </td>
+        </ng-container>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+
+    </mat-card>
+
+  </mat-tab>
+</mat-tab-group>

@@ -1,0 +1,91 @@
+ <div class="row">
+    <form class="col-lg-12 col-md-12" [formGroup]="registreForm" > 
+      <mat-form-field [hidden]="true"> 
+        <input   matInput formControlName="workflowid" />
+    </mat-form-field>
+    <mat-form-field [hidden]="true"> 
+      <input   matInput formControlName="taskid" />
+  </mat-form-field>
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+        <mat-form-field appearance="fill">
+          <mat-label>{{'workflow.titrereglegestion' | translate}}</mat-label>
+          <mat-icon matSuffix>compare_arrows</mat-icon>
+          <input matInput placeholder="{{'workflow.titrereglegestion' | translate}}" type="text" formControlName="titrereglegestion">
+        </mat-form-field>  
+      </div> 
+      <div class="col-lg-6 col-md-6"> 
+        <div class="form-group" >
+          <mat-form-field appearance="fill">
+            <mat-label>{{'wrkformdonnee' | translate}}</mat-label>
+            <mat-select placeholder="{{'workflow.selectform' | translate}}" (selectionChange)="onChange($event.value)" formControlName="wrkformdonnee"
+            required > 
+            <mat-option *ngFor="let wrkformdonnee of wrkform" [value]="wrkformdonnee.frmId">{{wrkformdonnee.frmNom}}</mat-option> 
+        </mat-select> 
+          </mat-form-field>
+        </div> 
+      </div>
+    </div>
+    <div class="row" > 
+      <div class="col-lg-6 col-md-6"> 
+        <div class="form-group" >
+          <h3>{{'workflow.variablecondition' | translate}}</h3>
+          <mat-form-field appearance="fill">
+            <mat-label>{{'variablecondition' | translate}}</mat-label>
+            <mat-select placeholder="{{'workflow.variablecondition' | translate}}" formControlName="variablecondition"
+            required> 
+            <mat-option *ngFor="let champs of champsextract" [value]="champs.chp_id">{{champs.chp_nom}}</mat-option> 
+        </mat-select>
+       
+          </mat-form-field>
+        </div> 
+      </div>
+      <div class="col-lg-6 col-md-6">
+      
+        <div class="form-group" >
+          <h3>{{'workflow.condition' | translate}}</h3>
+          <mat-form-field appearance="fill">
+            <mat-label>{{'workflow.condition' | translate}}</mat-label>
+            
+        <mat-select placeholder="{{'workflow.condition' | translate}}" formControlName="condition"
+        required> 
+        <mat-option [value]='"="'>{{'Egal à'}}</mat-option>
+          <mat-option [value]='">"'>{{'Superieur à'}}</mat-option>
+          <mat-option [value]='"<"'>{{'Inferieur à'}}</mat-option>
+          <mat-option [value]='"<="'>{{'Inferieur ou égal à'}}</mat-option>
+          <mat-option [value]='">="'>{{'Superieur ou égal à'}}</mat-option>
+          <mat-option [value]='"contient"'>{{'Contient'}}</mat-option>
+    </mat-select>
+          </mat-form-field> 
+        </div> 
+      </div>
+
+    
+
+    <div class="col-lg-6 col-md-6">
+      <mat-form-field appearance="fill">
+        <mat-label>{{'workflow.donneecondition' | translate}}</mat-label>
+        <mat-icon matSuffix>compare_arrows</mat-icon>
+        <input matInput placeholder="{{'workflow.donneecondition' | translate}}" type="text" formControlName="donneecondition">
+      </mat-form-field>  
+    </div> 
+    
+
+  </div>
+
+  </form>
+  </div>
+  
+   
+
+<div class="row">
+  <div class="col-6">
+    <div class="mat-dialog-actions"> 
+      <button mat-stroked-button color="warn" (click)="closeDialog()"
+          type="button">{{'Action.close' | translate}}</button> 
+      <button mat-raised-button color="primary"  (click)="save()">{{'Action.save' | translate}}</button>
+
+  </div>
+  </div>
+</div>
+

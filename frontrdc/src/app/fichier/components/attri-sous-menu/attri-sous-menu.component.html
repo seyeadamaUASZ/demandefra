@@ -1,0 +1,77 @@
+
+  <!-- <mat-card-title>{{'fichier.addPrivilege' | translate}}</mat-card-title>
+  <mat-card-header class="card-header">
+    {{rapport?.rptNom}}
+  </mat-card-header>
+  <form class="" (ngSubmit)="validateAllocation()">
+    <div class="mat-elevation-z8">
+      <mat-selection-list #shoes>
+        <mat-list-option *ngFor="let menu of listMenu">
+          {{menu.menNom}}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+    <div class="mat-dialog-actions">
+      <button class="align-left" mat-raised-button color="primary" type="submit">Validate</button>
+      <button class="align-left" mat-raised-button color="warn" (click)="closeDialog()">Return</button>
+    </div>
+  </form> -->
+
+  <mat-card>
+    <mat-card-title>{{'fichier.addPrivilege' | translate}}</mat-card-title>
+    <mat-card-header class="card-header">
+      {{'fichier.addDelMenu' | translate}}
+    </mat-card-header>
+    <!--
+    <mat-form-field class="filtre">
+      <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+      <input matInput (keyup)="applyFilterRoles($event)" placeholder="Search">
+    </mat-form-field>
+  -->
+    <form class="" >
+      <div class="mat-elevation-z8">
+        <mat-accordion >
+          <mat-expansion-panel class="fond" id="back" opened>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{rapport?.rptNom}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+  
+            <div fxLayout="column">
+              <table mat-table [dataSource]="getDatasource(listMenu)">
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox disabled (change)="$event ? masterToggle(listMenu) : null" [checked]="selectionMenu.hasValue() && isAllSelected(listMenu)"
+                      [indeterminate]="selectionMenu.hasValue() && !isAllSelected(listMenu)" [aria-label]="checkboxLabel(listMenu)">
+                    </mat-checkbox>
+                  </th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selectMenu($event, row) : null"
+                     [checked]="selectionIsSelected(row)"
+                      [aria-label]="checkboxLabel(listMenu, row)">
+                    </mat-checkbox>
+                  </td>
+                </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="menNom">
+                  <th mat-header-cell *matHeaderCellDef> {{'role.accessrights.name' | translate}} </th>
+                  <td mat-cell *matCellDef="let element"> {{element.menNom}} </td>
+                </ng-container>
+  
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectionMenu.toggle(row)">
+                </tr>
+              </table> <br>
+            </div>
+  
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <div class="mat-dialog-actions">
+        <button  mat-stroked-button color="warn" (click)="closeDialog()">Return</button>
+        <button  mat-raised-button color="primary" (click)="validateAllocation()">Validate</button>
+      </div>
+    </form>
+  </mat-card>

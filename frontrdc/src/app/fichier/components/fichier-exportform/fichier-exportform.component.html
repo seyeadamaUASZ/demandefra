@@ -1,0 +1,32 @@
+<!-- <span class="route">{{'dashboard.home' | translate }} >  {{'dashboard.fichier' | translate }}</span> -->
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <mat-card class="example-card">
+    <mat-card-header class="mat-card-header">
+      <mat-card-title>
+        {{'fichier.exportation_title' | translate}}
+      </mat-card-title>
+      <!-- <div class="mat-card-title">
+        <div id="login-fab" class="mdl-color--accent mdl-color-text--white">
+          <i id="lock-icon" class="material-icons">file_copy</i>
+        </div>
+        <mat-card-title>
+          {{'fichier.exportation_title' | translate}}
+        </mat-card-title>
+      </div> -->
+    </mat-card-header>
+    <mat-card-content class="mat-card-content">
+      <div *ngFor="let field of fields">
+        <app-dynamic-form-field [field]="field" [form]="form"></app-dynamic-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="mat-card-actions">&nbsp;&nbsp;&nbsp;
+      <button mat-stroked-button color="warn" type="button"
+        (click)="gotoPreviousPage()">{{'Action.cancel' | translate}}</button>
+      <button mat-raised-button color="primary" (click)="genererRapportPdf()"
+        [disabled]="!form.valid">{{'Action.exportPdf' | translate}}</button>
+      <button mat-raised-button (click)="genererRapportExcel()"
+        [disabled]="!form.valid">{{'Action.exportExcel' | translate}}</button>
+    </mat-card-actions><br>
+  </mat-card>
+
+</form>

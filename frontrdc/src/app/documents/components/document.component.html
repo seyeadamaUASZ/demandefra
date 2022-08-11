@@ -1,0 +1,223 @@
+<!-- <div class="row">
+  <div class="col-sm-6">
+    <h3 class="float-left">
+      <strong class="foncer"> {{'menu.documents' | translate}}
+      </strong>
+    </h3>
+  </div>
+</div> -->
+
+<mat-tab-group mat-align-tabs="start">
+    <mat-tab label="{{'menu.documents' | translate}}">
+        <mat-card class="">
+            <mat-card-header class="card-header">
+                <mat-card-title>{{'document.liste' | translate}}</mat-card-title>
+            </mat-card-header><br>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'document.titre' | translate}}</mat-label>
+                <input matInput [(ngModel)]="search.dctTitre" name="dtcTitre" >
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'document.auteur' | translate}}</mat-label>
+                <input matInput  [(ngModel)]="search.dctAuteur" name="dtcAuteur">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'document.type' | translate}}</mat-label>
+                <input matInput [(ngModel)]="search.typeDocuments" name="dtcType" >
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'document.date_chargement' | translate}}</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="search.dctDate" name="dctDate" >
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <button (click)="advancedSearch()" class="ml-5" mat-mini-fab color="primary"><mat-icon>search</mat-icon></button>
+
+            <mat-menu #detail="matMenu">
+                <form [formGroup]="form">
+                    <div *ngFor="let cd of columnDefinitions">
+                        &nbsp; <mat-checkbox [formControlName]="cd.def">{{cd.label | translate}}&nbsp;
+                        </mat-checkbox>
+                    </div>
+
+                </form>
+            </mat-menu>
+
+            <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAdd()"
+                matTooltip="{{'document.ajout' | translate}}">
+                <mat-icon>add</mat-icon>
+            </button>
+
+            <div class="">
+                <button class="float-right" mat-button [mat-menu-trigger-for]="detail" yPosition="above">
+                    <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                        filter_alt
+                    </mat-icon>
+                </button>
+                <table mat-table class=" mat-elevation-z8" [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="dctTitre">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.titre' | translate}} </th>
+                        <td mat-cell *matCellDef="let element"> {{element.dctTitre}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="dctAuteur">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'document.auteur' | translate}} </th>
+                        <td mat-cell *matCellDef="let element"> {{element.dctAuteur}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="dctType">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.type' | translate}} </th>
+                        <td mat-cell *matCellDef="let element"> {{element.typeDocuments.tydLibelle}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="dctDate">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.date_chargement' |
+                            translate}} </th>
+                        <td mat-cell *matCellDef="let element"> {{element.dctDate | date:'dd/MM/yyyy'}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                                {{'register.action' | translate}}</span> </th>
+                        <td mat-cell *matCellDef="let element" class="fab">
+                            <button mat-button [mat-menu-trigger-for]="detail">
+                                <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                                    yPosition="above">
+                                    more_vert
+                                </mat-icon>
+                            </button>
+
+
+                            <mat-menu #detail="matMenu">
+                                <button mat-menu-item (click)="openDialogUpdate(element)">
+                                    <mat-icon matTooltip="{{'utilisateur.edit'| translate}}" color="secondary">
+                                        edit
+                                    </mat-icon>{{'utilisateur.edit'| translate}}
+                                </button>
+                                <button mat-menu-item (click)="openDialogConsultDocument(element)">
+                                    <mat-icon matTooltip="{{'document.consulter'| translate}}" color="primary">
+                                        visibility
+                                    </mat-icon>{{'document.consulter'| translate}}
+                                </button>
+                                <button mat-menu-item (click)="openDialogDeleteDocument(element.dctId)">
+                                    <mat-icon color="warn" matTooltip="{{'utilisateur.supprimer'| translate}}">delete
+                                    </mat-icon>
+                                    {{'utilisateur.supprimer'| translate}}
+                                </button>
+
+                            </mat-menu>
+
+
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+                    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns()"></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+
+
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="{{'document.stockageblockchain' | translate}}">
+        <mat-card class="">
+            <mat-card-header class="card-header">
+                <mat-card-title>{{'document.listehash' | translate}}</mat-card-title>
+            </mat-card-header><br>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'document.filtre' | translate}}</mat-label>
+                <input matInput (keyup)="applyFilter($event)">
+            </mat-form-field>
+           
+
+
+            <button mat-mini-fab color="primary" class="add-contact" mat-button [mat-menu-trigger-for]="verifBl"
+                yPosition="above">
+                <mat-icon matTooltip="{{'blockchain.details'| translate}}" color="secondary">
+                    grid_view
+                </mat-icon>
+            </button>
+            <mat-menu #verifBl="matMenu">
+                <button mat-menu-item (click)="openDialogAddBlockChain()">
+                    {{'document.ajoutblockchain' | translate}}
+                </button>
+                <button mat-menu-item (click)="openDialogVerifyBlockChain()">
+                    {{'document.verifyblockchain' | translate}}
+                </button>
+            </mat-menu>
+
+            <div class="">
+                <button class="float-right" mat-button [mat-menu-trigger-for]="detail2" yPosition="above">
+                    <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+                        filter_alt
+                    </mat-icon>
+                </button>
+                <mat-menu #detail2="matMenu">
+                    <form [formGroup]="form2">
+                        <div *ngFor="let cd of columnDefinitions2">
+                            &nbsp; <mat-checkbox [formControlName]="cd.def">{{cd.label | translate}}&nbsp;
+                            </mat-checkbox>
+                        </div>
+    
+                    </form>
+                </mat-menu>
+                <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceBl" matSort>
+                    <ng-container matColumnDef="stblNom">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'blockchain.fileName' | translate}} </th>
+                        <td mat-cell *matCellDef="let element"> {{element.stblNom}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="stblHash">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'blockchain.fileHash' | translate}} </th>
+                        <td mat-cell *matCellDef="let element"> {{element.stblHash}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="stblDescription">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'blockchain.fileDescription' | translate}} </th>
+                        <td mat-cell *matCellDef="let element"> {{element.stblDescription}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                                {{'register.action' | translate}}</span> </th>
+                        <td mat-cell *matCellDef="let element" class="fab">
+                            <button mat-button [mat-menu-trigger-for]="detail">
+                                <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                                    yPosition="above">
+                                    more_vert
+                                </mat-icon>
+                            </button>
+
+
+                            <mat-menu #detail="matMenu">
+                                <button mat-menu-item (click)="openDialogUpdate(element)">
+                                    <mat-icon matTooltip="{{'utilisateur.edit'| translate}}" color="secondary">
+                                        edit
+                                    </mat-icon>{{'utilisateur.edit'| translate}}
+                                </button>
+                                <button mat-menu-item (click)="openDialogConsultDocument(element)">
+                                    <mat-icon matTooltip="{{'document.consulter'| translate}}" color="primary">
+                                        visibility
+                                    </mat-icon>{{'document.consulter'| translate}}
+                                </button>
+                                <button mat-menu-item (click)="openDialogDeleteDocument(element.dctId)">
+                                    <mat-icon color="warn" matTooltip="{{'utilisateur.supprimer'| translate}}">delete
+                                    </mat-icon>
+                                    {{'utilisateur.supprimer'| translate}}
+                                </button>
+
+                            </mat-menu>
+
+
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="getDisplayedColumns2()"></tr>
+                    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns2()"></tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+
+
+        </mat-card>
+    </mat-tab>
+
+</mat-tab-group>

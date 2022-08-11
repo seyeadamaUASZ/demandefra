@@ -1,0 +1,77 @@
+<mat-card class="container">
+  <mat-card-title>{{'notification.gestion-event' | translate}} | <span>{{notification?.ntfObjet}}</span></mat-card-title>
+  <!-- <mat-card-header class="card-header">
+    {{'notification.nom-notification' | translate}}: {{notification?.ntfObjet}}
+  </mat-card-header> -->
+  <!--
+  <mat-form-field class="filtre">
+    <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+    <input matInput (keyup)="applyFilterRoles($event)" placeholder="Search">
+  </mat-form-field>
+-->
+  <form class="">
+    <div class="">
+      <mat-accordion >
+        <mat-expansion-panel id="back"  *ngFor="let menu of listMenu" (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{'menu.'+menu?.menNom | translate}}
+            </mat-panel-title>
+            <!--
+          <mat-panel-description>
+           {{panelOpenState ? 'open' : 'closed'}}
+          </mat-panel-description>
+          -->
+          </mat-expansion-panel-header>
+
+          <div fxLayout="column">
+            <table mat-table [dataSource]="getDatasource(menu.actions)">
+              <!-- Checkbox Column -->
+              <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                  <mat-checkbox disabled (change)="$event ? masterToggle(menu.actions) : null"
+                    [checked]="selectionAction.hasValue() && isAllSelected(menu.actions)"
+                    [indeterminate]="selectionAction.hasValue() && !isAllSelected(menu.actions)"
+                    [aria-label]="checkboxLabel(menu.actions)">
+                  </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selectAction($event, row) : null"
+                    [checked]="selectionIsSelected(row)" [aria-label]="checkboxLabel(menu.actions, row)">
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+              <!-- Position Column -->
+              <ng-container matColumnDef="actCode">
+                <th mat-header-cell *matHeaderCellDef> {{'role.accessrights.code' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.actCode}} </td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="actNom">
+                <th mat-header-cell *matHeaderCellDef> {{'role.accessrights.name' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.actNom}} </td>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="actDescription">
+                <th mat-header-cell *matHeaderCellDef> {{'role.accessrights.description' | translate}}</th>
+                <td mat-cell *matCellDef="let element"> {{element.actDescription}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectionAction.toggle(row)">
+              </tr>
+            </table> <br>
+          </div>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="mat-dialog-actions margin">
+      <button mat-stroked-button color="warn" (click)="closeDialog()"> {{'btn_retour' | translate}}</button>
+      <button mat-raised-button color="primary" (click)="validateAllocation()"> {{'btn_enregistrer' | translate}}</button><br>
+    </div>
+  </form>
+</mat-card>

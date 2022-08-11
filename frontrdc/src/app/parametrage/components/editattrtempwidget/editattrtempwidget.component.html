@@ -1,0 +1,58 @@
+<div class="login-page">
+<div class="row"> 
+  <div class="col-lg-12 col-md-12">
+    <form class="" [formGroup]="registreForm" >
+
+    <div class="form-group" >
+      <h3>{{'parametrage.selectprofil' | translate}}</h3>
+      <mat-form-field appearance="fill">
+        <mat-label>{{'profile_select' | translate}}</mat-label>
+        <mat-select placeholder="{{'register.profil' | translate}}" formControlName="uti_pro_id"
+        required> 
+        <mat-option *ngFor="let profile of profiles" [value]="profile">{{profile.proLibelle}}
+        </mat-option>
+    </mat-select>
+    <mat-error *ngIf="g.uti_pro_id.errors">
+        {{'control.profil' | translate}} </mat-error>
+      </mat-form-field>
+    </div>
+     </form>
+  </div>
+</div>
+<div class="row" cdkDropListGroup>
+ 
+  <div class="col-6">
+    <h3>{{'widget.selecttemplate' | translate}}</h3>
+    <div
+      cdkDropList
+      [cdkDropListData]="restant"
+      class="example-list"
+      cdkDropListSortingDisabled
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of restant" cdkDrag>{{item.wtNom}}</div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <h3>{{'widget.listtemplate' | translate}}</h3>
+    <div
+    cdkDropList
+    [cdkDropListData]="restant1"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let itematrr of restant1" cdkDrag>{{itematrr.wtNom}}</div>
+  </div>
+  </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="mat-dialog-actions"> 
+        <button mat-stroked-button color="warn" (click)="closeDialog()"
+            type="button">{{'Action.close' | translate}}</button> 
+        <button mat-raised-button color="primary"  (click)="update()">{{'Action.edit' | translate}}</button>
+
+    </div>
+    </div>
+  </div> 
+</div>

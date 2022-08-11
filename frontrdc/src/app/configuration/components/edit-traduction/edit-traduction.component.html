@@ -1,0 +1,64 @@
+<div class="login-page">
+  <div class="login-spacer"></div>
+  <div class="">
+    <h3 class="card-heading float-left">
+      <strong class="foncer"> {{ editTraductionTitle | translate}}
+      </strong>
+    </h3>
+    <form class="" [formGroup]="traductionForm" (ngSubmit)="onSubmit()"><br><br>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="container-fluid">
+            <h3>{{'Référence' | translate}}</h3>
+          </div>
+          <div class="container-fluid">
+            
+            <mat-form-field appearance="fill">
+              <textarea type="text"
+                     matInput
+                     formControlName="reference"
+                     [matAutocomplete]="auto" rows="6" id="reference"></textarea>
+              <mat-autocomplete [panelWidth]="auto"  autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of (filteredOptions | async)" [value]="option" (click)="update(option)">
+                  <div style="word-break: break-all !important; width: fit-content;height: fit-content;">{{option.reference}}</div>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="container-fluid">
+            <h3>{{'langue.fr' | translate}}</h3>
+          </div>
+          <div class="container-fluid">
+            <mat-form-field appearance="fill">
+              <textarea matInput rows="6"  type="text"
+                formControlName="defaultLangue" required></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="container-fluid">
+            <h3>{{'langue.'+langue?.lngLangue | translate}}</h3>
+          </div>
+          <div class="container-fluid">
+            <mat-form-field appearance="fill">
+              <textarea matInput rows="6"  type="text"
+                formControlName="selectedLangue" ></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="buttons">
+        <div class="login col-sm-6 center">
+          <button mat-stroked-button color="warn" (click)="closeDialog2()"
+            type="button">{{'btn_fermer' | translate}}</button>
+          <button mat-raised-button color="primary" type="submit">{{'btn_valider' | translate}}</button>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

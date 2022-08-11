@@ -1,0 +1,179 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h3 class="float-left">
+      <strong class="foncer"> {{'menu.gestiontask' | translate}}
+      </strong>
+    </h3>
+
+  </div>
+</div>
+<br>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+      {{'workflow.gestiontask' | translate}}
+    </ng-template>
+    <mat-card class="">
+      <mat-card-header class="card-header">
+          <mat-card-title>{{'workflow.gestiontask' | translate}}</mat-card-title>
+      </mat-card-header><br>
+      <mat-form-field appearance="outline">
+          <mat-label>{{'formulaire.filtre' | translate}}</mat-label>
+          <input matInput (keyup)="applyFilter($event)">
+      </mat-form-field>
+      <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAddform()"
+      matTooltip="{{'workflow.ajoutTask' | translate}}">
+      <mat-icon>person_add</mat-icon>
+    </button>
+      <div class="">
+        <button mat-raised-button color="primary" type="submit" (click)="openDialogAddstatus()">{{'Action.addstatus' | translate}}</button>
+        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+          <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceWrkfTask" matSort>
+
+              <ng-container matColumnDef="tskId">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'formulaire.tskId' | translate}} </th>
+                  <td mat-cell *matCellDef="let element"> {{element.tskId}} </td>
+              </ng-container>
+              <ng-container matColumnDef="tskName">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'formulaire.tskName' | translate}} </th>
+                  <td mat-cell *matCellDef="let element"> {{element.tskName}} </td>
+              </ng-container>
+              
+
+            <ng-container matColumnDef="poOwner.proLibelle">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header="poOwner">{{'formulaire.taskOwner' | translate}} </th>
+              <td mat-cell *matCellDef="let element">{{element.poOwner?.proLibelle}}</td>
+          </ng-container>
+            
+              
+              <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                          {{'register.action' | translate}}</span> </th>
+                  <td mat-cell *matCellDef="let element" class="fab">
+                      <button mat-button [mat-menu-trigger-for]="detail">
+                          <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                              yPosition="above">
+                              more_vert
+                          </mat-icon>
+                      </button>
+
+
+                      <mat-menu #detail="matMenu">
+                        <button mat-menu-item  (click)="openDialogUpdateTask(element)">
+                          <mat-icon matTooltip="{{'workflow.modifier'| translate}}" color="primary">
+                              edit
+                          </mat-icon>{{'workflow.modifiertask'| translate}}
+                      </button>
+                      <button mat-menu-item  (click)="AddTransition(element)">
+                        <mat-icon matTooltip="{{'workflow.addTransition'| translate}}" color="primary">
+                            add
+                        </mat-icon>{{'workflow.addTransition'| translate}}
+                    </button>
+                    <button mat-menu-item  (click)="AddConfigTimer(element)">
+                      <mat-icon matTooltip="{{'workflow.configurertimer'| translate}}" color="primary">
+                          add
+                      </mat-icon>{{'workflow.configurertimer'| translate}}
+                  </button>
+                  <button mat-menu-item  (click)="RegleGestion(element)">
+                    <mat-icon matTooltip="{{'workflow.configureglegestion'| translate}}" color="primary">
+                        add
+                    </mat-icon>{{'workflow.configureglegestion'| translate}}
+                </button>
+                  
+
+                      </mat-menu>
+
+
+                  </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+
+
+    </mat-card>
+
+  </mat-tab>
+  
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+      {{'workflow.gestionConfigTimer' | translate}}
+    </ng-template>
+    <mat-card class="">
+      <mat-card-header class="card-header">
+          <mat-card-title>{{'workflow.gestionConfigTimer' | translate}}</mat-card-title>
+      </mat-card-header><br>
+      <mat-form-field appearance="outline">
+          <mat-label>{{'formulaire.filtre' | translate}}</mat-label>
+          <input matInput (keyup)="applyFilter($event)">
+      </mat-form-field>
+      <button mat-mini-fab color="primary" class="add-contact" (click)="openDialogAddform()"
+      matTooltip="{{'workflow.ajoutTimer' | translate}}">
+      <mat-icon>person_add</mat-icon>
+    </button>
+      <div class="">
+     
+        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+          <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceWrkftimer" matSort>
+
+              <ng-container matColumnDef="tmTitre">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'formulaire.tmTitre' | translate}} </th>
+                  <td mat-cell *matCellDef="let element"> {{element.tmTitre}} </td>
+              </ng-container>
+              <ng-container matColumnDef="tmTimerType">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'formulaire.tmTimerType' | translate}} </th>
+                  <td mat-cell *matCellDef="let element"> {{element.tmTimerType}} </td>
+              </ng-container>
+              
+
+            <ng-container matColumnDef="tmTimerData">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'formulaire.tmTimerData' | translate}} </th>
+              <td mat-cell *matCellDef="let element">{{element.tmTimerData}}</td>
+          </ng-container>
+            
+              
+              <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                          {{'register.action' | translate}}</span> </th>
+                  <td mat-cell *matCellDef="let element" class="fab">
+                      <button mat-button [mat-menu-trigger-for]="detail">
+                          <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                              yPosition="above">
+                              more_vert
+                          </mat-icon>
+                      </button>
+
+
+                      <mat-menu #detail="matMenu">
+                        <button mat-menu-item  (click)="SimulerTimer(element)">
+                          <mat-icon matTooltip="{{'workflow.simulertimer'| translate}}" color="primary">
+                              edit
+                          </mat-icon>{{'workflow.simulertimer'| translate}}
+                      </button>
+                       
+                      </mat-menu>
+
+
+                  </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumnstimer"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumnstimer;"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+
+
+    </mat-card>
+
+  </mat-tab>
+</mat-tab-group>
+
+

@@ -1,0 +1,30 @@
+
+  <mat-card-header>
+    <mat-card-title>{{'notification.detail' | translate}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-sm-6 col-lg-6 col-md-6">
+        <mat-icon color="primary" matSuffix>perm_identity</mat-icon>&nbsp;&nbsp;
+        <mat-label>{{'notification.profil' | translate}} :<strong>{{notification.profil.proLibelle}}</strong></mat-label><br>
+        <hr>
+        <mat-icon color="primary" matSuffix>add_alert</mat-icon>&nbsp;
+        <mat-label>{{'notification.text' | translate}} : <strong>{{notification.notification.ntfText}}</strong></mat-label><br>
+        <hr>
+        <mat-icon color="primary" matSuffix>add_alert</mat-icon>&nbsp;
+        <mat-label>{{'notification.Objet' | translate}} : <strong>{{notification.notification.ntfObjet}}</strong></mat-label><br>
+        <hr>
+        <mat-icon color="primary" matSuffix>add_alert</mat-icon>&nbsp;
+        <mat-label>{{'notification.signature' | translate}} : <strong>{{notification.notification.ntfSignature}}</strong></mat-label><br>
+        <hr>
+        <mat-icon color="primary" matSuffix>add_alert</mat-icon>&nbsp;
+        <mat-label>{{'notification.type' | translate}} : <strong>{{notification.notification.ntfTntId.tntNom}}</strong></mat-label><br>
+        <hr>
+        <div class="buttons">
+          <div class="login">
+              <button mat-raised-button color="primary" (click)="closeDialog()" type="button" >{{'Action.close' | translate}}</button>
+          </div>
+      </div>
+      </div>
+    </div>
+  </mat-card-content>

@@ -1,0 +1,48 @@
+import { Component, OnInit, Input, Inject, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
+import { NotificationService } from '../../../shared/service/notification.service';
+import {#ComponentNameService} from '../../service/#componentName.service';
+
+
+@Component({
+	selector: 'app-add-#componentName',
+	templateUrl: './add-#componentName.component.html',
+	styleUrls: ['./add-#componentName.component.scss']
+})
+export class Add#ComponentNameComponent implements OnInit {
+
+	#componentVariables
+	
+	constructor(private #componentNameService: #ComponentNameService,
+    private router: Router, private formBuilder: FormBuilder,
+    private translate: TranslateService,
+    private notification: NotificationService,
+    @Inject(MAT_DIALOG_DATA) public donnee: any,
+    public dialog: MatDialogRef<Add#ComponentNameComponent> ) { }
+	
+	EditForm = this.formBuilder.group({
+		id: [''],
+    	#forms
+    });
+
+	ngOnInit() {
+		#componentInstructionsOnInit
+		if(this.donnee){
+			this.EditForm.setValue(this.donnee);
+		}
+  	}
+  	
+  	onSubmit(){
+  		#componentOnSubmitInstructions
+  	}
+  	
+  	closeDialog(){
+  		this.dialog.close({status:false});
+  	}
+  	
+  	#componentFunctions
+  	
+}

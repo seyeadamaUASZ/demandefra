@@ -1,0 +1,52 @@
+<mat-card>
+  <mat-card-header  fxLayoutAlign="center">
+    <!-- <div mat-card-avatar name="{{compte.utiPrenom}} {{compte.utiNom}}" class="example-header-image"></div> -->
+  
+    <mat-card-title fxLayoutAlign="center">{{'menu.view-title' | translate}}</mat-card-title>
+    <mat-card-subtitle fxLayoutAlign="center">{{'menu.'+menu?.menNom | translate}} </mat-card-subtitle>
+
+  </mat-card-header>
+
+
+  <mat-card-content>
+    <div class="row">
+      <div class="col-sm-6">
+        <mat-label class="mat-body-strong">{{'menu.nom' | translate}} </mat-label>
+       </div>                           
+      <div class="col-sm-6">
+         <mat-label class="mat-body"> {{'menu.'+menu?.menNom | translate}}</mat-label>
+      </div>     
+    </div>
+  <br/>
+  <div class="row">
+      <div class="col-sm-6">
+        <mat-label class="mat-body-strong">{{'menu.chemin' | translate}} </mat-label>
+       </div>                           
+      <div class="col-sm-6">
+         <mat-label class="mat-body"> {{menu?.menPath}}</mat-label>
+      </div>     
+    </div>
+  <br/>
+   <div class="row">
+      <div class="col-sm-6">
+        <mat-label class="mat-body-strong">{{'menu.icone' | translate}} </mat-label>
+       </div>                           
+      <div class="col-sm-6">
+         <mat-label class="mat-body"> {{menu?.menIcone}}</mat-label>
+      </div>     
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-sm-6">
+        <mat-label class="mat-body-strong">{{'menu.icone-color' | translate}} </mat-label>
+       </div>                           
+      <div class="col-sm-6">
+         <mat-label class="mat-body"> {{menu?.menIconeColor}}</mat-label>
+      </div>     
+    </div>        
+  </mat-card-content>
+  <mat-card-actions>
+    &nbsp;<button (click)="closeDialog()" style="margin: 10px;" mat-stroked-button color="warn">{{'btn_fermer' | translate}}</button><br>
+    
+  </mat-card-actions>
+</mat-card>

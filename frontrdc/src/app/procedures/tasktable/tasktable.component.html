@@ -1,0 +1,97 @@
+<div class="container" >
+  <div class="card-header">
+
+    <h2>
+      {{this.taskname}}
+    </h2>
+  </div>
+
+  <div *ngIf="this.iddoc != null " style="margin-top: 15px;">
+    <button mat-raised-button color="primary" type="submit" (click)="recuJbpm()">Télécharger le document</button>
+  </div>
+
+  <table style="margin-top: 15px;">
+    <div *ngFor="let tskoutpt of taskoutput">
+      <tr *ngIf="tskoutpt.name != 'processId' && tskoutpt.name != 'containerId' && tskoutpt.name != 'initiator';">
+        <th>{{tskoutpt.name}} : </th>
+        <td>{{tskoutpt.value}}</td>
+      </tr>
+    </div>
+
+  </table>
+
+ 
+   
+  <form   [formGroup]="formGendoc"  style="margin-top: 15px; ">
+    <div  *ngFor="let frmdoc of formwithdoc"> 
+     <div #etat10 *ngIf="frmdoc.code == 'Document' ; else etat11">
+      <label for="">{{frmdoc.label }} </label>
+        <input  type="file"  id="doc" formControlName="{{frmdoc.name}}"  (change)="handleUpload($event)" required> 
+    </div> 
+    
+    <div #etat11 *ngIf="frmdoc.code == 'DocumentCollection' ">
+      <label for="">{{frmdoc.label }} </label>
+      <input  type="file"  id="doc" formControlName="{{frmdoc.name}}" (change)="handleUpload($event)" required> 
+  </div> 
+    </div>
+
+
+     <!--<div class="mat-dialog-actions"> 
+      <button mat-raised-button color="primary" type="submit" (click)="onsubmitDoc()">Téléverser</button>
+    </div> -->
+  </form>
+
+  <form   [formGroup]="formGen"  style="margin-top: 15px; " >
+    <div  *ngFor="let frm of form"> 
+      <mat-form-field  *ngIf="frm.code == 'TextBox' ;else etat2">
+        <label for="">{{frm.label }} </label>
+        <mat-icon matSuffix>compare_arrows</mat-icon>
+        <input  matInput placeholder="{{frm.placeHolder}}" type="text" id="{{frm.name}}" formControlName="{{frm.name}}" required> 
+    </mat-form-field> 
+    
+    <div #etat2 *ngIf="frm.code == 'CheckBox' ; else etat5">
+      <label for="">{{frm.label }} </label>
+        <input  type="checkbox" [(ngModel)]="choix" id="{{frm.name}}" formControlName="{{frm.name}}" required> 
+     </div> 
+
+ 
+    
+  
+    <div #etat5 *ngIf="frm.code == 'ListBox' ; else etat6">
+      <label for="">{{frm.label }} </label>
+         <select  id="{{frm.name}}" formControlName="{{frm.name}}" required>
+            <option *ngFor="let frm2 of frm.options"> {{frm2.text}}</option>
+ 
+        </select>
+      </div>
+
+      <label for=""></label>
+      <mat-form-field #etat6 *ngIf="frm.code == 'DatePicker' ;" appearance="fill">
+        <mat-label>{{frm.label }}</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="{{frm.name}}" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div #etat7 *ngIf="frm.code == 'TextArea' ; else etat8">
+        <label for="">{{frm.label }} </label>
+        <textarea id="{{frm.name}}" formControlName="{{frm.name}}" rows="3" cols="90" required></textarea>
+      </div>
+
+      <div #etat8 *ngIf="frm.code == 'RadioGroup'">
+        <div *ngFor="let frm3 of frm.options">
+          <label for="">{{frm.label }} </label>
+          <input type="CheckBox" id="{{frm.name }}" value="{{frm.name}}">
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="mat-dialog-actions">
+      <button mat-stroked-button color="warn" (click)="closeDialog()"
+        type="button">{{'Action.close' | translate}}</button>
+      <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Finir</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,744 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h3 class="float-left">
+      <strong class="foncer"> {{'menu.documents' | translate}}
+      </strong>
+    </h3>
+  </div>
+</div>
+<mat-tab-group>
+<mat-tab>
+  <ng-template mat-tab-label>
+    <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+    {{'document.asigner' | translate}}
+  </ng-template>
+  <ng-template mat-tab-label>
+    <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+    {{'menu.documents' | translate}}
+  </ng-template>
+  <mat-card class="">
+    <mat-card-header class="card-header centrer">
+        <mat-card-title>{{'document.asigner' | translate}}</mat-card-title>
+    </mat-card-header><br>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'document.titre' | translate}}</mat-label>
+      <input matInput [(ngModel)]="search.dctTitre" name="dtcTitre" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.auteur' | translate}}</mat-label>
+      <input matInput  [(ngModel)]="search.dctAuteur" name="dtcAuteur">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.type' | translate}}</mat-label>
+      <input matInput [(ngModel)]="search.typeDocuments" name="dtcType" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.date_chargement' | translate}}</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="search.dctDate" name="dctDate" >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <button (click)="advancedSearch(0,0)" class="ml-5" mat-mini-fab color="primary"><mat-icon>search</mat-icon></button>
+
+    <mat-menu #detail="matMenu">
+        <form [formGroup]="form">
+          <div *ngFor="let cd of columnDefinitions">
+            &nbsp; <mat-checkbox [formControlName]="cd.def">{{cd.label}}&nbsp;
+            </mat-checkbox>
+          </div>
+  
+        </form>
+      </mat-menu>
+
+    <div class="">
+          <button class="float-right" mat-button [mat-menu-trigger-for]="detail" yPosition="above">
+            <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+             filter_alt
+            </mat-icon>
+          </button>
+        <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceSigner" matSort>
+
+            <ng-container matColumnDef="dctTitre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.titre' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.dctTitre}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctAuteur">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'document.auteur' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.dctAuteur}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctType">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.type' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.typeDocuments.tydLibelle}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.date_chargement' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.dctDate |date:"dd/MM/yyyy"}} </td>
+          </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                        {{'register.action' | translate}}</span> </th>
+                <td mat-cell *matCellDef="let element" class="fab">
+                    <button mat-button [mat-menu-trigger-for]="detail">
+                        <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                            yPosition="above">
+                            more_vert
+                        </mat-icon>
+                    </button>
+
+
+                    <mat-menu #detail="matMenu">
+
+                      <button *ngIf="!element.estsigne" mat-menu-item (click)="openDialogSignerDocument(element)">
+                        <mat-icon color="success" matTooltip="{{'document.estsigner'| translate}}">vpn_key
+                        </mat-icon>
+                        {{'document.estsigner'| translate}}
+                    </button>
+                    </mat-menu>
+
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+            <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+
+  </mat-card>
+
+</mat-tab>
+<mat-tab>
+  <ng-template mat-tab-label>
+    <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+    {{'document.acertifier' | translate}}
+  </ng-template>
+
+  <mat-card class="">
+    <mat-card-header class="card-header centrer">
+        <mat-card-title>{{'document.acertifier' | translate}}</mat-card-title>
+    </mat-card-header><br>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'document.titre' | translate}}</mat-label>
+      <input matInput [(ngModel)]="search.dctTitre" name="dtcTitre" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.auteur' | translate}}</mat-label>
+      <input matInput  [(ngModel)]="search.dctAuteur" name="dtcAuteur">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.type' | translate}}</mat-label>
+      <input matInput [(ngModel)]="search.typeDocuments" name="dtcType" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.date_chargement' | translate}}</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="search.dctDate" name="dctDate" >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <button (click)="advancedSearch(1,0)" class="ml-5" mat-mini-fab color="primary"><mat-icon>search</mat-icon></button>
+
+
+    <mat-menu #detail="matMenu">
+        <form [formGroup]="form">
+          <div *ngFor="let cd of columnDefinitions">
+            &nbsp; <mat-checkbox [formControlName]="cd.def">{{cd.label}}&nbsp;
+            </mat-checkbox>
+          </div>
+  
+        </form>
+      </mat-menu>
+
+    <div class="">
+        <button class="float-right" mat-button [mat-menu-trigger-for]="detail" yPosition="above">
+            <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+             filter_alt
+            </mat-icon>
+          </button>
+        <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceCertifier" matSort>
+
+            <ng-container matColumnDef="dctTitre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.titre' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.dctTitre}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctAuteur">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'document.auteur' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.dctAuteur}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctType">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.type' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.typeDocuments.tydLibelle}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.date_chargement' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.dctDate |date:"dd/MM/yyyy"}} </td>
+          </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                        {{'register.action' | translate}}</span> </th>
+                <td mat-cell *matCellDef="let element" class="fab">
+                    <button mat-button [mat-menu-trigger-for]="detail">
+                        <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                            yPosition="above">
+                            more_vert
+                        </mat-icon>
+                    </button>
+
+
+                    <mat-menu #detail="matMenu">
+
+                        <button *ngIf="!element.estsigne" mat-menu-item >
+                          <mat-icon color="success" matTooltip="{{'document.certifier'| translate}}">vpn_key
+                          </mat-icon>
+                          {{'document.certifier'| translate}}
+                      </button>
+                    </mat-menu>
+
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+            <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+
+  </mat-card>
+
+</mat-tab>
+<mat-tab>
+  <ng-template mat-tab-label>
+    <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+    {{'document.aconsulter' | translate}}
+  </ng-template>
+  <mat-card class="" >
+    <mat-card-header class="card-header centrer">
+        <mat-card-title>{{'document.aconsulter' | translate}}</mat-card-title>
+    </mat-card-header><br>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'document.titre' | translate}}</mat-label>
+      <input matInput [(ngModel)]="search.dctTitre" name="dtcTitre" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.auteur' | translate}}</mat-label>
+      <input matInput  [(ngModel)]="search.dctAuteur" name="dtcAuteur">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.type' | translate}}</mat-label>
+      <input matInput [(ngModel)]="search.typeDocuments" name="dtcType" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.date_chargement' | translate}}</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="search.dctDate" name="dctDate" >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <button (click)="advancedSearch(2,0)" class="ml-5" mat-mini-fab color="primary"><mat-icon>search</mat-icon></button>
+
+    <mat-menu #detail="matMenu">
+        <form [formGroup]="form">
+          <div *ngFor="let cd of columnDefinitions">
+            &nbsp; <mat-checkbox [formControlName]="cd.def">{{cd.label}}&nbsp;
+            </mat-checkbox>
+          </div>
+  
+        </form>
+      </mat-menu>
+
+    <div class="">
+        <button class="float-right" mat-button [mat-menu-trigger-for]="detail" yPosition="above">
+            <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+             filter_alt
+            </mat-icon>
+          </button>
+        <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceConsulter" matSort>
+
+            <ng-container matColumnDef="dctTitre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.titre' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.dctTitre}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctAuteur">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'document.auteur' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.dctAuteur}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctType">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.type' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.typeDocuments.tydLibelle}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.date_chargement' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.dctDate |date:"dd/MM/yyyy"}} </td>
+          </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                        {{'register.action' | translate}}</span> </th>
+                <td mat-cell *matCellDef="let element" class="fab">
+                    <button mat-button [mat-menu-trigger-for]="detail">
+                        <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                            yPosition="above">
+                            more_vert
+                        </mat-icon>
+                    </button>
+
+
+                    <mat-menu #detail="matMenu">
+
+                      <button mat-menu-item (click)="consulterDocument(element)">
+                        <mat-icon matTooltip="{{'document.consulter'| translate}}" color="primary">
+                            visibility
+                        </mat-icon>{{'document.consulter'| translate}}
+                    </button>
+                    </mat-menu>
+
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+            <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+
+  </mat-card>
+
+</mat-tab>
+
+<mat-tab>
+  <ng-template mat-tab-label>
+    <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+    {{'document.aapprouver' | translate}}
+  </ng-template>
+  <mat-card class="" >
+    <mat-card-header class="card-header centrer">
+        <mat-card-title>{{'document.aapprouver' | translate}}</mat-card-title>
+    </mat-card-header><br>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'document.titre' | translate}}</mat-label>
+      <input matInput [(ngModel)]="search.dctTitre" name="dtcTitre" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.auteur' | translate}}</mat-label>
+      <input matInput  [(ngModel)]="search.dctAuteur" name="dtcAuteur">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.type' | translate}}</mat-label>
+      <input matInput [(ngModel)]="search.typeDocuments" name="dtcType" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.date_chargement' | translate}}</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="search.dctDate" name="dctDate" >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <button (click)="advancedSearch(3,0)" class="ml-5" mat-mini-fab color="primary"><mat-icon>search</mat-icon></button>
+
+    <mat-menu #detail="matMenu">
+        <form [formGroup]="form">
+          <div *ngFor="let cd of columnDefinitions">
+            &nbsp; <mat-checkbox [formControlName]="cd.def">{{cd.label}}&nbsp;
+            </mat-checkbox>
+          </div>
+  
+        </form>
+      </mat-menu>
+
+    <div class="">
+        <button class="float-right" mat-button [mat-menu-trigger-for]="detail" yPosition="above">
+            <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+             filter_alt
+            </mat-icon>
+          </button>
+        <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceApprouver" matSort>
+
+            <ng-container matColumnDef="dctTitre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.titre' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.dctTitre}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctAuteur">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'document.auteur' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.dctAuteur}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctType">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.type' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.typeDocuments.tydLibelle}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.date_chargement' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.dctDate |date:"dd/MM/yyyy"}} </td>
+          </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                        {{'register.action' | translate}}</span> </th>
+                <td mat-cell *matCellDef="let element" class="fab">
+                    <button mat-button [mat-menu-trigger-for]="detail">
+                        <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                            yPosition="above">
+                            more_vert
+                        </mat-icon>
+                    </button>
+
+
+                    <mat-menu #detail="matMenu">
+
+                      <button mat-menu-item (click)="consulterDocument(element)">
+                        <mat-icon matTooltip="{{'document.consulter'| translate}}" color="primary">
+                            visibility
+                        </mat-icon>{{'document.consulter'| translate}}
+                    </button>
+                    <button mat-menu-item (click)="approuverDocument(element)">
+                      <mat-icon matTooltip="{{'document.approuver'| translate}}" color="primary">
+                          check
+                      </mat-icon>{{'document.approuver'| translate}}
+                  </button>
+                    </mat-menu>
+
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+            <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+
+  </mat-card>
+
+</mat-tab>
+
+<mat-tab>
+  <ng-template mat-tab-label>
+    <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+    {{'document.dejasigner' | translate}}
+  </ng-template>
+
+  <mat-card class="" >
+    <mat-card-header class="card-header centrer">
+        <mat-card-title>{{'document.dejasigner' | translate}}</mat-card-title>
+    </mat-card-header><br>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'document.titre' | translate}}</mat-label>
+      <input matInput [(ngModel)]="search.dctTitre" name="dtcTitre" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.auteur' | translate}}</mat-label>
+      <input matInput  [(ngModel)]="search.dctAuteur" name="dtcAuteur">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.type' | translate}}</mat-label>
+      <input matInput [(ngModel)]="search.typeDocuments" name="dtcType" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.date_chargement' | translate}}</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="search.dctDate" name="dctDate" >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <button (click)="advancedSearch(0,1)" class="ml-5" mat-mini-fab color="primary"><mat-icon>search</mat-icon></button>
+
+
+    <mat-menu #detail="matMenu">
+        <form [formGroup]="form">
+          <div *ngFor="let cd of columnDefinitions">
+            &nbsp; <mat-checkbox [formControlName]="cd.def">{{cd.label}}&nbsp;
+            </mat-checkbox>
+          </div>
+  
+        </form>
+      </mat-menu>
+    <div class="">
+        <button class="float-right" mat-button [mat-menu-trigger-for]="detail" yPosition="above">
+            <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+             filter_alt
+            </mat-icon>
+          </button>
+        <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceDejaSigner" matSort>
+
+            <ng-container matColumnDef="dctTitre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.titre' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.dctTitre}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctAuteur">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'document.auteur' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.dctAuteur}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctType">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.type' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.typeDocuments.tydLibelle}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.date_chargement' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.dctDate |date:"dd/MM/yyyy"}} </td>
+          </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                        {{'register.action' | translate}}</span> </th>
+                <td mat-cell *matCellDef="let element" class="fab">
+                    <button mat-button [mat-menu-trigger-for]="detail">
+                        <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                            yPosition="above">
+                            more_vert
+                        </mat-icon>
+                    </button>
+
+
+                    <mat-menu #detail="matMenu">
+                      <button mat-menu-item (click)="consulterDocument(element)">
+                        <mat-icon matTooltip="{{'document.consulter'| translate}}" color="primary">
+                            visibility
+                        </mat-icon>{{'document.consulter'| translate}}
+                    </button>
+                      <button mat-menu-item (click)="consulterDetailSignature(element)">
+                        <mat-icon matTooltip="{{'document.consulter'| translate}}" color="primary">
+                            visibility
+                        </mat-icon>{{'document.details'| translate}}
+                    </button>
+                    </mat-menu>
+
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+            <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+
+  </mat-card>
+
+</mat-tab>
+
+
+<mat-tab>
+  <ng-template mat-tab-label>
+    <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+    {{'document.dejacertifie' | translate}}
+  </ng-template>
+
+  <mat-card class="" >
+    <mat-card-header class="card-header centrer">
+        <mat-card-title>{{'document.dejacertifie' | translate}}</mat-card-title>
+    </mat-card-header><br>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'document.titre' | translate}}</mat-label>
+      <input matInput [(ngModel)]="search.dctTitre" name="dtcTitre" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.auteur' | translate}}</mat-label>
+      <input matInput  [(ngModel)]="search.dctAuteur" name="dtcAuteur">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.type' | translate}}</mat-label>
+      <input matInput [(ngModel)]="search.typeDocuments" name="dtcType" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.date_chargement' | translate}}</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="search.dctDate" name="dctDate" >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <button (click)="advancedSearch(1,1)" class="ml-5" mat-mini-fab color="primary"><mat-icon>search</mat-icon></button>
+
+
+    <mat-menu #detail="matMenu">
+        <form [formGroup]="form">
+          <div *ngFor="let cd of columnDefinitions">
+            &nbsp; <mat-checkbox [formControlName]="cd.def">{{cd.label}}&nbsp;
+            </mat-checkbox>
+          </div>
+  
+        </form>
+      </mat-menu>
+    <div class="">
+        <button class="float-right" mat-button [mat-menu-trigger-for]="detail" yPosition="above">
+            <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+             filter_alt
+            </mat-icon>
+          </button>
+        <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceDejaCertifies" matSort>
+
+            <ng-container matColumnDef="dctTitre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.titre' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.dctTitre}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctAuteur">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'document.auteur' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.dctAuteur}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctType">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.type' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.typeDocuments.tydLibelle}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.date_chargement' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.dctDate |date:"dd/MM/yyyy"}} </td>
+          </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                        {{'register.action' | translate}}</span> </th>
+                <td mat-cell *matCellDef="let element" class="fab">
+                    <button mat-button [mat-menu-trigger-for]="detail">
+                        <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                            yPosition="above">
+                            more_vert
+                        </mat-icon>
+                    </button>
+
+
+                    <mat-menu #detail="matMenu">
+                      <button mat-menu-item (click)="consulterDocument(element)">
+                        <mat-icon matTooltip="{{'document.consulter'| translate}}" color="primary">
+                            visibility
+                        </mat-icon>{{'document.consulter'| translate}}
+                    </button>
+                      <button mat-menu-item (click)="consulterDetailSignature(element)">
+                        <mat-icon matTooltip="{{'document.consulter'| translate}}" color="primary">
+                            visibility
+                        </mat-icon>{{'document.details'| translate}}
+                    </button>
+                    </mat-menu>
+
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+            <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+
+  </mat-card>
+
+</mat-tab>
+
+<mat-tab>
+  <ng-template mat-tab-label>
+    <mat-icon class="mymargin" color="primary">view_agenda</mat-icon>
+    {{'document.dejaapprouve' | translate}}
+  </ng-template>
+
+  <mat-card class="" >
+    <mat-card-header class="card-header centrer">
+        <mat-card-title>{{'document.dejaapprouve' | translate}}</mat-card-title>
+    </mat-card-header><br>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'document.titre' | translate}}</mat-label>
+      <input matInput [(ngModel)]="search.dctTitre" name="dtcTitre" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.auteur' | translate}}</mat-label>
+      <input matInput  [(ngModel)]="search.dctAuteur" name="dtcAuteur">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.type' | translate}}</mat-label>
+      <input matInput [(ngModel)]="search.typeDocuments" name="dtcType" >
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+      <mat-label>{{'document.date_chargement' | translate}}</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="search.dctDate" name="dctDate" >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <button (click)="advancedSearch(3,1)" class="ml-5" mat-mini-fab color="primary"><mat-icon>search</mat-icon></button>
+
+
+    <mat-menu #detail="matMenu">
+        <form [formGroup]="form">
+          <div *ngFor="let cd of columnDefinitions">
+            &nbsp; <mat-checkbox [formControlName]="cd.def">{{cd.label}}&nbsp;
+            </mat-checkbox>
+          </div>
+  
+        </form>
+      </mat-menu>
+    <div class="">
+        <button class="float-right" mat-button [mat-menu-trigger-for]="detail" yPosition="above">
+            <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+             filter_alt
+            </mat-icon>
+          </button>
+        <table mat-table class=" mat-elevation-z8" [dataSource]="dataSourceDejaApprouves" matSort>
+
+            <ng-container matColumnDef="dctTitre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.titre' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.dctTitre}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctAuteur">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'document.auteur' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.dctAuteur}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctType">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.type' | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.typeDocuments.tydLibelle}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dctDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'document.date_chargement' | translate}} </th>
+              <td mat-cell *matCellDef="let element"> {{element.dctDate |date:"dd/MM/yyyy"}} </td>
+          </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                        {{'register.action' | translate}}</span> </th>
+                <td mat-cell *matCellDef="let element" class="fab">
+                    <button mat-button [mat-menu-trigger-for]="detail">
+                        <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary"
+                            yPosition="above">
+                            more_vert
+                        </mat-icon>
+                    </button>
+
+
+                    <mat-menu #detail="matMenu">
+                      <button mat-menu-item (click)="consulterDocument(element)">
+                        <mat-icon matTooltip="{{'document.consulter'| translate}}" color="primary">
+                            visibility
+                        </mat-icon>{{'document.consulter'| translate}}
+                    </button>
+                      <button mat-menu-item (click)="consulterDetailSignature(element)">
+                        <mat-icon matTooltip="{{'document.consulter'| translate}}" color="primary">
+                            visibility
+                        </mat-icon>{{'document.details'| translate}}
+                    </button>
+                    </mat-menu>
+
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+            <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+
+  </mat-card>
+
+</mat-tab>
+
+
+</mat-tab-group>
+

@@ -1,0 +1,94 @@
+
+<mat-card>
+  <mat-card-header class="card-header centrer">
+    <mat-card-title>{{'menu.management' | translate}}</mat-card-title>
+  
+  </mat-card-header><br>
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>{{'utilisateur.filtre' | translate}}</mat-label>
+      <input matInput type="text" [(ngModel)]="search.menNom" name="menNom">
+    </mat-form-field>&nbsp;
+    <button (click)="searchMenu()" class="ml-5" mat-mini-fab color="primary">
+      <mat-icon>search</mat-icon>
+    </button>
+    <div class="column-add-button">
+      <button mat-mini-fab color="primary" class="add-button" matTooltip="{{'menu.add-menu' | translate}}">
+        <mat-icon (click)="openDialogAdd(null)">add_box</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="mat-elevation-z8">
+    <mat-tree [dataSource]="dataSourceMenu" [treeControl]="treeControl">
+      <!-- Les éléments qui n'ont pas de sous menus -->
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <!-- Utilise un bouton désactivé pour gérer les espaces de marge entre les menus et les sous menus -->
+        <button mat-icon-button disabled></button>
+        <div> {{'menu.'+node?.name | translate}}</div>
+        <div style="position:absolute;right: 0;">
+          <button mat-button [mat-menu-trigger-for]="detail" yPosition="above">
+            <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+              more_vert
+            </mat-icon>
+          </button>
+          <mat-menu #detail="matMenu">
+            <button mat-menu-item (click)="openDialogView(node)">
+              <mat-icon class="mat-icon-rtl-mirror" matTooltip="{{'Action.view' | translate}}" color="primary">
+                visibility
+              </mat-icon>{{'Action.view' | translate}}
+            </button>
+            <button mat-menu-item (click)="openDialogEdit(node)">
+              <mat-icon class="mat-icon-rtl-mirror" matTooltip="{{'Action.edit' | translate}}" color="secondary">edit
+              </mat-icon>{{'Action.edit' | translate}}
+            </button>
+            <button mat-menu-item (click)="addChildMenu(node)">
+              <mat-icon color="accent" matTooltip="{{'menu.add-child' | translate}}">add</mat-icon>
+              {{'menu.add-child' | translate}}
+            </button>
+            <button mat-menu-item (click)="addAction(node)">
+              <mat-icon matTooltip="{{'Action.list' | translate}}">assignment</mat-icon>{{'Action.list' | translate}}
+            </button>
+          </mat-menu><br><br>
+        </div>
+
+      </mat-tree-node>
+      <!--Pour les éléments qui ont des sous menus -->
+      <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+        <div matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+          <button mat-icon-button>
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button> {{'menu.'+node?.name | translate}}
+        </div>
+        <div style="position:absolute;right: 0;">
+          <button mat-button [mat-menu-trigger-for]="detail" yPosition="above">
+            <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+              more_vert
+            </mat-icon>
+          </button>
+          <mat-menu #detail="matMenu">
+            <button mat-menu-item (click)="openDialogView(node)">
+              <mat-icon class="mat-icon-rtl-mirror" matTooltip="{{'Action.view' | translate}}" color="primary">
+                visibility
+              </mat-icon>{{'Action.view' | translate}}
+            </button>
+            <button mat-menu-item (click)="openDialogEdit(node)">
+              <mat-icon class="mat-icon-rtl-mirror" matTooltip="{{'Action.edit' | translate}}" color="secondary">edit
+              </mat-icon>{{'Action.edit' | translate}}
+            </button>
+            <button mat-menu-item (click)="addChildMenu(node)">
+              <mat-icon color="accent" matTooltip="{{'menu.add-child' | translate}}">add</mat-icon>
+              {{'menu.add-child' | translate}}
+            </button>
+            <button mat-menu-item disabled (click)="addAction(node)">
+              <mat-icon matTooltip="{{'Action.list' | translate}}">assignment</mat-icon>{{'Action.list' | translate}}
+            </button>
+          </mat-menu>
+
+        </div>
+      </mat-tree-node>
+    </mat-tree>
+
+  </div>
+</mat-card>

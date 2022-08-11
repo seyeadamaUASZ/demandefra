@@ -1,0 +1,88 @@
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+  }
+  .big{
+    font-size: 105%;
+  }
+  
+  div.gallery:hover {
+    border: 1px solid #777;
+  }
+  
+  div.gallery img {
+    width: 100%;
+    height: auto;
+  }
+  
+  div.desc {
+    padding: 15px;
+    text-align: center;
+  }
+  .image{
+    background: url("/assets/images/paiement/pay.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 600%;
+    opacity: 3;
+  }
+  mat-form-field{
+    width: 30%;
+    margin-left: 1%;
+  }
+  table{
+    width: 100%;
+  }
+  .position-relative {
+	position: relative;
+}
+
+
+
+.add-contact {
+	position: absolute;
+    right: 25px;
+    top: 25px;
+}
+// .route{
+//   position: absolute;
+//   right: 40px;
+//   //top: 90px;
+//   }
+
+  mat-form-field{
+    width: 30%;
+    margin-left: 1%;
+
+  }
+  .filtre{
+    margin-left: 1%;
+
+  }
+
+  .fab{
+      width: 12%;
+      margin: 0.5%;
+  }
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+ 
+  mat-card{
+    
+table {
+  width: 100%;
+  margin-top: 20px;
+ }
+  }
+  .header{
+  margin-top: 10px;
+  display: block;
+  margin: auto;
+  text-align: center;
+  color: white;
+  }
+
+ 

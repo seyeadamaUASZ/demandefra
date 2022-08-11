@@ -1,0 +1,37 @@
+
+<div [formGroup]="form">
+  
+  <div class="form-group input-group mymargin" [ngSwitch]="field.controlType">
+    <mat-form-field *ngSwitchCase="'textbox'" appearance="fill">
+      <mat-label>{{field.label}}</mat-label>
+      <input matInput placeholder="{{field.label}}" [formControlName]="field.key"
+              [id]="field.key" [type]="field.type">
+    </mat-form-field>
+    <mat-form-field *ngSwitchCase="'number'" appearance="fill">
+      <mat-label>{{field.label}}</mat-label>
+      <input matInput placeholder="{{field.label}}" [formControlName]="field.key"
+              [id]="field.key" [type]="field.type">
+    </mat-form-field>
+    <mat-form-field *ngSwitchCase="'phone'" appearance="fill">
+      <mat-label>{{field.label}}</mat-label>
+      <input matInput placeholder="{{field.label}}" [formControlName]="field.key"
+              [id]="field.key" [type]="field.type">
+    </mat-form-field>
+    <mat-form-field *ngSwitchCase="'textarea'" appearance="fill" >
+      <mat-label>{{field.label}}</mat-label>
+      <textarea matInput placeholder="{{field.label}}" [formControlName]="field.key"
+      [id]="field.key"></textarea>
+    </mat-form-field>
+    <mat-form-field *ngSwitchCase="'dropdown'" appearance="fill">
+      <mat-select matInput placeholder="{{field.label}}" [id]="field.key" [formControlName]="field.key">
+        <mat-option *ngFor="let opt of field.options" [value]="opt.key">{{opt.value}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngSwitchCase="'date'" appearance="fill">
+      <input matInput [matDatepicker]="picker" placeholder="{{field.label}}" [id]="field.key"  [formControlName]="field.key"/>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <!-- <div class="errorMessage" *ngIf="!isValid">{{field.label}} is required</div> -->
+  </div>  
+</div>

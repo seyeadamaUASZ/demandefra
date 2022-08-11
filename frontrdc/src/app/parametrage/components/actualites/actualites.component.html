@@ -1,0 +1,63 @@
+<mat-card><br>
+  <!-- <mat-card-header class="card-header">
+    <span class="header center ">{{'parametre' | translate}}</span>
+  </mat-card-header> -->
+
+  <form [formGroup]="LandingForm" (ngSubmit)="updateParametre()">
+    
+    <div class="row">
+      <div class="centrer"><br><br>
+        <h5 style="font-size: 16px;">&nbsp;{{'landing.actualités' | translate}}</h5><br>
+      </div>
+    </div>
+   
+    
+    <div class="row">
+      <div class="col-sm-4 col-lg-4 col-md-4">
+        <mat-card style="border-radius: 1%">
+          <label class="btn">
+            <img *ngIf="retreivedImage8" mat-card-sm-image [src]="retreivedImage8">&nbsp;&nbsp;
+            <mat-icon style="zoom:4;" *ngIf=!retreivedImage8 color="primary">image </mat-icon>
+            <input type="file" style="display: none" formControlName="lndIm8" accept='image/*'
+              (change)="onFileChanged8($event)">
+          </label>
+        </mat-card>
+        <span *ngIf="retreivedImage8 && !selectedFile8" style="margin:auto; text-align: center;display: block;">
+          &nbsp;&nbsp;&nbsp;&nbsp; {{'parametrage.actu1' | translate}}
+        </span>
+      </div>
+      <div class="col-sm-4 col-lg-4 col-md-4">
+        <mat-card style="border-radius: 1%">
+          <label class="btn">
+            <img *ngIf="retreivedImage9" mat-card-sm-image [src]="retreivedImage9">&nbsp;&nbsp;
+            <mat-icon style="zoom:4;" *ngIf=!retreivedImage9 color="primary">image </mat-icon>
+            <input type="file" style="display: none" formControlName="lndIm9" accept='image/*'
+              (change)="onFileChanged9($event)">
+          </label>
+        </mat-card>
+        <span *ngIf="retreivedImage9 && !selectedFile9" style="margin:auto; text-align: center;display: block;">
+          &nbsp;&nbsp;&nbsp;&nbsp; {{'parametrage.actu2' | translate}}
+        </span>
+      </div>
+      <div class="col-sm-4 col-lg-4 col-md-4">
+        <mat-card style="border-radius: 1%">
+          <label class="btn">
+            <img *ngIf="retreivedImage10" mat-card-sm-image [src]="retreivedImage10">&nbsp;&nbsp;
+            <mat-icon style="zoom:4;" *ngIf=!retreivedImage10 color="primary">image </mat-icon>
+            <input type="file" style="display: none" formControlName="lndIm10" accept='image/*'
+              (change)="onFileChanged10($event)">
+          </label>
+        </mat-card>
+        <span *ngIf="retreivedImage10 && !selectedFile10" style="margin:auto; text-align: center;display: block;">
+          &nbsp;&nbsp;&nbsp;&nbsp; {{'parametrage.actu3' | translate}}
+        </span>
+      </div>
+    </div>
+    <br>
+    &nbsp;&nbsp;
+    <button class="" mat-stroked-button color="warn" type="button" routerLink="/home">{{'btn_fermer'|
+      translate}}</button>&nbsp;&nbsp;
+    <button class="" mat-raised-button color="primary" type="submit">{{'btn_valider'| translate}}</button><br>
+    <mat-spinner class="center" *ngIf="loading" value="indeterminate"></mat-spinner>
+  </form>
+</mat-card>

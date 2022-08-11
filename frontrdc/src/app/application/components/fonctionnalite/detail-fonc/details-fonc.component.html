@@ -1,0 +1,26 @@
+<mat-card class="">
+  <mat-card-title class="card-header">{{'fonctionnalite.Choix_fonctionnalite' | translate}}</mat-card-title>
+   <div class="mat-elevation-z8">
+       <table mat-table class=" mat-elevation-z8" [dataSource]="dataSource1" matSort>
+           <!-- Name Column -->
+           <ng-container matColumnDef="fonNom">
+               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'fonctionnalite.nom' | translate}} </th>
+               <td mat-cell *matCellDef="let element"> {{element.appliFoncFonId.fonNom}} </td>
+           </ng-container>
+           <ng-container matColumnDef="action">
+               <th mat-header-cell *matHeaderCellDef><span style="margin-left: 0%;">
+                       {{'register.action' | translate}}</span> </th>
+               <td mat-cell *matCellDef="let element" class="fab">
+                   <mat-icon *ngIf="!element.appliFonIsActive" color="warn"  (click)="openDialogActive(element.appliFoncFonId.fonId)">close
+               </mat-icon>
+               <mat-icon *ngIf="element.appliFonIsActive" color="primary"  (click)="openDialogDesactive(element.appliFoncFonId.fonId)">done
+               </mat-icon>
+               </td>
+           </ng-container>
+           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+       </table>
+       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+       <button class="mymargin" mat-stroked-button color="warn" (click)="closeDialog()" >{{'btn_fermer' | translate}}</button>
+   </div>
+  </mat-card>

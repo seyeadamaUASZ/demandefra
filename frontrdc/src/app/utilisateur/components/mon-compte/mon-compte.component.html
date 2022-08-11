@@ -1,0 +1,76 @@
+
+<mat-dialog-content>
+  <div class="">
+
+    <div>
+      <img src="assets\images\compte_user.jpg" alt="5 Terre" style="width:100%">
+      <button mat-mini-fab color="primary" class="topp pull-right text-white" [mat-menu-trigger-for]="themeMenu"
+        matTooltip="{{'theme' | translate}}" tabindex="-1">
+        <mat-icon>format_color_fill</mat-icon>
+      </button>
+      <mat-menu class="theme-picker-menu" #themeMenu="matMenu" x-position="before">
+        <mat-grid-list cols="2">
+          <mat-grid-tile *ngFor="let theme of Themes">
+            <div mat-menu-item (click)="switchTheme(theme.thmName)" (click)="getThemeId(theme.thmId)">
+              <div class="theme-picker-swatch">
+                <mat-icon class="theme-chosen-icon" *ngIf="currentTheme === theme">check_circle</mat-icon>
+                <div class="theme-picker-primary" [style.background]="theme.thmPrimary"></div>
+              </div>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-menu>
+      <!-- <button mat-button class="topp pull-right text-white"
+        (click)="openDialogUpdate(compte)">{{'changePwd' | translate}}</button> -->
+      <!-- <button (click)="close()" mat-stroked-button class="topp pull-left text-white" color="warn"
+        ><mat-icon>close</mat-icon></button> -->
+      <!-- <div class="top">
+        <ngx-avatar [src]="logo" class="top" (click)="openDialogUpdateLogo(compte)" size="60" *ngIf="compte?.utiLogo">
+        </ngx-avatar>
+      </div> -->
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 top ">
+          <ngx-avatar [src]="logo" (click)="openDialogUpdateLogo(compte)" size="60" *ngIf="compte?.utiLogo">
+          </ngx-avatar>
+          <ngx-avatar name="{{compte?.utiPrenom}} {{compte?.utiNom}}"
+            (click)="openDialogUpdateLogo(compte)" size="60" *ngIf="!compte?.utiLogo"></ngx-avatar>
+        </div>
+        <div class="col-sm-4">
+          <h5>{{compte?.utiPrenom}} {{compte?.utiNom}}</h5>
+        </div>
+        <div class="col-sm-4" style="font-size: 13px;">&nbsp;&nbsp;&nbsp;{{compte?.uti_pro_id.proLibelle}}</div>
+  
+      </div><br><br>
+      <!-- <span class="float-center">{{compte?.utiPrenom}} {{compte?.utiNom}}</span> 
+     <h3 class="float-right">{{compte?.uti_pro_id.proLibelle}}</h3> -->
+  
+    </div>
+    <div class="row container">
+      <div class="col-lg-12 col-sm-6 col-md-3">
+    
+        <div class="fond"><br>
+          <mat-icon color="primary" matSuffix>perm_identity</mat-icon>&nbsp;
+          <span> {{'register.username' | translate}}</span>
+          <p class="mymargin foncer">{{compte?.utiUsername}}</p>
+        </div>
+        <div class="fond"><br>
+          <mat-icon color="primary" matSuffix>email</mat-icon>&nbsp;
+          <span>{{'register.email' | translate}} </span><br>
+          <p class="mymargin foncer"> {{compte?.utiEmail}}</p>
+        </div>
+  
+        <div class="fond"><br>
+          <mat-icon color="primary" matSuffix>phone</mat-icon>&nbsp;
+          <span>{{'register.telephone' | translate}} </span><br>
+          <p class="mymargin foncer"> {{compte?.utiTelephone}}</p>
+        </div>
+      </div>
+      <button (click)="close()" mat-stroked-button class="buttons foncer"
+        color="warn">{{'btn_fermer' | translate}}</button>&nbsp;&nbsp;&nbsp;
+      <button mat-raised-button class="buttons foncer"  color="primary"
+        (click)="openDialogUpdate(compte)">{{'update' | translate}}</button>
+    </div>
+  </div>
+</mat-dialog-content>

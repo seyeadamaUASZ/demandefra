@@ -1,0 +1,82 @@
+ <!-- <div class="container-fluid">
+<div class="row"> 
+  <div class="col-md-6" *ngFor="let desc  of workflow">
+  <div class="card card-widget widget-user-2">
+    <div class="widget-user-header bg-warning"> 
+      <h3 class="widget-user-username"><a [routerLink]="['/procedures/secteurs/'+secteurparam+'/execution',desc.wkfConteneur]" style="color: green;">{{desc.description}}</a></h3>
+      <h5 class="widget-user-desc"> {{desc.wkfConteneur}}  </h5>
+      
+    </div>
+    <div class="card-footer p-0">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+         <strong>   Nombre de processus actif </strong><span class="float-right badge bg-primary">25</span>
+        </li>
+        <li class="nav-item">
+          <strong>{{desc.wkfLabelwdgt}} total</strong><span class="float-right badge bg-primary">0</span>
+        </li>
+        <li class="nav-item" >
+          <strong>{{desc.wkfLabelwdgt}} Completé</strong><span class="float-right badge bg-primary">
+            {{this.complete}}  
+          </span> 
+        </li>  
+      </ul>
+    </div>
+  </div>
+</div> 
+</div> 
+</div> -->
+<div class="row">
+  <div class="col-sm-6">
+    <h3 class="float-left">
+    <button  routerLink="../../" class="foncer" mat-button><strong style="font-size:15px">{{secteurparam}}</strong><mat-icon style="zoom: 1.5;" class="float-left">keyboard_arrow_left</mat-icon> </button>
+    
+    </h3>
+
+  </div>
+</div>
+<div class="row container-fluid diminuer">
+  <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let desc  of workflow">
+    <div class="card card-stats">
+      <div class="card-header card-header-warning card-header-icon"> 
+        <button mat-button [mat-menu-trigger-for]="detail" yPosition="above" class="float-right">
+          <mat-icon matTooltip="{{'utilisateur.details'| translate}}" color="secondary">
+            more_vert
+          </mat-icon>
+        </button>
+        <mat-menu #detail="" x-position="before">
+          <button mat-menu-item  [routerLink]="['/procedures/secteurs/'+secteurparam+'/execution',desc.wkfConteneur]"
+            matTooltip="Valider">
+            <mat-icon color="primary">visibility</mat-icon>{{'utilisateur.details'| translate}}
+          </button>
+          </mat-menu>
+         <h5 class="center">{{desc.description}}</h5>
+      </div>
+      <div class="">
+        <div class="stats mymargin"> 
+          <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <strong class="center">{{'workflow.process_actif'| translate}}</strong>
+              <h3 class="color center">{{this.encoucours}}</h3>    
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <strong class="center">{{'workflow.process_total'| translate}}</strong>
+              <h3 class="color center">{{this.nomdemarer}}</h3>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <strong class="center">{{'workflow.process_complete'| translate}}</strong>
+              <h3 class="color center">{{this.complete}}</h3> 
+
+            </div>
+          </div>
+          
+          <!-- <img src="assets\images\gainde\office-sector.jpg" class="img-responsive"> -->
+           
+          <!-- <button  mat-raised-button color="primary" type="button" (click)="accessprocess(space.name)">
+            Entrer
+         </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

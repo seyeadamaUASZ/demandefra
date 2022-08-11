@@ -1,0 +1,33 @@
+.file_upload:hover{
+    background-color: rgb(229, 243, 252);
+  }
+  .file_upload{
+    width: 270px;
+    height: 130px;
+    border: solid 1px;
+    margin-top: 10px;
+    
+    border-color:lightgray;
+    background-color: white;
+    color: gray;
+    word-break: break-all;
+    font-size: 11px;
+    cursor: pointer;
+    padding-top: 20px;
+    
+    .mat-icon{
+      margin:auto;
+    }
+    .file_titre{
+      word-break: break-all;
+      text-align: center;
+      justify-content: center;
+    }
+    .file_name{
+      margin-top: 20px;
+      word-break: break-all;
+      color:lightslategray;
+      text-align: center;
+    justify-content: center;
+    }
+  }

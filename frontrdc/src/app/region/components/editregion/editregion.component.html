@@ -1,0 +1,34 @@
+<div>
+  <div class="">
+    <br>
+    <h3 class="card-heading float-left">
+      <strong class="foncer"> {{'region.ajoutregion' | translate}}
+      </strong>
+    </h3><br><br>
+
+    <mat-dialog-content>
+      <div class="">
+        <form class="" [formGroup]="EditForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="fill">
+            <mat-label>{{'region.code' | translate}}</mat-label>
+            <input matInput type="text" formControlName="codeRegion" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="fill">
+            <mat-label>{{'region.nom' | translate}}</mat-label>
+            <input matInput type="text" formControlName="nomRegion" required>
+          </mat-form-field>
+
+          <div class="buttons">
+            <div class="login">
+              <button mat-raised-button color="primary" type="submit">{{'btn_valider' | translate}}</button>
+              <button mat-stroked-button color="warn" (click)="closeDialog()" type="button">{{'btn_fermer' |
+                translate}}</button>
+
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </mat-dialog-content>
+  </div>
